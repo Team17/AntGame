@@ -216,7 +216,7 @@ public class RandomNumber {
 	/**
 	 * Constructor for RandomNumber using system time as seed integer
 	 */
-	public Random() {
+	public RandomNumber() {
 		// java.util.Random uses this same method when no seed integer is passed
 		setSeed(System.currentTimeMillis());
 		_construct();
@@ -226,7 +226,7 @@ public class RandomNumber {
 	 * Constructor for RandomNumber using the specified seed integer
 	 * @param	seed	The seed (long) integer
 	 */
-	public Random(long seed) {
+	public RandomNumber(long seed) {
 		setSeed(seed);
 		_construct();
 	}
