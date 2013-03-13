@@ -14,7 +14,7 @@ public class Map {
 	private String[][] stringMapArray;
 
 	public Map(int id, String mapTextFile){
-		mapId = id;
+		setMapId(id);
 		
 		translator(mapTextFile);
 		mapArray = new Cell[xSize][ySize];
@@ -199,6 +199,14 @@ public class Map {
 		}
 
 
+	}
+
+	public int getMapId() {
+		return mapId;
+	}
+
+	public void setMapId(int mapId) {
+		this.mapId = mapId;
 	}
 
 	public static void main(String[] args){
