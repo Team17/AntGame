@@ -20,8 +20,8 @@ public class Cell {
 	
 	
 	public Cell(int xCoordinate, int yCoordinate, String content){
-		this.xCoordinate = xCoordinate;
-	    this.yCoordinate = yCoordinate;
+		this.setxCoordinate(xCoordinate);
+	    this.setyCoordinate(yCoordinate);
 	    this.content = content;
 	    if (content.equals("#")){
 	    	containsRock = true;
@@ -125,6 +125,34 @@ public boolean ContainsBlackAntHill() {
 
 public void setContainsBlackAntHill(boolean containsBlackAntHill) {
 	this.containsBlackAntHill = containsBlackAntHill;
+}
+
+
+
+
+public int getxCoordinate() {
+	return xCoordinate;
+}
+
+
+
+
+public void setxCoordinate(int xCoordinate) {
+	this.xCoordinate = xCoordinate;
+}
+
+
+
+
+public int getyCoordinate() {
+	return yCoordinate;
+}
+
+
+
+
+public void setyCoordinate(int yCoordinate) {
+	this.yCoordinate = yCoordinate;
 }
 
 }
