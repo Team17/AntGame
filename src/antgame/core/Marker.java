@@ -21,7 +21,7 @@ public class Marker {
 	/**
 	 * The colour of the Ant colony to which this marker belongs
 	 */
-	private AntColor color;
+	private AntColour color;
 	
 	/**
 	 * Extraction of maximum legal number of ant markers from Properties file
@@ -34,7 +34,7 @@ public class Marker {
 	 * @param	color						The colour of the ant colony to which this marker belongs
 	 * @throws	InvalidMarkerIdException 	Exception thrown if the marker value lies outside the specified legal range
 	 */
-	public Marker (int id, AntColor color) throws InvalidMarkerIdException {
+	public Marker (int id, AntColour color) throws InvalidMarkerIdException {
 		
 		// validity check
 		if (id < 0 || id > NUM_ANT_MARKERS) {
@@ -58,7 +58,7 @@ public class Marker {
 	 * Return the colour of the colony to which this marker belongs
 	 * @return the color
 	 */
-	public AntColor getAntColor() {
+	public AntColour getAntColor() {
 		return color;
 	}
 	
