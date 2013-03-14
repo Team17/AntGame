@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<!-- numAntMarkers = the number of types of markers it is possible for an ant colony to leave -->
+<entry key="numAntMarkers">6</entry>
+</properties>
