@@ -17,7 +17,7 @@ public enum AntColour {
 	 * @param	color	The colour for which the opposite colour is requested
 	 * @return			The opposite coluor to the one provided	
 	 */
-	public static AntColour otherColour(AntColor color) {
+	public static AntColour otherColour(AntColour color) {
 		switch (color) {
 		case RED:
 			return BLACK;
