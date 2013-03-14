@@ -4,26 +4,26 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Map {
-	private int mapId;
 	private int xSize;
 	private int ySize;
 	private Cell[][] mapArray;
 	private String[][] stringMapArray;
 
-	public Map(int id, String mapTextFile) {
-		mapId = id;
+	public Map( String mapTextFile) {
+		
 
 		translator(mapTextFile);
 		mapArray = new Cell[xSize][ySize];
-		for (int j = 0; j < (ySize); j++) {
-			for (int i = 0; i < (xSize); i++) {
-				mapArray[i][j] = new Cell(i, j, (stringMapArray[i][j]));
-
+		for (int y = 0; y < (ySize); y++) {
+			for (int x = 0; x < (xSize); x++) {
+				mapArray[x][y] = new Cell(x, y, (stringMapArray[x][y]));
+				
 			}
 		}
-
+		
 	}
 
 	public String[][] translator(String textmap) {
@@ -38,11 +38,11 @@ public class Map {
 
 				stringMapArray = new String[xSize][ySize];
 
-				for (int j = 0; j < (ySize); j++) {
+				for (int y = 0; y < (ySize); y++) {
 					String lineinput = reader.readLine().replaceAll("\\s","");
-					for (int i = 0; i < (xSize); i++) {
-						stringMapArray[i][j] = String.valueOf(lineinput
-								.charAt(i));
+					for (int x = 0; x < (xSize); x++) {
+						stringMapArray[x][y] = String.valueOf(lineinput
+								.charAt(x));
 					}
 				}
 				reader.close();
@@ -194,12 +194,22 @@ public class Map {
 
 	}
 
-	public int getMapId() {
-		return mapId;
+	public Cell getCell(int x, int y){
+		return mapArray[x][y];
+	}
+
+	
+
+	public int getxSize() {
+		return xSize;
+	}
+
+	public int getySize() {
+		return ySize;
 	}
 
 	public static void main(String[] args) {
-		Map m2 = new Map(5, "C://map.txt");
+		Map m2 = new Map("C://map.txt");
 		m2.normprintmap();
 
 	}
