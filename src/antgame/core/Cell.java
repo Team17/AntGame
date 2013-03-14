@@ -6,8 +6,7 @@ package antgame.core;
  *
  */
 public class Cell {
-	private int xCoordinate;
-	private int yCoordinate;
+	private int[] pos;
 	private String content;
 	private boolean containsFood;
 	private int numberOfFoodParticles;
@@ -18,14 +17,14 @@ public class Cell {
 	private boolean containsBlackAntHill;
 	
 	private Ant antid;
-	
-	private Marker mark;
-	
+	private int mark;
 	
 	
-	public Cell(int xCoordinate, int yCoordinate, String content){
-		this.xCoordinate = xCoordinate;
-	    this.yCoordinate = yCoordinate;
+	
+	public Cell(int x, int y, String content){
+		pos = new int[2];
+		pos[0] = x;
+		pos[1] = y;
 	    this.content = content;
 	    if (content.equals("#")){
 	    	containsRock = true;
@@ -50,87 +49,102 @@ public class Cell {
 	        
 }
 
-
-
-
-//	source for method isInteger http://stackoverflow.com/questions/237159/whats-the-best-way-to-check-to-see-if-a-string-represents-an-integer-in-java
-public boolean isInteger( String input ) {
-	    try {
-	        Integer.parseInt( input );
-	        return true;
-	    }
-	    catch( Exception e ) {
-	        return false;
-	    }
+	//	source for method isInteger http://stackoverflow.com/questions/237159/whats-the-best-way-to-check-to-see-if-a-string-represents-an-integer-in-java
+	public boolean isInteger( String input ) {
+		    try {
+		        Integer.parseInt( input );
+		        return true;
+		    }
+		    catch( Exception e ) {
+		        return false;
+		    }
+		}
+	
+	
+	// Getters and setters
+	public String getContent() {
+		return content;
+	}
+	
+	public void setContent(String content) {
+		this.content = content;
+	}
+	
+	public boolean ContainsFood() {
+		return containsFood;
+	}
+	
+	public void setContainsFood(boolean containsFood) {
+		this.containsFood = containsFood;
+	}
+	
+	public int getNumberOfFoodParticles() {
+		return numberOfFoodParticles;
+	}
+	
+	public void setNumberOfFoodParticles(int numberOfFoodParticles) {
+		this.numberOfFoodParticles = numberOfFoodParticles;
+	}
+	
+	public boolean ContainsRock() {
+		return containsRock;
+	}
+	
+	public void setContainsRock(boolean containsRock) {
+		this.containsRock = containsRock;
+	}
+	
+	public boolean isClear() {
+		return isClear;
+	}
+	
+	public void setClear(boolean isClear) {
+		this.isClear = isClear;
+	}
+	
+	public boolean ContainsAnt() {
+		return containsAnt;
+	}
+	
+	public void setContainsAnt(boolean containsAnt) {
+		this.containsAnt = containsAnt;
+	}
+	
+	public boolean ContainsRedAntHill() {
+		return containsRedAntHill;
+	}
+	
+	public void setContainsRedAntHill(boolean containsRedAntHill) {
+		this.containsRedAntHill = containsRedAntHill;
+	}
+	
+	public boolean ContainsBlackAntHill() {
+		return containsBlackAntHill;
+	}
+	
+	public void setContainsBlackAntHill(boolean containsBlackAntHill) {
+		this.containsBlackAntHill = containsBlackAntHill;
+	}
+	
+	public int[] getCellPos(){
+		return pos;
 	}
 
+	public Ant getAntid() {
+		return antid;
+	}
 
-// Getters and setters
-public String getContent() {
-	return content;
-}
+	public void setAntid(Ant antid) {
+		this.antid = antid;
+	}
 
-public void setContent(String content) {
-	this.content = content;
-	
-}
+	public int getMark() {
+		return mark;
+	}
 
-public boolean ContainsFood() {
-	return containsFood;
-}
-
-public void setContainsFood(boolean containsFood) {
-	this.containsFood = containsFood;
-}
-
-public int getNumberOfFoodParticles() {
-	return numberOfFoodParticles;
-}
-
-public void setNumberOfFoodParticles(int numberOfFoodParticles) {
-	this.numberOfFoodParticles = numberOfFoodParticles;
-}
-
-public boolean ContainsRock() {
-	return containsRock;
-}
-
-public void setContainsRock(boolean containsRock) {
-	this.containsRock = containsRock;
-}
-
-public boolean isClear() {
-	return isClear;
-}
-
-public void setClear(boolean isClear) {
-	this.isClear = isClear;
-}
-
-public boolean ContainsAnt() {
-	return containsAnt;
-}
-
-public void setContainsAnt(boolean containsAnt) {
-	this.containsAnt = containsAnt;
-}
-
-public boolean ContainsRedAntHill() {
-	return containsRedAntHill;
-}
-
-public void setContainsRedAntHill(boolean containsRedAntHill) {
-	this.containsRedAntHill = containsRedAntHill;
-}
-
-public boolean ContainsBlackAntHill() {
-	return containsBlackAntHill;
-}
-
-public void setContainsBlackAntHill(boolean containsBlackAntHill) {
-	this.containsBlackAntHill = containsBlackAntHill;
-}
-
+	public void setMark(int mark) {
+		this.mark = mark;
+	}
 }
 
 
