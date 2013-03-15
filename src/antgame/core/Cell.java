@@ -6,23 +6,34 @@ package antgame.core;
  *
  */
 public class Cell {
-	private int[] pos;
+	//pos stores the location of the cell in the map, it is represented by an array of size two so pos[0] = pos[x] and pos[1] = pos[y]
+	private int[] pos  = new int[2];
+	//content keeps record of what is in the cell (kept for testing
+	
 	private String content;
+	//containsFood is a boolean of whether or not the cell contains food
 	private boolean containsFood;
+	//numberOfFoodParticles is an int value of the amount of food contained in the cell
 	private int numberOfFoodParticles;
+	//containsRock is a boolean of whether or not the cell contains Rock
 	private boolean containsRock;
+	//isClear is a clear boolean of whether or not the cell is clear
 	private boolean isClear;
+	//containsAnt is a boolean of whether or not the cell contains an ant
 	private boolean containsAnt;
+	//antid points to the ant that is currently in the cell is that is the case.
+	private Ant antId;
+	//containsRedAntHill is a boolean of whether or not the cell contains a Red AntHill
 	private boolean containsRedAntHill;
+	//containsBlackAntHill is a boolean of whether or not the cell contains a Black AntHill
 	private boolean containsBlackAntHill;
 	
-	private Ant antid;
+	
 	private int mark;
 	
 	
 	
 	public Cell(int x, int y, String content){
-		pos = new int[2];
 		pos[0] = x;
 		pos[1] = y;
 	    this.content = content;
@@ -59,6 +70,33 @@ public class Cell {
 		        return false;
 		    }
 		}
+	
+	
+	// gameplay setters
+	public void antMoveIn(Ant id){
+		//** do we need to check whether or no it is clear?
+		containsAnt = true;
+		antId = id;
+		isClear = false;
+		
+		
+	}
+	/**
+	 * addFood() increments the number of food particles by 1
+	 */
+	public void addFood(){
+		numberOfFoodParticles++;
+		containsFood = true;
+		
+	}
+	public void removeFood(){
+		if(numberOfFoodParticles>0){
+			numberOfFoodParticles--;
+		}
+		if(numberOfFoodParticles==0){
+			containsFood = false;
+		}
+	}
 	
 	
 	// Getters and setters
@@ -131,11 +169,11 @@ public class Cell {
 	}
 
 	public Ant getAntid() {
-		return antid;
+		return antId;
 	}
 
 	public void setAntid(Ant antid) {
-		this.antid = antid;
+		this.antId = antid;
 	}
 
 	public int getMark() {
