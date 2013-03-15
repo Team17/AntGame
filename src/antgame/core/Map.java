@@ -52,7 +52,7 @@ public class Map {
 	}
 
 	public void normprintmap() {
-		System.out.println(ySize);
+		//System.out.println(ySize);
 		for (int j = 0; j < (ySize); j++) {
 			if (j % 2 != 0) {
 				System.out.print(" ");

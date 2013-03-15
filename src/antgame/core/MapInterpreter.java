@@ -92,11 +92,11 @@ public class MapInterpreter {
 
 			int nolines = 0;
 			String linea = reader.readLine().replaceAll("\\s","");
-			System.out.println(xcomparesize*2);
+			//System.out.println(xcomparesize*2);
 			while (linea != null) {
-				System.out.println(linea);
+				//System.out.println(linea);
 				linea = linea.replaceAll("\\s+","");
-				System.out.println(linea);
+				//System.out.println(linea);
 				if (linea.length() != (xcomparesize)) {
 					System.err.println("Map not the same width as in header1");
 					rightsize = false;
