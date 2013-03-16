@@ -3,6 +3,7 @@
  */
 package antgame.core;
 
+import antgame.InvalidMarkerIdException;
 import antgame.AntGame;
 
 /**
@@ -28,6 +29,43 @@ public class Marker {
 	 */
 	private static int NUM_ANT_MARKERS = Integer.parseInt(AntGame.CONFIG.getProperty("numAntMarkers"));
 	
+	/**
+	 * Hashcode generated based on this class's fields
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((color == null) ? 0 : color.hashCode());
+		result = prime * result + id;
+		return result;
+	}
+
+	/** Two markers are considered equal if their Ids and AntColors match
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Marker other = (Marker) obj;
+		if (color != other.color) {
+			return false;
+		}
+		if (id != other.id) {
+			return false;
+		}
+		return true;
+	}
+
 	/**
 	 * Construct a marker of particular Id and for a specified ant colony
 	 * @param	id							The numerical ID of this marker ( where id is in the range 0 to ( numAntMarkers - 1 ) )
