@@ -4,14 +4,14 @@ public class World {
 
 	private Ant[] ants;
 	private Map map;
-	private AntBrain redAnts;
-	private AntBrain blackAnts;
+	private AntBrain redAntBrain;
+	private AntBrain blackAntBrain;
 	
 	
 	public World(String mapLocation, String antR, String antB){
 		this.map = new Map(mapLocation);
-		this.redAnts = new AntBrain(antR);
-		this.blackAnts = new AntBrain(antB);
+		this.redAntBrain = new AntBrain(antR);
+		this.blackAntBrain = new AntBrain(antB);
 		
 		// antPointer is the pointer in the array of ants to point to the next free positon also used as the uID
 		int antPointer = 0;

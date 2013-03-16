@@ -17,7 +17,69 @@ public class Map {
 		
 		
 	}
-
+	public Cell adjacentCell(Cell pos, int dir)
+	{
+		int x = pos.getXPos();
+		int y = pos.getYPos();
+		int xAdj = x;
+		int yAdj = y;
+		
+		switch(dir){
+		case 0:
+			xAdj = x +1;
+			yAdj = y;
+			break;
+		case 1:
+			if(y%2 == 0){
+				xAdj = x;
+				yAdj = y+1;
+				
+			}
+			else{
+				xAdj = x+1;
+				yAdj = y+1;
+			}
+			break;
+		case 2:
+			if(y%2 == 0){
+				xAdj = x-1;
+				y = y+1;
+				
+			}
+			else{
+				xAdj = x;
+				yAdj = y+1;
+			}
+			break;
+		case 3:
+				xAdj = x-1;
+				yAdj = y;	
+			break;
+		case 4:
+			if(y%2 == 0){
+				xAdj = x-1;
+				yAdj = y-1;
+				
+			}
+			else{
+				xAdj = x;
+				yAdj = y-1;
+			}
+			break;
+		case 5:
+			if(y%2 == 0){
+				xAdj = x;
+				yAdj = y-1;
+				
+			}
+			else{
+				xAdj = x+1;
+				yAdj = y-1;
+			}
+			break;
+		}
+		return map[xAdj][yAdj];
+	}
 
 
 

@@ -12,27 +12,20 @@ public class Cell {
 	
 	private String content;
 	//containsFood is a boolean of whether or not the cell contains food
-	@SuppressWarnings("unused")
 	private boolean containsFood;
 	//numberOfFoodParticles is an int value of the amount of food contained in the cell
 	private int numberOfFoodParticles;
 	//containsRock is a boolean of whether or not the cell contains Rock
-	@SuppressWarnings("unused")
 	private boolean containsRock;
 	//isClear is a clear boolean of whether or not the cell is clear
-	@SuppressWarnings("unused")
 	private boolean isClear;
 	//containsAnt is a boolean of whether or not the cell contains an ant
-	@SuppressWarnings("unused")
 	private boolean containsAnt;
 	//antid points to the ant that is currently in the cell is that is the case.
-	@SuppressWarnings("unused")
 	private Ant antId;
 	//containsRedAntHill is a boolean of whether or not the cell contains a Red AntHill
-	@SuppressWarnings("unused")
 	private boolean containsRedAntHill;
 	//containsBlackAntHill is a boolean of whether or not the cell contains a Black AntHill
-	@SuppressWarnings("unused")
 	private boolean containsBlackAntHill;
 	//this field holds the markers as an array of boolean 0-5 is red markers 6-11 is Black markers
 	private Boolean[] redMarkers;
@@ -189,6 +182,104 @@ public class Cell {
 public String getContent() {
 		return content;
 	}
+
+public int[] getPos() {
+	return pos;
+}
+public int getXPos() {
+	return pos[0];
+}
+public int getYPos() {
+	return pos[1];
+}
+
+public boolean isContainsFood() {
+	return containsFood;
+}
+
+public void setContainsFood(boolean containsFood) {
+	this.containsFood = containsFood;
+}
+
+public int getNumberOfFoodParticles() {
+	return numberOfFoodParticles;
+}
+
+public void setNumberOfFoodParticles(int numberOfFoodParticles) {
+	this.numberOfFoodParticles = numberOfFoodParticles;
+}
+
+public boolean isContainsRock() {
+	return containsRock;
+}
+
+public void setContainsRock(boolean containsRock) {
+	this.containsRock = containsRock;
+}
+
+public boolean isClear() {
+	return isClear;
+}
+
+public void setClear(boolean isClear) {
+	this.isClear = isClear;
+}
+
+public boolean isContainsAnt() {
+	return containsAnt;
+}
+
+public void setContainsAnt(boolean containsAnt) {
+	this.containsAnt = containsAnt;
+}
+
+public Ant getAntId() {
+	return antId;
+}
+
+public void setAntId(Ant antId) {
+	this.antId = antId;
+}
+
+public boolean isContainsRedAntHill() {
+	return containsRedAntHill;
+}
+
+public void setContainsRedAntHill(boolean containsRedAntHill) {
+	this.containsRedAntHill = containsRedAntHill;
+}
+
+public boolean isContainsBlackAntHill() {
+	return containsBlackAntHill;
+}
+
+public void setContainsBlackAntHill(boolean containsBlackAntHill) {
+	this.containsBlackAntHill = containsBlackAntHill;
+}
+
+public Boolean[] getRedMarkers() {
+	return redMarkers;
+}
+
+public void setRedMarkers(Boolean[] redMarkers) {
+	this.redMarkers = redMarkers;
+}
+
+public Boolean[] getBlackMarkers() {
+	return blackMarkers;
+}
+
+public void setBlackMarkers(Boolean[] blackMarkers) {
+	this.blackMarkers = blackMarkers;
+}
+
+public void setPos(int[] pos) {
+	this.pos = pos;
+}
+
+public void setContent(String content) {
+	this.content = content;
+}
 
 public static void main (String[] args){
 	Cell c = new Cell(0,0,".");
