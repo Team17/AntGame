@@ -9,7 +9,6 @@ public class Cell {
 	//pos stores the location of the cell in the map, it is represented by an array of size two so pos[0] = pos[x] and pos[1] = pos[y]
 	private int[] pos  = new int[2];
 	//content keeps record of what is in the cell (kept for testing no longer keeps up to date post setup)
-	
 	private String content;
 	//containsFood is a boolean of whether or not the cell contains food
 	private boolean containsFood;
@@ -89,6 +88,12 @@ public class Cell {
 		containsAnt = true;
 		antId = id;
 		isClear = false;
+		if(id.getColour()){
+			content = content + "(r)";
+		}
+		else if(!id.getColour()){
+			content = content + "(b)";
+		}
 		
 		
 	}

@@ -84,36 +84,9 @@ public class Map {
 
 
 
+
+
 	public void printmap() {
-
-		for (int j = 0; j < (ySize); j++) {
-			if (j % 2 != 0) {
-				System.out.print(" ");
-			}
-			System.out.println("/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\");
-			if (j % 2 != 0) {
-				System.out.print(" ");
-			}
-			for (int i = 0; i < (xSize); i++) {
-				System.out.print("|");
-				System.out.print(map[i][j].getContent());
-
-			}
-			System.out.print("|");
-			System.out.println(" ");
-			if (j % 2 != 0) {
-				System.out.print(" ");
-			}
-		}
-
-		System.out.println("\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/");
-		System.out.println("");
-		System.out.println("");
-		System.out.println("");
-		normprintmap();
-	}
-
-	public void normprintmap() {
 		//System.out.println(ySize);
 		for (int j = 0; j < (ySize); j++) {
 			if (j % 2 != 0) {
@@ -143,8 +116,9 @@ public class Map {
 	}
 
 	public static void main(String[] args) {
-		Map m2 = new Map("C://map.txt");
-		m2.normprintmap();
+		Map m2 = new Map("C://a.world");
+
+		m2.printmap();
 
 	}
 }

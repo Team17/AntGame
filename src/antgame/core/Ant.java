@@ -28,13 +28,14 @@ public class Ant {
 	private Cell currentPos;
 	
 	//Creates an ant with given values
-	public Ant(int uID, int dir, boolean colour, int state){
+	public Ant(int uID, int dir, boolean colour, int state, Cell initialPos){
 		this.uID = uID;
 		this.dir = dir;
 		this.colour = colour;
 		this.state = state;
 		this.resting = 0;
 		this.hasFood = false;
+		this.currentPos = initialPos;
 	}
 	
 	/**
