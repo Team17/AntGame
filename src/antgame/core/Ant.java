@@ -27,8 +27,11 @@ public class Ant {
 	//Current cell of the ant
 	private Cell currentPos;
 	
+	//Ant's brain
+	private AntBrain myBrain;
+	
 	//Creates an ant with given values
-	public Ant(int uID, int dir, boolean colour, int state, Cell initialPos){
+	public Ant(int uID, int dir, boolean colour, int state, Cell initialPos, AntBrain brain){
 		this.uID = uID;
 		this.dir = dir;
 		this.colour = colour;
@@ -36,6 +39,7 @@ public class Ant {
 		this.resting = 0;
 		this.hasFood = false;
 		this.currentPos = initialPos;
+		this.myBrain = brain;
 	}
 	
 	/**
@@ -140,4 +144,10 @@ public class Ant {
 		this.currentPos = currentPos;
 	}
 	
+	/**
+	 * @return ant's brain 
+	 */
+	public AntBrain getBrain(){
+		return this.brain;
+	}
 }
