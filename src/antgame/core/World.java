@@ -23,16 +23,16 @@ public class World {
 		 * it then increases the pointer
 		 * 
 		 */
-		for (int y = 0; y < (map.getySize()); y++) {
-			for (int x = 0; x < (map.getxSize()); x++) {
+		for (int y = 0; y < (map.getYSize()); y++) {
+			for (int x = 0; x < (map.getXSize()); x++) {
 				if(map.getCell(x, y).isContainsRedAntHill()){
-					ants[antPointer] = new Ant(antPointer, 0, true, 0,map.getCell(x, y));
+					ants[antPointer] = new Ant(antPointer, 0, true, 0,map.getCell(x, y),redAntBrain);
 					
 					map.getCell(x, y).antMoveIn(ants[antPointer]);
 					antPointer ++;
 				}
 				if(map.getCell(x, y).isContainsBlackAntHill()){
-					ants[antPointer] = new Ant(antPointer, 0, false, 0,map.getCell(x, y));			
+					ants[antPointer] = new Ant(antPointer, 0, false, 0,map.getCell(x, y),blackAntBrain);			
 					map.getCell(x, y).antMoveIn(ants[antPointer]);
 					antPointer ++;
 				}
@@ -40,9 +40,53 @@ public class World {
 		}
 		
 	}
+	public Ant getAnt(Cell cell){
+		if(cell.isContainsAnt()){
+			return cell.getAnt();
+			
+		}
+		else{
+			return null;
+		}
+		
+	}
+	public Ant getAnt(int[] pos){
+		Cell cell = map.getCell(pos);
+		if(cell.isContainsAnt()){
+			
+			return cell.getAnt();
+			
+			}
+			else{
+				return null;
+			}
+		
+	}
+	public boolean isAntAt(Cell cell){
+		return cell.isContainsAnt();
+	}
+	public boolean isAntAt(int[] pos){
+		
+		Cell cell = map.getCell(pos);
+		return cell.isContainsAnt();
+	}
+	
+	public void killAntAt(Cell cell){
+		if(cell.isContainsAnt()){
+			cell.getAnt().die();
+			cell.addFood(3);
+			ants[cell.getAnt().getuID()] = null;
+			cell.antMoveOut();
+		}
+		else{
+			System.err.print("No ant in Cell");
+			
+		}
+	}
+	
 	public static void main (String[] args){
 		World w = new World("C://a.world",500);
-		w.map.printmap();
+		w.map.printMap();
 	}
 }
 
