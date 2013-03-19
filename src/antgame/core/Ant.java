@@ -3,7 +3,7 @@ package antgame.core;
 /**
 * A simple ant model. Which can set markers, pick food, move cells.
 *@author Doniyor Ulmasov (13158)
-*@version 0.1
+*@version 0.2
 */
 public class Ant {
 	//Unique ID of an ant.
