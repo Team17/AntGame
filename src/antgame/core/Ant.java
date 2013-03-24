@@ -13,10 +13,12 @@ public class Ant {
 	private int dir;
 	
 	//Colour of the ant. Choose any value, This is just to distinguish. True is red, false is black.
-	private boolean colour;
+	private AntColour colour;
 	
 	//Current state of the ant in reference to the AntBrain.
 	private int state;
+	
+	
 	
 	//How many turns an ant has to rest before moving.
 	private int resting;
@@ -28,13 +30,14 @@ public class Ant {
 	private Cell currentPos;
 	
 	//Creates an ant with given values
-	public Ant(int uID, int dir, boolean colour, int state){
+	public Ant(int uID, int dir, AntColour colour, int state, Cell initialCell){
 		this.uID = uID;
 		this.dir = dir;
 		this.colour = colour;
 		this.state = state;
 		this.resting = 0;
 		this.hasFood = false;
+		this.currentPos = initialCell;
 	}
 	
 	/**
@@ -62,7 +65,7 @@ public class Ant {
 	/**
 	*@return int colour of the ant.
 	*/
-	public boolean getColour() {
+	public AntColour getColour() {
 		return colour;
 	}
 

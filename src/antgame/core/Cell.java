@@ -12,27 +12,20 @@ public class Cell {
 	
 	private String content;
 	//containsFood is a boolean of whether or not the cell contains food
-	@SuppressWarnings("unused")
 	private boolean containsFood;
 	//numberOfFoodParticles is an int value of the amount of food contained in the cell
 	private int numberOfFoodParticles;
 	//containsRock is a boolean of whether or not the cell contains Rock
-	@SuppressWarnings("unused")
 	private boolean containsRock;
 	//isClear is a clear boolean of whether or not the cell is clear
-	@SuppressWarnings("unused")
 	private boolean isClear;
 	//containsAnt is a boolean of whether or not the cell contains an ant
-	@SuppressWarnings("unused")
 	private boolean containsAnt;
 	//antid points to the ant that is currently in the cell is that is the case.
-	@SuppressWarnings("unused")
-	private Ant antId;
+	private Ant ant;
 	//containsRedAntHill is a boolean of whether or not the cell contains a Red AntHill
-	@SuppressWarnings("unused")
 	private boolean containsRedAntHill;
 	//containsBlackAntHill is a boolean of whether or not the cell contains a Black AntHill
-	@SuppressWarnings("unused")
 	private boolean containsBlackAntHill;
 	//this field holds the markers as an array of boolean 0-5 is red markers 6-11 is Black markers
 	private Boolean[] redMarkers;
@@ -94,7 +87,7 @@ public class Cell {
 	public void antMoveIn(Ant id){
 		//** do we need to check whether or no it is clear?
 		containsAnt = true;
-		antId = id;
+		ant = id;
 		isClear = false;
 		
 		
@@ -102,7 +95,7 @@ public class Cell {
 	public void antMoveOut(){
 		//** do we need to check whether or no it is clear?
 		containsAnt = false;
-		antId = null;
+		ant = null;
 		isClear = true;
 		
 		
@@ -115,6 +108,11 @@ public class Cell {
 		containsFood = true;
 
 	}
+	public void addNumFood(int n){
+		numberOfFoodParticles = numberOfFoodParticles + n;
+		containsFood = true;
+	}
+		
 	public void removeFood(){
 		if(numberOfFoodParticles>0){
 			numberOfFoodParticles--;
@@ -126,31 +124,32 @@ public class Cell {
 	/*
 	 * color is true if red and false is black
 	 */
-	public void setMarker(boolean color, int marker){
-		if(color == true){//red
+	public void setMarker(AntColour colour , int marker){
+		if(colour == AntColour.RED){//red
 			redMarkers[marker-1] = true;
 		}
-		if(color == false){//black
+		if(colour == AntColour.BLACK){//black
 			blackMarkers[marker-1] = true;
 		}
 	}
 
-	public void clearMarker(boolean color, int marker){
-		if(color == true){//red
+	public void clearMarker(AntColour colour, int marker){
+		if(colour == AntColour.RED){//red
 			redMarkers[marker-1] = false;
 		}
-		if(color == false){//black
+		if(colour == AntColour.BLACK){//black
 			blackMarkers[marker-1] = false;
 		}
 	}
 
 
-	public boolean checkMarker(boolean color, int marker){
-		if(color == true){//red
+	public boolean checkMarker(AntColour colour, int marker){
+		if(colour == AntColour.RED){//red
 			return redMarkers[marker-1];
 		}
 		else{//black
 			return blackMarkers[marker-1];
+		
 		}
 
 	}
@@ -160,9 +159,10 @@ public class Cell {
 	 *  set, and clear all 6 of their own markers, but are only able to detect the presence of some marker
 	 *   belonging to the other species.
 	 *   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	 *   
 	 */
-	public boolean checkAnyMarker(boolean color){
-		if(color == true){//red
+	public boolean checkMyColonyMarker(Ant ant){
+		if(ant.getColour() == AntColour.RED){//red
 			boolean redAnyTrue = false;
 			for(int i = 0; i <6; i++){
 				if(redMarkers[i]){
@@ -170,6 +170,7 @@ public class Cell {
 				}
 			}
 			return redAnyTrue;
+			
 		}
 
 		else{//black
@@ -190,13 +191,56 @@ public String getContent() {
 		return content;
 	}
 
+public int[] getPos() {
+	return pos;
+}
+
+public boolean isContainsFood() {
+	return containsFood;
+}
+
+public int getNumberOfFoodParticles() {
+	return numberOfFoodParticles;
+}
+
+public boolean containsRock() {
+	return containsRock;
+}
+
+public boolean isClear() {
+	return isClear;
+}
+
+public boolean isContainsAnt() {
+	return containsAnt;
+}
+
+public Ant getAnt() {
+	return ant;
+}
+
+public boolean containsRedAntHill() {
+	return containsRedAntHill;
+}
+
+public boolean containsBlackAntHill() {
+	return containsBlackAntHill;
+}
+
+public Boolean[] getRedMarkers() {
+	return redMarkers;
+}
+
+public Boolean[] getBlackMarkers() {
+	return blackMarkers;
+}
+
 public static void main (String[] args){
 	Cell c = new Cell(0,0,".");
-	c.setMarker(false, 6);
-	System.out.println(c.checkMarker(false, 6));
-	System.out.println(c.checkAnyMarker(false));
-	c.clearMarker(true, 6);
-	System.out.println(c.checkMarker(false, 6));
+	c.setMarker(AntColour.BLACK, 6);
+	System.out.println(c.checkMarker(AntColour.BLACK, 6));
+	c.clearMarker(AntColour.RED, 6);
+	System.out.println(c.checkMarker(AntColour.BLACK, 6));
 }
 
 

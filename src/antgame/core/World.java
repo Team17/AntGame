@@ -12,27 +12,6 @@ public class World {
 	private AntBrain redAnts;
 	private AntBrain blackAnts;
 	
-	
-	public World(String mapLocation, String antR, String antB){
-		this.map = new Map(mapLocation);
-		this.redAnts = new AntBrain(antR);
-		this.blackAnts = new AntBrain(antB);
-		
-		// antPointer is the pointer in the array of ants to point to the next free positon also used as the uID
-		int antPointer = 0;
-		for (int y = 0; y < (map.getySize()); y++) {
-			for (int x = 0; x < (map.getxSize()); x++) {
-				if(map.getCell(x, y).ContainsRedAntHill()){
-					ants[antPointer] = new Ant(antPointer, 0, true, 0);
-					antPointer ++;
-				}
-				if(map.getCell(x, y).ContainsBlackAntHill()){
-					ants[antPointer] = new Ant(antPointer, 0, false, 0);
-					
-	private AntBrain redAntBrain;
-	private AntBrain blackAntBrain;
-	
-	
 	public World(String mapLocation, int numOfAnts){//, String antR, String antB){
 		this.map = new Map(mapLocation);
 		ants = new Ant[numOfAnts];
@@ -50,14 +29,14 @@ public class World {
 		 */
 		for (int y = 0; y < (map.getYSize()); y++) {
 			for (int x = 0; x < (map.getXSize()); x++) {
-				if(map.getCell(x, y).isContainsRedAntHill()){
-					ants[antPointer] = new Ant(antPointer, 0, AntColour.RED, 0,map.getCell(x, y),redAntBrain);
+				if(map.getCell(x, y).containsRedAntHill()){
+					ants[antPointer] = new Ant(antPointer, 0, AntColour.RED, 0,map.getCell(x, y));
 					
 					map.getCell(x, y).antMoveIn(ants[antPointer]);
 					antPointer ++;
 				}
-				if(map.getCell(x, y).isContainsBlackAntHill()){
-					ants[antPointer] = new Ant(antPointer, 0, AntColour.BLACK, 0,map.getCell(x, y),blackAntBrain);			
+				if(map.getCell(x, y).containsBlackAntHill()){
+					ants[antPointer] = new Ant(antPointer, 0, AntColour.BLACK, 0,map.getCell(x, y));			
 					map.getCell(x, y).antMoveIn(ants[antPointer]);
 					antPointer ++;
 				}
@@ -65,8 +44,7 @@ public class World {
 		}
 		
 	}
-<<<<<<< HEAD
-=======
+
 	public void step(){
 		for(int i=0; i < Integer.parseInt(AntGame.CONFIG.getProperty("numRound")); i++){
 			for(int j = 0; j<ants.length;i++){
@@ -114,7 +92,7 @@ public class World {
 	public void killAntAt(Cell cell){
 		if(cell.isContainsAnt()){
 			//cell.getAnt().die();
-			cell.addFood(3);
+			cell.addNumFood(3);
 			ants[cell.getAnt().getuID()] = null;
 			cell.antMoveOut();
 		}
