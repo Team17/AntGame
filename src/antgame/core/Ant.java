@@ -16,7 +16,8 @@ public class Ant {
 	private AntColour colour;
 	
 	//Current state of the ant in reference to the AntBrain.
-	private int state;
+	private BrainState brainState;
+	private int state
 	
 	
 	
@@ -81,6 +82,14 @@ public class Ant {
 	*/
 	public void setState(int state) {
 		this.state = state;
+	}
+
+	public BrainState getBrainState() {
+		return brainState;
+	}
+
+	public void setBrainState(BrainState brainState) {
+		this.brainState = brainState;
 	}
 
 	/**

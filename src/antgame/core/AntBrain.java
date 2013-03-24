@@ -67,13 +67,13 @@ public class AntBrain {
 		}
 	}
 	
-	public int[] sensed_cell(int[] pos, int dir, String sense_dir){
-		switch (sense_dir){
-			case "here":
+	public Cell sensed_cell(int[] pos, int dir, SenseDirection senseDir){
+		switch (senseDir){
+			case "HERE:
 				return pos;
-			case "ahead":
+			case "AHEAD":
 				return adjacentCell(pos,dir);
-			case "leftahead":
+			case LEFTAHEAD:
 				return adjacentCell(pos,turn("left",dir));
 			case "rightahead":
 				return adjacentCell(pos,turn("right",dir));

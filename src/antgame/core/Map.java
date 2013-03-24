@@ -91,6 +91,7 @@ public class Map {
 			case 0: 
 				adjX = x+1;
 				adjY = y;
+				break;
 			case 1: 
 				if(y%2==0){
 					adjX = x;

@@ -48,12 +48,27 @@ public class World {
 	public void step(){
 		for(int i=0; i < Integer.parseInt(AntGame.CONFIG.getProperty("numRound")); i++){
 			for(int j = 0; j<ants.length;i++){
-				BrainState antsState = ants[j].getState();
+				BrainState antsState = ants[j].getBrainState();
 				switch (antsState) {
+				case SENSE:
+					antsState.getSenseDirection()
+					break;
+				case MARK:
+					break;
+				case UNMARK:
+					break;
+				case PICKUP:
+					break;
+				case DROP:
+					break;
 				case TURN:
 					// DO SOME STUFF
 					antsState.getLeftRight();
-				}
+					break;
+				case MOVE:
+					break;
+				case FLIP:
+					break;
 				
 			}
 		}
