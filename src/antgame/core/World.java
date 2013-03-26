@@ -11,6 +11,11 @@ public class World {
 	private Map map;
 	private AntBrain redAnts;
 	private AntBrain blackAnts;
+	private ArrayList<Cell> bAHLoc = new ArrayList<Cell>();
+	private ArrayList<Cell> rAHLoc = new ArrayList<Cell>();
+	private int foodInRAH;
+	private int foodInBAH;
+	
 	
 	public World(String mapLocation, int numOfAnts){//, String antR, String antB){
 		this.map = new Map(mapLocation);
@@ -31,12 +36,13 @@ public class World {
 			for (int x = 0; x < (map.getXSize()); x++) {
 				if(map.getCell(x, y).containsRedAntHill()){
 					ants[antPointer] = new Ant(antPointer, 0, AntColour.RED, 0,map.getCell(x, y));
-					
+					rAHLoc.add(map.getCell(x, y));
 					map.getCell(x, y).antMoveIn(ants[antPointer]);
 					antPointer ++;
 				}
 				if(map.getCell(x, y).containsBlackAntHill()){
-					ants[antPointer] = new Ant(antPointer, 0, AntColour.BLACK, 0,map.getCell(x, y));			
+					ants[antPointer] = new Ant(antPointer, 0, AntColour.BLACK, 0,map.getCell(x, y));	
+					bAHLoc.add(map.getCell(x, y));
 					map.getCell(x, y).antMoveIn(ants[antPointer]);
 					antPointer ++;
 				}
@@ -47,8 +53,15 @@ public class World {
 
 	public void step(){
 		for(int i=0; i < Integer.parseInt(AntGame.CONFIG.getProperty("numRound")); i++){
+			
 			for(int j = 0; j<ants.length;i++){
-				BrainState antsState = ants[j].getBrainState();
+				foodInEachAntHill();
+				Ant curAnt = ants[j];
+				if(isAntSurronded(curAnt)){
+					curAnt.killAnt();
+				}
+				if(curAnt.isAlive()){
+				BrainState antsState = curAnt.getBrainState();
 				switch (antsState) {
 				case SENSE:
 					antsState.getSenseDirection()
@@ -71,8 +84,25 @@ public class World {
 					break;
 				
 			}
+				}
+			}
 		}
 	}
+		
+	public void foodInEachAntHill(){
+		int redFood = 0;
+		for(int i = 0; i<=rAHLoc.size();i++){
+			redFood = redFood + rAHLoc.get(i).getNumberOfFoodParticles();
+		}
+		foodInRAH = redFood;
+		
+		int blackFood = 0;
+		for(int i = 0; i<=bAHLoc.size();i++){
+			blackFood = blackFood + bAHLoc.get(i).getNumberOfFoodParticles();
+		}
+		foodInBAH = blackFood;
+	}
+	
 	public Ant getAnt(Cell cell){
 		if(cell.isContainsAnt()){
 			return cell.getAnt();
@@ -142,11 +172,11 @@ public class World {
 			if(c.isClear()){
 				surrounded = false;
 			}
-			else if(ant.getColour() && c.containsRedAnt()){
+			else if(ant.getColour() ==  AntColour.RED && c.containsRedAnt()){
 				//if red ant
 				surrounded = false;
 			}
-			else if(!ant.getColour() && c.containsBlackAnt()){
+			else if(ant.getColour() == AntColour.BLACK && c.containsBlackAnt()){
 				//if red ant
 				surrounded = false;
 			}
@@ -157,7 +187,7 @@ public class World {
 	
 	public static void main (String[] args){
 		World w = new World("C://map6.txt",500);
-		w.map.printMap();
+		w.map.printmap();
 		Ant antinquestion = w.map.getCell(6, 2).getAnt();
 		System.out.println(w.isAntSurronded(antinquestion));
 	}

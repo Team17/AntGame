@@ -183,6 +183,27 @@ public class Cell {
 			return blackAnyTrue;
 		}
 	}
+	
+	public boolean containsRedAnt(){
+		boolean containsRedAnt = false;
+		if(containsAnt){
+			if(ant.getColour() == AntColour.RED){
+				containsRedAnt =  true;
+			}
+		}
+		return containsRedAnt;
+		
+	}
+	public boolean containsBlackAnt(){
+		boolean containsBlackAnt = false;
+		if(containsAnt){
+			if(ant.getColour() == AntColour.BLACK){
+				containsBlackAnt =  true;
+			}
+		}
+		return containsBlackAnt;
+		
+	}
 
 	
 

@@ -17,9 +17,9 @@ public class Ant {
 	
 	//Current state of the ant in reference to the AntBrain.
 	private BrainState brainState;
-	private int state
+	private int state;
 	
-	
+	private boolean alive;
 	
 	//How many turns an ant has to rest before moving.
 	private int resting;
@@ -36,6 +36,7 @@ public class Ant {
 		this.dir = dir;
 		this.colour = colour;
 		this.state = state;
+		this.alive = true;
 		this.resting = 0;
 		this.hasFood = false;
 		this.currentPos = initialCell;
@@ -149,6 +150,14 @@ public class Ant {
 	 */
 	public void setCurrentPos(Cell currentPos) {
 		this.currentPos = currentPos;
+	}
+
+	public boolean isAlive() {
+		return alive;
+	}
+
+	public void killAnt() {
+		this.alive = false;
 	}
 	
 }
