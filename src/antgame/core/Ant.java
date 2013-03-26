@@ -133,8 +133,22 @@ public class Ant {
 	/**
 	*Toggles if ant has food.
 	*/
-	public void setHasFood() {
-		this.hasFood = !hasFood;
+	public void pickupFood() {
+		this.hasFood = true;
+	}
+	public void dropFood() {
+		
+			this.hasFood = false;
+		
+	}
+	
+	public void turn(LeftRight lr){
+		if(lr == LeftRight.LEFT){
+			dir = (dir+5)%6;
+		}
+		else if(lr == LeftRight.RIGHT){
+			dir = (dir+1)%6;	
+		}
 	}
 
 	/**
@@ -157,6 +171,8 @@ public class Ant {
 
 	public void killAnt() {
 		this.alive = false;
+		currentPos.antMoveOut();
+		currentPos.addNumFood(3);
 	}
 	
 	

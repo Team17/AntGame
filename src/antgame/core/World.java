@@ -67,25 +67,63 @@ public class World {
 					Cell cellTS = sensedCell(curAnt.getCurrentPos(),curAnt.getDir(),antsState.getSenseDirection());
 					SenseCondition sCon = antsState.getSenseCondition();
 					if(sCon == SenseCondition.MARKER){
-						cellTS.senseCheck(curAnt, sCon, sCon.getMarker());
+						if(cellTS.senseCheck(curAnt, sCon, sCon.getMarker())){
+							curAnt.setBrainState(antsState.getNextState());
+						}
+						else{
+							curAnt.setBrainState(antsState.getAltNextState());
+						}
 					}
 					else{
-						cellTS.senseCheck(curAnt, sCon, null);
+						if(cellTS.senseCheck(curAnt, sCon, null)){
+							curAnt.setBrainState(antsState.getNextState());
+						}
+						else{
+							curAnt.setBrainState(antsState.getAltNextState());
+						}
 					}
 					break;
 				case MARK:
+					curAnt.getCurrentPos().setMarker(curAnt.getColour(), antsState.getMarker())
+					curAnt.setBrainState(antsState.getNextState());
 					break;
 				case UNMARK:
+					curAnt.getCurrentPos().clearMarker(curAnt.getColour(), antsState.getMarker())
+					curAnt.setBrainState(antsState.getNextState());
 					break;
 				case PICKUP:
+					if(curAnt.getCurrentPos().isContainsFood()){
+						curAnt.getCurrentPos().removeFood();
+						curAnt.pickupFood();
+						curAnt.setBrainState(antsState.getNextState());
+					}
+					else{
+						curAnt.setBrainState(antsState.getAltNextState());
+					}
 					break;
 				case DROP:
+						if(curAnt.isHasFood()){
+							curAnt.dropFood();
+							curAnt.getCurrentPos().addFood();
+						}
+						
+						curAnt.setBrainState(antsState.getNextState());	
+						
 					break;
 				case TURN:
-					// DO SOME STUFF
-					antsState.getLeftRight();
+					curAnt.turn(antsState.getLeftRight());
 					break;
 				case MOVE:
+					Cell cellGoingTo = map.adjacentCell(curAnt.getCurrentPos(), curAnt.getDir());
+					if(cellGoingTo.isClear()){
+					curAnt.getCurrentPos().antMoveOut();
+					cellGoingTo.antMoveIn(curAnt);
+					curAnt.setCurrentPos(cellGoingTo);
+					curAnt.setBrainState(antsState.getNextState());
+					}
+					else{
+						curAnt.setBrainState(antsState.getAltNextState());
+					}
 					break;
 				case FLIP:
 					break;
