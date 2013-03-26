@@ -6,7 +6,11 @@ package antgame.core;
  * @version 0.1
  */
 public class AntBrain {
-	private String[] brain;
+	private BrainState[] brain;
+	
+	public BrainState getState(int state){
+		return brain[state];
+	}
 	
 	public int[] adjacentCell(int[] pos,int d){
 		switch(d) {
@@ -63,19 +67,19 @@ public class AntBrain {
 			return (dir+5)%6;
 		}
 		else{
-			return (dir+1)%6;			
+			return (dir+1)%6;	
 		}
 	}
 	
-	public Cell sensed_cell(int[] pos, int dir, SenseDirection senseDir){
+	public int[] sensed_cell(int[] pos, int dir, SenseDirection senseDir){
 		switch (senseDir){
-			case "HERE:
+			case HERE:
 				return pos;
-			case "AHEAD":
+			case AHEAD:
 				return adjacentCell(pos,dir);
 			case LEFTAHEAD:
 				return adjacentCell(pos,turn("left",dir));
-			case "rightahead":
+			case RIGHTAHEAD:
 				return adjacentCell(pos,turn("right",dir));
 			default:
 				return null;

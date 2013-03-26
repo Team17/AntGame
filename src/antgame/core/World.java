@@ -9,19 +9,19 @@ public class World {
 
 	private Ant[] ants;
 	private Map map;
-	private AntBrain redAnts;
-	private AntBrain blackAnts;
+	private AntBrain redAntBrain;
+	private AntBrain blackAntBrain;
 	private ArrayList<Cell> bAHLoc = new ArrayList<Cell>();
 	private ArrayList<Cell> rAHLoc = new ArrayList<Cell>();
 	private int foodInRAH;
 	private int foodInBAH;
 	
 	
-	public World(String mapLocation, int numOfAnts){//, String antR, String antB){
+	public World(String mapLocation, AntBrain antR, AntBrain antB, int numOfAnts){//, String antR, String antB){
 		this.map = new Map(mapLocation);
 		ants = new Ant[numOfAnts];
-	//	this.redAntBrain = new AntBrain(antR);
-	//	this.blackAntBrain = new AntBrain(antB);
+		this.redAntBrain = new AntBrain(antR);
+		this.blackAntBrain = new AntBrain(antB);
 		
 		// antPointer is the pointer in the array of ants to point to the next free positon also used as the uID
 		int antPointer = 0;
@@ -35,13 +35,13 @@ public class World {
 		for (int y = 0; y < (map.getYSize()); y++) {
 			for (int x = 0; x < (map.getXSize()); x++) {
 				if(map.getCell(x, y).containsRedAntHill()){
-					ants[antPointer] = new Ant(antPointer, 0, AntColour.RED, 0,map.getCell(x, y));
+					ants[antPointer] = new Ant(antPointer, 0, AntColour.RED, 0,map.getCell(x, y),redAntBrain);
 					rAHLoc.add(map.getCell(x, y));
 					map.getCell(x, y).antMoveIn(ants[antPointer]);
 					antPointer ++;
 				}
 				if(map.getCell(x, y).containsBlackAntHill()){
-					ants[antPointer] = new Ant(antPointer, 0, AntColour.BLACK, 0,map.getCell(x, y));	
+					ants[antPointer] = new Ant(antPointer, 0, AntColour.BLACK, 0,map.getCell(x, y),blackAntBrain);	
 					bAHLoc.add(map.getCell(x, y));
 					map.getCell(x, y).antMoveIn(ants[antPointer]);
 					antPointer ++;
@@ -64,7 +64,14 @@ public class World {
 				BrainState antsState = curAnt.getBrainState();
 				switch (antsState) {
 				case SENSE:
-					antsState.getSenseDirection()
+					Cell cellTS = sensedCell(curAnt.getCurrentPos(),curAnt.getDir(),antsState.getSenseDirection());
+					SenseCondition sCon = antsState.getSenseCondition();
+					if(sCon == SenseCondition.MARKER){
+						cellTS.senseCheck(curAnt, sCon, sCon.getMarker());
+					}
+					else{
+						cellTS.senseCheck(curAnt, sCon, null);
+					}
 					break;
 				case MARK:
 					break;
@@ -86,6 +93,20 @@ public class World {
 			}
 				}
 			}
+		}
+	}
+	public Cell sensedCell(Cell cell, int dir, SenseDirection senseDir){
+		switch (senseDir){
+			case HERE:
+				return cell;
+			case AHEAD:
+				return map.adjacentCell(cell,dir);
+			case LEFTAHEAD:
+				return map.adjacentCell(cell,((dir+5)%6));
+			case RIGHTAHEAD:
+				return map.adjacentCell(cell,(dir+1));
+			default:
+				return null;
 		}
 	}
 		

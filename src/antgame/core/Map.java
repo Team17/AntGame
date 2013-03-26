@@ -147,6 +147,9 @@ public class Map {
 
 		return getCell(adjX,adjY);
 		}
+		else{
+			return null;
+		}
 	}
 	
 	public ArrayList<Cell> adjacentCells(Cell cell){
@@ -220,6 +223,7 @@ public class Map {
 		return adjacentCells;
 		
 	}
+	
 
 	public static void main(String[] args) {
 		Map m2 = new Map("C://map.txt");

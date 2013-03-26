@@ -183,6 +183,25 @@ public class Cell {
 			return blackAnyTrue;
 		}
 	}
+	public boolean checkColourMarker(AntColour ac){
+		boolean contains = false;
+		if(ac == AntColour.RED){
+			for(int i = 0; i <6; i++){
+				if(redMarkers[i]){
+					contains = true;
+				}
+			}
+		}
+
+		if(ac == AntColour.BLACK){
+			for(int i = 0; i <6; i++){
+				if(blackMarkers[i]){
+					contains = true;
+				}
+			}
+	}
+			return contains;
+		}
 	
 	public boolean containsRedAnt(){
 		boolean containsRedAnt = false;
@@ -204,6 +223,131 @@ public class Cell {
 		return containsBlackAnt;
 		
 	}
+	
+	public boolean senseCheck(Ant a, SenseCondition sc, Marker m){
+		switch (sc){
+		case FRIEND:
+			if(containsAnt){
+				if(ant.getColour() == a.getColour()){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+			else{
+				return false;
+			}
+		
+		
+		case FOE:
+			if(containsAnt){
+				if(ant.getColour() != a.getColour()){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+			else{
+				return false;
+			}
+		
+		
+		case FRIENDWITHFOOD:
+			if(containsAnt){
+				if(ant.getColour() == a.getColour()){
+					if(ant.isHasFood()){
+						return true;
+					}
+					else{
+						return false;
+					}
+				}
+				else{
+					return false;
+				}
+			}
+			else{
+				return false;
+			}
+		case FOEWITHFOOD:
+			if(containsAnt){
+				if(ant.getColour() != a.getColour()){
+					if(ant.isHasFood()){
+						return true;
+					}
+					else{
+						return false;
+					}
+				}
+				else{
+					return false;
+				}
+			}
+			else{
+				return false;
+			}
+		case FOOD:
+			return containsFood;
+		case ROCK:
+			return containsRock;
+		case MARKER:
+			if(a.getColour() == AntColour.RED){
+				return redMarkers[m.getId()];
+			}
+			
+			else if(a.getColour() == AntColour.BLACK){
+				return blackMarkers[m.getId()];
+			}
+			else{
+				return false;
+			}
+			
+			
+		case FOEMARKER:
+			if(a.getColour() == AntColour.BLACK){
+				return checkColourMarker(AntColour.RED);
+			}
+			
+			else if(a.getColour() == AntColour.RED){
+				return checkColourMarker(AntColour.BLACK);
+			}
+			else{
+				return false;
+			}
+			
+		case HOME:
+			if(a.getColour() == AntColour.RED){
+				return containsRedAntHill;
+			}
+			
+			else if(a.getColour() == AntColour.BLACK){
+				return containsBlackAntHill;
+			}
+			else{
+				return false;
+			}
+			
+		case FOEHOME:
+			if(a.getColour() == AntColour.BLACK){
+				return containsRedAntHill;
+			}
+			
+			else if(a.getColour() == AntColour.RED){
+				return containsBlackAntHill;
+			}
+			else{
+				return false;
+			}
+			
+		default:
+			return false;	
+		}
+		
+		}
+		
+	
 
 	
 

@@ -17,7 +17,6 @@ public class Ant {
 	
 	//Current state of the ant in reference to the AntBrain.
 	private BrainState brainState;
-	private int state;
 	
 	private boolean alive;
 	
@@ -31,11 +30,11 @@ public class Ant {
 	private Cell currentPos;
 	
 	//Creates an ant with given values
-	public Ant(int uID, int dir, AntColour colour, int state, Cell initialCell){
+	public Ant(int uID, int dir, AntColour colour, int state, Cell initialCell,AntBrain brain){
 		this.uID = uID;
 		this.dir = dir;
 		this.colour = colour;
-		this.state = state;
+		this.brainState = brain.getState(state);
 		this.alive = true;
 		this.resting = 0;
 		this.hasFood = false;
@@ -74,15 +73,15 @@ public class Ant {
 	/**
 	*@return Int state of the ant.
 	*/
-	public int getState() {
-		return state;
+	public BrainState getState() {
+		return brainState;
 	}
 
 	/**
 	*Set the state of the ant in int.
 	*/
-	public void setState(int state) {
-		this.state = state;
+	public void setState(BrainState state) {
+		this.brainState = state;
 	}
 
 	public BrainState getBrainState() {
@@ -159,5 +158,6 @@ public class Ant {
 	public void killAnt() {
 		this.alive = false;
 	}
+	
 	
 }

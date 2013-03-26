@@ -9,5 +9,16 @@ package antgame.core;
  *
  */
 public enum SenseCondition {
-	FRIEND,FOE,FRIENDWITHFOOD,FOEWITHFOOD,FOOD,ROCK,MARKER,FOEMARKER,HOME,FOEHOME
+	FRIEND,FOE,FRIENDWITHFOOD,FOEWITHFOOD,FOOD,ROCK,MARKER,FOEMARKER,HOME,FOEHOME;
+	
+	private Marker marker;
+
+	public Marker getMarker() {
+		return marker;
+	}
+
+	public void setMarker(Marker marker) {
+		this.marker = marker;
+	}
+	
 }
