@@ -17,7 +17,7 @@ public class World {
 	private int foodInBAH;
 	
 	
-	public World(String mapLocation, AntBrain antR, AntBrain antB, int numOfAnts){//, String antR, String antB){
+	public World(String mapLocation, String antR, String antB, int numOfAnts){//, String antR, String antB){
 		this.map = new Map(mapLocation);
 		ants = new Ant[numOfAnts];
 		this.redAntBrain = new AntBrain(antR);
@@ -84,11 +84,11 @@ public class World {
 					}
 					break;
 				case MARK:
-					curAnt.getCurrentPos().setMarker(curAnt.getColour(), antsState.getMarker())
+					curAnt.getCurrentPos().setMarker(curAnt.getColour(), antsState.getMarker());
 					curAnt.setBrainState(antsState.getNextState());
 					break;
 				case UNMARK:
-					curAnt.getCurrentPos().clearMarker(curAnt.getColour(), antsState.getMarker())
+					curAnt.getCurrentPos().clearMarker(curAnt.getColour(), antsState.getMarker());
 					curAnt.setBrainState(antsState.getNextState());
 					break;
 				case PICKUP:
@@ -245,10 +245,7 @@ public class World {
 	
 	
 	public static void main (String[] args){
-		World w = new World("C://map6.txt",500);
-		w.map.printmap();
-		Ant antinquestion = w.map.getCell(6, 2).getAnt();
-		System.out.println(w.isAntSurronded(antinquestion));
+	
 	}
 
 }

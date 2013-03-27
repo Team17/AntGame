@@ -1,5 +1,7 @@
 package antgame.core;
 
+import java.util.ArrayList;
+
 
 /**
  * @author Coryn
@@ -28,21 +30,18 @@ public class Cell {
 	//containsBlackAntHill is a boolean of whether or not the cell contains a Black AntHill
 	private boolean containsBlackAntHill;
 	//this field holds the markers as an array of boolean 0-5 is red markers 6-11 is Black markers
-	private Boolean[] redMarkers;
+	private ArrayList<Marker> redMarkers;
 	//this field holds the markers as an array of boolean
-	private Boolean[] blackMarkers;
+	private ArrayList<Marker> blackMarkers;
 	
 	
 	
 	public Cell(int x, int y, String content){
 		pos[0] = x;
 		pos[1] = y;
-		redMarkers = new Boolean[6];
-		blackMarkers = new Boolean[6];
-		for(int i=0; i<6; i++){
-			redMarkers[i]=false;
-			blackMarkers[i]=false;
-		}
+		redMarkers = new ArrayList<Marker>();
+		blackMarkers = new ArrayList<Marker>();
+		
 	    this.content = content;
 	    if (content.equals("#")){
 	    	containsRock = true;
@@ -124,34 +123,49 @@ public class Cell {
 	/*
 	 * color is true if red and false is black
 	 */
-	public void setMarker(AntColour colour , int marker){
+	public void setMarker(AntColour colour , Marker marker){
 		if(colour == AntColour.RED){//red
-			redMarkers[marker-1] = true;
+			redMarkers.add(marker);
 		}
 		if(colour == AntColour.BLACK){//black
-			blackMarkers[marker-1] = true;
+			blackMarkers.add(marker);
+		}
+	}
+	//contains checks objects not correct!!!!!!!!!!!1
+	public void clearMarker(AntColour colour, Marker marker){
+		if(colour == AntColour.RED){//red
+			if(redMarkers.contains(marker)){
+				redMarkers.remove(marker);
+			}
+		}
+		if(colour == AntColour.BLACK){//black
+			if(blackMarkers.contains(marker)){
+				blackMarkers.remove(marker);
+			}
 		}
 	}
 
-	public void clearMarker(AntColour colour, int marker){
-		if(colour == AntColour.RED){//red
-			redMarkers[marker-1] = false;
-		}
-		if(colour == AntColour.BLACK){//black
-			blackMarkers[marker-1] = false;
-		}
-	}
-
-
+	//contains checks objects not correct!!!!!!!!!!!1
 	public boolean checkMarker(AntColour colour, int marker){
 		if(colour == AntColour.RED){//red
-			return redMarkers[marker-1];
+			if(redMarkers.contains(marker)){
+				return true;
+			}
+			else{
+				return false;
+			}
 		}
-		else{//black
-			return blackMarkers[marker-1];
-		
+		else if(colour == AntColour.BLACK){//black
+			if(blackMarkers.contains(marker)){
+				return true;
+			}
+			else{
+				return false;
+			}
 		}
-
+		else{ 
+			return false;
+				}
 	}
 	/*
 	 * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -161,45 +175,23 @@ public class Cell {
 	 *   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	 *   
 	 */
-	public boolean checkMyColonyMarker(Ant ant){
-		if(ant.getColour() == AntColour.RED){//red
-			boolean redAnyTrue = false;
-			for(int i = 0; i <6; i++){
-				if(redMarkers[i]){
-					redAnyTrue = true;
-				}
-			}
-			return redAnyTrue;
-			
-		}
-
-		else{//black
-			boolean blackAnyTrue = false;
-			for(int i = 0; i <6; i++){
-				if(blackMarkers[i]){
-					blackAnyTrue = true;
-				}
-			}
-			return blackAnyTrue;
-		}
-	}
+	
+	
 	public boolean checkColourMarker(AntColour ac){
 		boolean contains = false;
 		if(ac == AntColour.RED){
-			for(int i = 0; i <6; i++){
-				if(redMarkers[i]){
+				if(!redMarkers.isEmpty()){
 					contains = true;
 				}
 			}
-		}
+		
 
 		if(ac == AntColour.BLACK){
-			for(int i = 0; i <6; i++){
-				if(blackMarkers[i]){
+				if(!blackMarkers.isEmpty()){
 					contains = true;
 				}
 			}
-	}
+	
 			return contains;
 		}
 	
@@ -294,11 +286,21 @@ public class Cell {
 			return containsRock;
 		case MARKER:
 			if(a.getColour() == AntColour.RED){
-				return redMarkers[m.getId()];
+				if(redMarkers.contains(m)){
+					return true;
+				}
+				else{
+					return false;
+				}
 			}
 			
 			else if(a.getColour() == AntColour.BLACK){
-				return blackMarkers[m.getId()];
+				if(blackMarkers.contains(m)){
+					return true;
+				}
+				else{
+					return false;
+				}
 			}
 			else{
 				return false;
@@ -392,20 +394,15 @@ public boolean containsBlackAntHill() {
 	return containsBlackAntHill;
 }
 
-public Boolean[] getRedMarkers() {
+public ArrayList<Marker> getRedMarkers() {
 	return redMarkers;
 }
 
-public Boolean[] getBlackMarkers() {
+public ArrayList<Marker> getBlackMarkers() {
 	return blackMarkers;
 }
 
 public static void main (String[] args){
-	Cell c = new Cell(0,0,".");
-	c.setMarker(AntColour.BLACK, 6);
-	System.out.println(c.checkMarker(AntColour.BLACK, 6));
-	c.clearMarker(AntColour.RED, 6);
-	System.out.println(c.checkMarker(AntColour.BLACK, 6));
 }
 
 
