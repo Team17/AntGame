@@ -13,10 +13,12 @@ public class Ant {
 	private int dir;
 	
 	//Colour of the ant. Choose any value, This is just to distinguish. True is red, false is black.
-	private boolean colour;
+	private AntColour colour;
 	
 	//Current state of the ant in reference to the AntBrain.
-	private int state;
+	private BrainState brainState;
+	
+	private boolean alive;
 	
 	//How many turns an ant has to rest before moving.
 	private int resting;
@@ -28,13 +30,15 @@ public class Ant {
 	private Cell currentPos;
 	
 	//Creates an ant with given values
-	public Ant(int uID, int dir, boolean colour, int state){
+	public Ant(int uID, int dir, AntColour colour, int state, Cell initialCell,AntBrain brain){
 		this.uID = uID;
 		this.dir = dir;
 		this.colour = colour;
-		this.state = state;
+		this.brainState = brain.getState(state);
+		this.alive = true;
 		this.resting = 0;
 		this.hasFood = false;
+		this.currentPos = initialCell;
 	}
 	
 	/**
@@ -62,22 +66,30 @@ public class Ant {
 	/**
 	*@return int colour of the ant.
 	*/
-	public boolean getColour() {
+	public AntColour getColour() {
 		return colour;
 	}
 
 	/**
 	*@return Int state of the ant.
 	*/
-	public int getState() {
-		return state;
+	public BrainState getState() {
+		return brainState;
 	}
 
 	/**
 	*Set the state of the ant in int.
 	*/
-	public void setState(int state) {
-		this.state = state;
+	public void setState(BrainState state) {
+		this.brainState = state;
+	}
+
+	public BrainState getBrainState() {
+		return brainState;
+	}
+
+	public void setBrainState(BrainState brainState) {
+		this.brainState = brainState;
 	}
 
 	/**
@@ -121,8 +133,22 @@ public class Ant {
 	/**
 	*Toggles if ant has food.
 	*/
-	public void setHasFood() {
-		this.hasFood = !hasFood;
+	public void pickupFood() {
+		this.hasFood = true;
+	}
+	public void dropFood() {
+		
+			this.hasFood = false;
+		
+	}
+	
+	public void turn(LeftRight lr){
+		if(lr == LeftRight.LEFT){
+			dir = (dir+5)%6;
+		}
+		else if(lr == LeftRight.RIGHT){
+			dir = (dir+1)%6;	
+		}
 	}
 
 	/**
@@ -138,5 +164,16 @@ public class Ant {
 	public void setCurrentPos(Cell currentPos) {
 		this.currentPos = currentPos;
 	}
+
+	public boolean isAlive() {
+		return alive;
+	}
+
+	public void killAnt() {
+		this.alive = false;
+		currentPos.antMoveOut();
+		currentPos.addNumFood(3);
+	}
+	
 	
 }

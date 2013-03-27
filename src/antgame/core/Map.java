@@ -1,5 +1,7 @@
 package antgame.core;
 
+import java.util.ArrayList;
+
 
 public class Map {
 	private int xSize;
@@ -69,16 +71,159 @@ public class Map {
 	public Cell getCell(int x, int y){
 		return map[x][y];
 	}
-
+	
+	public Cell getCell(int[] pos){
+		return map[pos[0]][pos[1]];
+	}
 	
 
-	public int getxSize() {
+	public int getXSize() {
 		return xSize;
 	}
 
-	public int getySize() {
+	public int getYSize() {
 		return ySize;
 	}
+	public Cell adjacentCell(Cell cell, int dir){
+		int x = cell.getPos()[0];
+		int y = cell.getPos()[1];
+		int adjX = cell.getPos()[0];
+		int adjY = cell.getPos()[1];
+		switch(dir) {
+			case 0: 
+				adjX = x+1;
+				adjY = y;
+				break;
+			case 1: 
+				if(y%2==0){
+					adjX = x;
+					adjY = y+1;
+				}
+				else{
+					adjX = x+1;
+					adjY = y+1;
+				}
+				break;
+			case 2: 
+				if(y%2==0){
+					adjX = x-1;
+					adjY = y+1;
+					
+				}
+				else{
+					adjX = x;
+					adjY = y+1;
+				}
+				break;
+			case 3: 
+				adjX = x-1;
+				adjY = y;
+				break;
+			case 4: 
+				if(y%2==0){
+					adjX = x-1;
+					adjY = y-1;
+				}
+				else{
+					adjX = x;
+					adjY = y-1;
+				}
+				break;
+			case 5: 
+				if(y%2==0){
+					adjX = x;
+					adjY = y-1;
+				}
+				else{
+					adjX = x+1;
+					adjY = y-1;
+				}
+				break;
+			default:
+				break;
+		}
+		if(adjX>=0 && adjX<=xSize && adjY>=0 && adjY<=ySize){
+			
+
+		return getCell(adjX,adjY);
+		}
+		else{
+			return null;
+		}
+	}
+	
+	public ArrayList<Cell> adjacentCells(Cell cell){
+		ArrayList<Cell> adjacentCells = new ArrayList<Cell>();
+		int x = cell.getPos()[0];
+		int y = cell.getPos()[1];
+		
+		for(int dir=0;dir<6;dir++){
+			int adjX = cell.getPos()[0];
+			int adjY = cell.getPos()[1];
+		
+		switch(dir) {
+			case 0: 
+				adjX = x+1;
+				adjY = y;
+				break;
+			case 1: 
+				if(y%2==0){
+					adjX = x;
+					adjY = y+1;
+				}
+				else{
+					adjX = x+1;
+					adjY = y+1;
+				}
+				break;
+			case 2: 
+				if(y%2==0){
+					adjX = x-1;
+					adjY = y+1;
+					
+				}
+				else{
+					adjX = x;
+					adjY = y+1;
+				}
+				break;
+			case 3: 
+				adjX = x-1;
+				adjY = y;
+				break;
+			case 4: 
+				if(y%2==0){
+					adjX = x-1;
+					adjY = y-1;
+				}
+				else{
+					adjX = x;
+					adjY = y-1;
+				}
+				break;
+			case 5: 
+				if(y%2==0){
+					adjX = x;
+					adjY = y-1;
+				}
+				else{
+					adjX = x+1;
+					adjY = y-1;
+				}
+				break;
+			default:
+				break;
+				
+		}
+		
+		if(adjX>=0 && adjX<=xSize && adjY>=0 && adjY<=ySize){
+			adjacentCells.add(getCell(adjX,adjY));
+		}
+		}
+		return adjacentCells;
+		
+	}
+	
 
 	public static void main(String[] args) {
 		Map m2 = new Map("C://map.txt");
