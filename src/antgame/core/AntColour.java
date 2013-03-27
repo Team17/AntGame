@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package antgame.core;
 
