@@ -21,7 +21,7 @@ import antgame.services.RandomNumber;
  */
 public class RandomNumberTest {
 
-	/**
+	/** 
 	 * Test method for {@link antgame.services.RandomNumber#nextInt(int)}.
 	 * 
 	 * This test determines whether the RandomNumber class generates a random number sequence equal
