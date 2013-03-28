@@ -29,4 +29,17 @@ public enum AntColour {
 		}
 	}
 	
+	/**
+	 * Return the opposite colour to this one
+	 * @return	The opposite colour
+	 */
+	public AntColour otherColour() {
+		if (this.equals(BLACK)) {
+			return RED;
+		}
+		else {
+			return BLACK;
+		}
+	}
+	
 }
