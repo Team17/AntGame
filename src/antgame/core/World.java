@@ -85,11 +85,11 @@ public class World {
 					}
 					break;
 				case MARK:
-					curAnt.getCurrentPos().setMarker(curAnt.getColour(), antsState.getMarker());
+					curAnt.getCurrentPos().setMarker(antsState.getMarker());
 					curAnt.setBrainState(antsState.getNextState());
 					break;
 				case UNMARK:
-					curAnt.getCurrentPos().clearMarker(curAnt.getColour(), antsState.getMarker());
+					curAnt.getCurrentPos().clearMarker(antsState.getMarker());
 					curAnt.setBrainState(antsState.getNextState());
 					break;
 				case PICKUP:
