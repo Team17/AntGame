@@ -46,7 +46,9 @@ public class AntBrainInterpreterCoryn {
 	}
 	
 	public BrainState[] antBrainGenerator(String antBrainTextFile){
-		BrainState[] states = new BrainState[stateInt];
+		if(antBrainChecker(antBrainTextFile)){
+			BrainState[] states = new BrainState[stateInt];
+		
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(antBrainTextFile));
 			int ptr = 0;
@@ -191,7 +193,12 @@ public class AntBrainInterpreterCoryn {
 		}
 		return states;	
 		
-		
+		}
+		else{
+			
+			System.out.print("syntac Incorrect");
+			return null;
+		}
 	}
 	public boolean antBrainChecker(String antBrainTextFile){
 		boolean legit = false;
@@ -251,11 +258,10 @@ public class AntBrainInterpreterCoryn {
 	}
 	public static void main (String[] args){
 		AntBrainInterpreterCoryn aBI = new AntBrainInterpreterCoryn();
-		System.out.println(aBI.antBrainChecker("C://brain1.txt"));
+		BrainState[] st = aBI.antBrainGenerator("C://brain.txt");
 		System.out.println(aBI.stateInt);
-		BrainState[] st = aBI.antBrainGenerator("C://brain1.txt");
-		st[0].print();
-		st[1].print();
-		st[2].print();
+		for(BrainState s:st){
+			s.print();
+		}
 	}
 }

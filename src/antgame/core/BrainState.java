@@ -227,7 +227,7 @@ public class BrainState {
 	}
 	
 	public void print(){
-		System.out.println("StateId: " + this.stateId +"\nInstructons: " + this.instruction + "\nNextState: " + this.nextState + "\nAltNextState: "+ this.altNextState + "\nSenseDiection: " + this.senseDirection + "\nSenseCondition: " + this.senseCondition + "\nMarker: " + this.marker);
+		System.out.println("StateId: " + this.stateId +"\nInstructons: " + this.instruction + "\nNextState: " + this.nextState + "\nAltNextState: "+ this.altNextState + "\nSenseDiection: " + this.senseDirection + "\nSenseCondition: " + this.senseCondition + "\nMarker: " + this.marker +"\nTrun Dir: " + this.leftRight + "\nRandomInt: "+ this.randomInt +"\n");
 	}
 	
 
