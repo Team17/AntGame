@@ -63,7 +63,8 @@ public class World {
 				}
 				if(curAnt.isAlive()){
 				BrainState antsState = curAnt.getBrainState();
-				switch (antsState) {
+				
+				switch (antsState.getInstruction()) {
 				case SENSE:
 					Cell cellTS = sensedCell(curAnt.getCurrentPos(),curAnt.getDir(),antsState.getSenseDirection());
 					SenseCondition sCon = antsState.getSenseCondition();
