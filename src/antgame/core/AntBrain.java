@@ -9,7 +9,9 @@ public class AntBrain {
 	private BrainState[] brain;
 	
 	public AntBrain(String antLoc)
-	{}
+	{
+		
+	}
 	
 	public BrainState getState(int state){
 		return brain[state];

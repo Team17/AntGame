@@ -4,6 +4,7 @@ package antgame.core;
 import java.util.ArrayList;
 
 import antgame.AntGame;
+import antgame.services.RandomNumber;
 
 public class World {
 
@@ -126,6 +127,14 @@ public class World {
 					}
 					break;
 				case FLIP:
+					RandomNumber rN = new RandomNumber();
+					if(rN.nextInt(antsState.getRandomInt()) ==0){
+						curAnt.setBrainState(antsState.getNextState());
+					}
+					else{
+						curAnt.setBrainState(antsState.getAltNextState());
+					}
+					
 					break;
 				
 			}
