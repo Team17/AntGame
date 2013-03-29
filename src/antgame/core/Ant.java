@@ -175,5 +175,4 @@ public class Ant {
 		currentPos.addNumFood(3);
 	}
 	
-	
 }
