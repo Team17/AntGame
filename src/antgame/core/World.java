@@ -9,6 +9,7 @@ import antgame.services.RandomNumber;
 public class World {
 
 	private Ant[] ants;
+	int noAnts;
 	private Map map;
 	private AntBrain redAntBrain;
 	private AntBrain blackAntBrain;
@@ -18,14 +19,14 @@ public class World {
 	private int foodInBAH;
 	
 	
-	public World(String mapLocation, String antR, String antB, int numOfAnts){//, String antR, String antB){
+	public World(String mapLocation, String antR, String antB){//, String antR, String antB){
 		this.map = new Map(mapLocation);
-		ants = new Ant[numOfAnts];
-		this.redAntBrain = new AntBrain(antR);
-		this.blackAntBrain = new AntBrain(antB);
+		
+		this.redAntBrain = new AntBrain(antR, AntColour.RED);
+		this.blackAntBrain = new AntBrain(antB,AntColour.BLACK);
 		
 		// antPointer is the pointer in the array of ants to point to the next free positon also used as the uID
-		int antPointer = 0;
+		
 		/* the following goes trough all of the cells looking for cells that contain an anthill
 		 * once it finds an anthill it creates an ant sets its antid to the ant pointer, its direction to zero, its color dependant on the color
 		 * ant hill, its state which is 0 and its intial location.
@@ -33,6 +34,16 @@ public class World {
 		 * it then increases the pointer
 		 * 
 		 */
+		for (int y = 0; y < (map.getYSize()); y++) {
+			for (int x = 0; x < (map.getXSize()); x++) {
+				if(map.getCell(x, y).containsRedAntHill() || map.getCell(x, y).containsBlackAntHill()){
+					
+					noAnts++;
+				}
+			}
+		}
+		ants = new Ant[noAnts];
+		int antPointer = 0;
 		for (int y = 0; y < (map.getYSize()); y++) {
 			for (int x = 0; x < (map.getXSize()); x++) {
 				if(map.getCell(x, y).containsRedAntHill()){
@@ -49,58 +60,69 @@ public class World {
 				}
 			}
 		}
+		map.printmap();
+		for(int i=0; i < 10000; i++){
+			step();
+		}
+		map.printmap();
+		System.out.print("Food In Red AntHill: " + foodInRAH + "Food In Black AntHill: " + foodInBAH);
 		
 	}
 
 	public void step(){
-		for(int i=0; i < Integer.parseInt(AntGame.CONFIG.getProperty("numRound")); i++){
-			
-			for(int j = 0; j<ants.length;i++){
+		
+		
+			for(int j = 0; j<noAnts;j++){
 				foodInEachAntHill();
+				
 				Ant curAnt = ants[j];
 				if(isAntSurronded(curAnt)){
 					curAnt.killAnt();
 				}
 				if(curAnt.isAlive()){
 				BrainState antsState = curAnt.getBrainState();
-				
+				//System.out.println(curAnt.getState().getInstruction());
+				//antsState.print();
 				switch (antsState.getInstruction()) {
 				case SENSE:
+				//	antsState.print();
 					Cell cellTS = sensedCell(curAnt.getCurrentPos(),curAnt.getDir(),antsState.getSenseDirection());
 					SenseCondition sCon = antsState.getSenseCondition();
 					if(sCon == SenseCondition.MARKER){
-						if(cellTS.senseCheck(curAnt, sCon, sCon.getMarker())){
-							curAnt.setBrainState(antsState.getNextIdState());
+						//antsState.print();
+						//System.out.println(antsState.getSenseCondition());
+						if(cellTS.senseCheck(curAnt, sCon, antsState.getMarker())){
+							curAnt.setBrainState(antsState.getNextState());
 						}
 						else{
-							curAnt.setBrainState(antsState.getAltNextIdState());
+							curAnt.setBrainState(antsState.getAltNextState());
 						}
 					}
 					else{
 						if(cellTS.senseCheck(curAnt, sCon, null)){
-							curAnt.setBrainState(antsState.getNextIdState());
+							curAnt.setBrainState(antsState.getNextState());
 						}
 						else{
-							curAnt.setBrainState(antsState.getAltNextIdState());
+							curAnt.setBrainState(antsState.getAltNextState());
 						}
 					}
 					break;
 				case MARK:
 					curAnt.getCurrentPos().setMarker(antsState.getMarker());
-					curAnt.setBrainState(antsState.getNextIdState());
+					curAnt.setBrainState(antsState.getNextState());
 					break;
 				case UNMARK:
 					curAnt.getCurrentPos().clearMarker(antsState.getMarker());
-					curAnt.setBrainState(antsState.getNextIdState());
+					curAnt.setBrainState(antsState.getNextState());
 					break;
 				case PICKUP:
 					if(curAnt.getCurrentPos().isContainsFood()){
 						curAnt.getCurrentPos().removeFood();
 						curAnt.pickupFood();
-						curAnt.setBrainState(antsState.getNextIdState());
+						curAnt.setBrainState(antsState.getNextState());
 					}
 					else{
-						curAnt.setBrainState(antsState.getAltNextIdState());
+						curAnt.setBrainState(antsState.getAltNextState());
 					}
 					break;
 				case DROP:
@@ -109,11 +131,12 @@ public class World {
 							curAnt.getCurrentPos().addFood();
 						}
 						
-						curAnt.setBrainState(antsState.getNextIdState());	
+						curAnt.setBrainState(antsState.getNextState());	
 						
 					break;
 				case TURN:
 					curAnt.turn(antsState.getLeftRight());
+					curAnt.setBrainState(antsState.getNextState());	
 					break;
 				case MOVE:
 					Cell cellGoingTo = map.adjacentCell(curAnt.getCurrentPos(), curAnt.getDir());
@@ -121,27 +144,26 @@ public class World {
 					curAnt.getCurrentPos().antMoveOut();
 					cellGoingTo.antMoveIn(curAnt);
 					curAnt.setCurrentPos(cellGoingTo);
-					curAnt.setBrainState(antsState.getNextIdState());
+					curAnt.setBrainState(antsState.getNextState());
 					}
 					else{
-						curAnt.setBrainState(antsState.getAltNextIdState());
+						curAnt.setBrainState(antsState.getAltNextState());
 					}
 					break;
 				case FLIP:
 					RandomNumber rN = new RandomNumber();
 					if(rN.nextInt(antsState.getRandomInt()) ==0){
-						curAnt.setBrainState(antsState.getNextIdState());
+						curAnt.setBrainState(antsState.getNextState());
 					}
 					else{
-						curAnt.setBrainState(antsState.getAltNextIdState());
+						curAnt.setBrainState(antsState.getAltNextState());
 					}
 					
 					break;
 				
 			}
-				}
-			}
-		}
+				
+			}}
 	}
 	public Cell sensedCell(Cell cell, int dir, SenseDirection senseDir){
 		switch (senseDir){
@@ -160,13 +182,13 @@ public class World {
 		
 	public void foodInEachAntHill(){
 		int redFood = 0;
-		for(int i = 0; i<=rAHLoc.size();i++){
+		for(int i = 0; i<rAHLoc.size();i++){
 			redFood = redFood + rAHLoc.get(i).getNumberOfFoodParticles();
 		}
 		foodInRAH = redFood;
 		
 		int blackFood = 0;
-		for(int i = 0; i<=bAHLoc.size();i++){
+		for(int i = 0; i<bAHLoc.size();i++){
 			blackFood = blackFood + bAHLoc.get(i).getNumberOfFoodParticles();
 		}
 		foodInBAH = blackFood;
@@ -255,6 +277,9 @@ public class World {
 	
 	
 	public static void main (String[] args){
+		String workingDir = System.getProperty("user.dir");
+		
+		World w1 = new World(workingDir+"\\files\\workingworld.world",workingDir+"\\files\\cleverbrain1.brain",workingDir+"\\files\\cleverbrain2.brain");
 	
 	}
 

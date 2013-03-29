@@ -45,16 +45,17 @@ public class AntBrainInterpreterCoryn {
 
 	}
 	
-	public BrainState[] antBrainGenerator(String antBrainTextFile){
+	public BrainState[] antBrainGenerator(String antBrainTextFile, AntColour colour){
 		if(antBrainChecker(antBrainTextFile)){
 			BrainState[] states = new BrainState[stateInt];
+			
 		
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(antBrainTextFile));
 			int ptr = 0;
-			String curLine = reader.readLine();
-			while(curLine != null){
-				curLine.toLowerCase();
+			String curLineup = reader.readLine();
+			while(curLineup != null){
+				String curLine = curLineup.toLowerCase();
 				String instruction; 
 				
 				
@@ -72,13 +73,14 @@ public class AntBrainInterpreterCoryn {
 					    bs.setAltNextIdState(Integer.parseInt(mattSense.group(3)));
 					    if(mattSense.group(4).startsWith("marker")){
 					    	bs.setSenseCondition("marker");
-					    	bs.setMarker(Integer.parseInt(mattSense.group(4).substring(7, 8)));
+					    	bs.setMarker(Integer.parseInt(mattSense.group(4).substring(7, 8)),colour);
 					    }
 					    else{
 					    	bs.setSenseCondition(mattSense.group(4));
 					    }
 					}
 					states[ptr] = bs;
+					
 				}
 				else if(curLine.matches(regMark)){
 					BrainState bs =  new BrainState();
@@ -88,10 +90,11 @@ public class AntBrainInterpreterCoryn {
 					Matcher mattMark = pattMark.matcher(curLine);
 					if (mattMark.find())
 					{
-						bs.setMarker(Integer.parseInt(mattMark.group(1)));
+						bs.setMarker(Integer.parseInt(mattMark.group(1)),colour);
 						bs.setNextIdState(Integer.parseInt(mattMark.group(2)));
 					}
 					states[ptr] = bs;
+					
 				}
 				else if(curLine.matches(regUnMark)){
 					BrainState bs =  new BrainState();
@@ -101,10 +104,11 @@ public class AntBrainInterpreterCoryn {
 					Matcher mattUnMark = pattUnMark.matcher(curLine);
 					if (mattUnMark.find())
 					{
-						bs.setMarker(Integer.parseInt(mattUnMark.group(1)));
+						bs.setMarker(Integer.parseInt(mattUnMark.group(1)),colour);
 						bs.setNextIdState(Integer.parseInt(mattUnMark.group(2)));
 					}
 					states[ptr] = bs;
+					
 				}
 				else if(curLine.matches(regPickUp)){
 					BrainState bs =  new BrainState();
@@ -119,6 +123,7 @@ public class AntBrainInterpreterCoryn {
 					}
 					states[ptr] = bs;
 					
+					
 				}
 				else if(curLine.matches(regDrop)){
 					BrainState bs =  new BrainState();
@@ -131,6 +136,7 @@ public class AntBrainInterpreterCoryn {
 						bs.setNextIdState(Integer.parseInt(mattDrop.group(1)));
 					}
 					states[ptr] = bs;
+					
 					
 				}
 				else if(curLine.matches(regTurn)){
@@ -147,6 +153,7 @@ public class AntBrainInterpreterCoryn {
 					}
 					states[ptr] = bs;
 					
+					
 				}
 				else if(curLine.matches(regMove)){
 					BrainState bs =  new BrainState();
@@ -161,6 +168,7 @@ public class AntBrainInterpreterCoryn {
 						bs.setAltNextIdState(Integer.parseInt(mattMove.group(2)));
 					}
 					states[ptr] = bs;
+					
 					
 				}
 				else if(curLine.matches(regFlip)){
@@ -177,11 +185,15 @@ public class AntBrainInterpreterCoryn {
 					}
 					states[ptr] = bs;
 					
+					
 				}
 				
 				
 				ptr++;
-				curLine = reader.readLine();
+				
+						
+				
+				curLineup = reader.readLine();
 			}
 		
 		} catch (FileNotFoundException e) {
@@ -191,6 +203,7 @@ public class AntBrainInterpreterCoryn {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		updateBrainStates(states);
 		return states;	
 		
 		}
@@ -202,29 +215,27 @@ public class AntBrainInterpreterCoryn {
 	}
 	public boolean antBrainChecker(String antBrainTextFile){
 		boolean legit = false;
+		int numStates = 0;
 		try {
 			legit = true;
-			stateInt = 0;
 			BufferedReader reader = new BufferedReader(new FileReader(antBrainTextFile));
 		
 			String curLine = reader.readLine();
 		while(curLine != null && legit)
 		{
-			stateInt ++;
+			
 			if(regChecker(curLine) == false){
 				legit = false;
-				System.out.println(curLine);
 				
 				
 			}
-			
+			numStates ++;
 			curLine = reader.readLine();
+			
 			
 		}
 		
-		
-		
-	
+		stateInt = numStates;
 	} catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -235,6 +246,16 @@ public class AntBrainInterpreterCoryn {
 		return false;
 	}
 		return legit;
+	}
+	
+	public void updateBrainStates(BrainState[] states){
+		for(BrainState s:states){
+			
+			s.setNextState(states[s.getNextIdState()]);
+			s.setAltNextState(states[s.getAltNextIdState()]);
+		}
+		
+		
 	}
 	public boolean isInteger(String input) {
 		try {
@@ -257,11 +278,13 @@ public class AntBrainInterpreterCoryn {
 		return false;
 	}
 	public static void main (String[] args){
-		AntBrainInterpreterCoryn aBI = new AntBrainInterpreterCoryn();
-		BrainState[] st = aBI.antBrainGenerator("C://brain.txt");
-		System.out.println(aBI.stateInt);
-		for(BrainState s:st){
-			s.print();
+		AntBrainInterpreterCoryn abi = new  AntBrainInterpreterCoryn();
+		System.out.println(abi.antBrainChecker("C://cleverbrain2.brain"));
+		BrainState[] bs = abi.antBrainGenerator("C://cleverbrain2.brain", AntColour.RED);
+		for(BrainState b: bs){
+			b.print();
 		}
+		
+		
 	}
 }

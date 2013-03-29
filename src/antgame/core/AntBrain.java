@@ -8,8 +8,10 @@ package antgame.core;
 public class AntBrain {
 	private BrainState[] brain;
 	
-	public AntBrain(String antLoc)
+	public AntBrain(String antLoc, AntColour colour)
 	{
+		AntBrainInterpreterCoryn aBI = new AntBrainInterpreterCoryn();
+		brain = aBI.antBrainGenerator(antLoc, colour);
 		
 	}
 	
@@ -88,6 +90,12 @@ public class AntBrain {
 				return adjacentCell(pos,turn("right",dir));
 			default:
 				return null;
+		}
+	}
+	public static void main(String[] args){
+		AntBrain ab1 = new AntBrain("C://cleverbrain1.brain",AntColour.RED);
+		for(BrainState bs: ab1.brain){
+			bs.print();
 		}
 	}
 }
