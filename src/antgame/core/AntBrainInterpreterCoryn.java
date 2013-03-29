@@ -68,8 +68,8 @@ public class AntBrainInterpreterCoryn {
 					if (mattSense.find())
 					{
 						bs.setSenseDirection(mattSense.group(1));
-						bs.setNextState(Integer.parseInt(mattSense.group(2)));
-					    bs.setAltNextState(Integer.parseInt(mattSense.group(3)));
+						bs.setNextIdState(Integer.parseInt(mattSense.group(2)));
+					    bs.setAltNextIdState(Integer.parseInt(mattSense.group(3)));
 					    if(mattSense.group(4).startsWith("marker")){
 					    	bs.setSenseCondition("marker");
 					    	bs.setMarker(Integer.parseInt(mattSense.group(4).substring(7, 8)));
@@ -89,7 +89,7 @@ public class AntBrainInterpreterCoryn {
 					if (mattMark.find())
 					{
 						bs.setMarker(Integer.parseInt(mattMark.group(1)));
-						bs.setNextState(Integer.parseInt(mattMark.group(2)));
+						bs.setNextIdState(Integer.parseInt(mattMark.group(2)));
 					}
 					states[ptr] = bs;
 				}
@@ -102,7 +102,7 @@ public class AntBrainInterpreterCoryn {
 					if (mattUnMark.find())
 					{
 						bs.setMarker(Integer.parseInt(mattUnMark.group(1)));
-						bs.setNextState(Integer.parseInt(mattUnMark.group(2)));
+						bs.setNextIdState(Integer.parseInt(mattUnMark.group(2)));
 					}
 					states[ptr] = bs;
 				}
@@ -114,8 +114,8 @@ public class AntBrainInterpreterCoryn {
 					Matcher mattPickUp = pattPickUp.matcher(curLine);
 					if (mattPickUp.find())
 					{
-						bs.setNextState(Integer.parseInt(mattPickUp.group(1)));
-						bs.setAltNextState(Integer.parseInt(mattPickUp.group(2)));
+						bs.setNextIdState(Integer.parseInt(mattPickUp.group(1)));
+						bs.setAltNextIdState(Integer.parseInt(mattPickUp.group(2)));
 					}
 					states[ptr] = bs;
 					
@@ -128,7 +128,7 @@ public class AntBrainInterpreterCoryn {
 					Matcher mattDrop = pattDrop.matcher(curLine);
 					if (mattDrop.find())
 					{
-						bs.setNextState(Integer.parseInt(mattDrop.group(1)));
+						bs.setNextIdState(Integer.parseInt(mattDrop.group(1)));
 					}
 					states[ptr] = bs;
 					
@@ -143,7 +143,7 @@ public class AntBrainInterpreterCoryn {
 					{
 						
 						bs.setLeftRight(mattTurn.group(1));
-						bs.setNextState(Integer.parseInt(mattTurn.group(2)));
+						bs.setNextIdState(Integer.parseInt(mattTurn.group(2)));
 					}
 					states[ptr] = bs;
 					
@@ -157,8 +157,8 @@ public class AntBrainInterpreterCoryn {
 					if (mattMove.find())
 					{
 						
-						bs.setNextState(Integer.parseInt(mattMove.group(1)));
-						bs.setAltNextState(Integer.parseInt(mattMove.group(2)));
+						bs.setNextIdState(Integer.parseInt(mattMove.group(1)));
+						bs.setAltNextIdState(Integer.parseInt(mattMove.group(2)));
 					}
 					states[ptr] = bs;
 					
@@ -172,8 +172,8 @@ public class AntBrainInterpreterCoryn {
 					if (mattFlip.find())
 					{
 						bs.setRandomInt(Integer.parseInt(mattFlip.group(1)));
-						bs.setNextState(Integer.parseInt(mattFlip.group(2)));
-						bs.setAltNextState(Integer.parseInt(mattFlip.group(3)));
+						bs.setNextIdState(Integer.parseInt(mattFlip.group(2)));
+						bs.setAltNextIdState(Integer.parseInt(mattFlip.group(3)));
 					}
 					states[ptr] = bs;
 					

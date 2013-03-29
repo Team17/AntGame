@@ -30,12 +30,12 @@ public class BrainState {
 	 * In cases where the next brain state depends on some condition, this is the state
 	 * where the ant will be when that condition is met.
 	 */
-	private int nextState;
+	private int nextIdState;
 	
 	/**
 	 * [Optional] The brain state the ant will be at if the provided condition is not met.
 	 */
-	private int altNextState;
+	private int altNextIdState;
 	
 	/**
 	 * [Optional] For the SENSE instruction, this property denotes the cell that is being
@@ -83,25 +83,25 @@ public class BrainState {
 	 * @return the nextState
 	 */
 	public int getNextState() {
-		return nextState;
+		return nextIdState;
 	}
 	/**
 	 * @param nextState the nextState to set
 	 */
 	public void setNextState(int nextState) {
-		this.nextState = nextState;
+		this.nextIdState = nextState;
 	}
 	/**
 	 * @return the altNextState
 	 */
 	public int getAltNextState() {
-		return altNextState;
+		return altNextIdState;
 	}
 	/**
 	 * @param altNextState the altNextState to set
 	 */
 	public void setAltNextState(int altNextState) {
-		this.altNextState = altNextState;
+		this.altNextIdState = altNextState;
 	}
 	/**
 	 * @return the senseDirection
@@ -227,7 +227,7 @@ public class BrainState {
 	}
 	
 	public void print(){
-		System.out.println("StateId: " + this.stateId +"\nInstructons: " + this.instruction + "\nNextState: " + this.nextState + "\nAltNextState: "+ this.altNextState + "\nSenseDiection: " + this.senseDirection + "\nSenseCondition: " + this.senseCondition + "\nMarker: " + this.marker +"\nTrun Dir: " + this.leftRight + "\nRandomInt: "+ this.randomInt +"\n");
+		System.out.println("StateId: " + this.stateId +"\nInstructons: " + this.instruction + "\nNextState: " + this.nextIdState + "\nAltNextState: "+ this.altNextIdState + "\nSenseDiection: " + this.senseDirection + "\nSenseCondition: " + this.senseCondition + "\nMarker: " + this.marker +"\nTrun Dir: " + this.leftRight + "\nRandomInt: "+ this.randomInt +"\n");
 	}
 	
 

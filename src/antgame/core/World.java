@@ -70,37 +70,37 @@ public class World {
 					SenseCondition sCon = antsState.getSenseCondition();
 					if(sCon == SenseCondition.MARKER){
 						if(cellTS.senseCheck(curAnt, sCon, sCon.getMarker())){
-							curAnt.setBrainState(antsState.getNextState());
+							curAnt.setBrainState(antsState.getNextIdState());
 						}
 						else{
-							curAnt.setBrainState(antsState.getAltNextState());
+							curAnt.setBrainState(antsState.getAltNextIdState());
 						}
 					}
 					else{
 						if(cellTS.senseCheck(curAnt, sCon, null)){
-							curAnt.setBrainState(antsState.getNextState());
+							curAnt.setBrainState(antsState.getNextIdState());
 						}
 						else{
-							curAnt.setBrainState(antsState.getAltNextState());
+							curAnt.setBrainState(antsState.getAltNextIdState());
 						}
 					}
 					break;
 				case MARK:
 					curAnt.getCurrentPos().setMarker(antsState.getMarker());
-					curAnt.setBrainState(antsState.getNextState());
+					curAnt.setBrainState(antsState.getNextIdState());
 					break;
 				case UNMARK:
 					curAnt.getCurrentPos().clearMarker(antsState.getMarker());
-					curAnt.setBrainState(antsState.getNextState());
+					curAnt.setBrainState(antsState.getNextIdState());
 					break;
 				case PICKUP:
 					if(curAnt.getCurrentPos().isContainsFood()){
 						curAnt.getCurrentPos().removeFood();
 						curAnt.pickupFood();
-						curAnt.setBrainState(antsState.getNextState());
+						curAnt.setBrainState(antsState.getNextIdState());
 					}
 					else{
-						curAnt.setBrainState(antsState.getAltNextState());
+						curAnt.setBrainState(antsState.getAltNextIdState());
 					}
 					break;
 				case DROP:
@@ -109,7 +109,7 @@ public class World {
 							curAnt.getCurrentPos().addFood();
 						}
 						
-						curAnt.setBrainState(antsState.getNextState());	
+						curAnt.setBrainState(antsState.getNextIdState());	
 						
 					break;
 				case TURN:
@@ -121,19 +121,19 @@ public class World {
 					curAnt.getCurrentPos().antMoveOut();
 					cellGoingTo.antMoveIn(curAnt);
 					curAnt.setCurrentPos(cellGoingTo);
-					curAnt.setBrainState(antsState.getNextState());
+					curAnt.setBrainState(antsState.getNextIdState());
 					}
 					else{
-						curAnt.setBrainState(antsState.getAltNextState());
+						curAnt.setBrainState(antsState.getAltNextIdState());
 					}
 					break;
 				case FLIP:
 					RandomNumber rN = new RandomNumber();
 					if(rN.nextInt(antsState.getRandomInt()) ==0){
-						curAnt.setBrainState(antsState.getNextState());
+						curAnt.setBrainState(antsState.getNextIdState());
 					}
 					else{
-						curAnt.setBrainState(antsState.getAltNextState());
+						curAnt.setBrainState(antsState.getAltNextIdState());
 					}
 					
 					break;
