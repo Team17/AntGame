@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<project name="Ant-Test" default="main" basedir=".">
+	<!-- Sets variables which can later be used. -->
+	<!-- The value of a property is accessed via ${} -->
+	<property name="src.dir" location="src" />
+	<property name="lib.dir" location="lib" />
+	<property name="build.dir" location="bin" />
+	<property name="dist.dir" location="dist" />
+	<property name="docs.dir" location="docs" />
+
+	<property name="build.test.dir" location="${build.dir}/antgame/test" />
+	<property name="test.report.dir" location="build-report" />
+
+	<!-- Define the classpath which includes the junit.jar and the classes after compiling-->
+	<path id="junit.class.path">
+		<pathelement location="${lib.dir}/junit.jar" />
+		<pathelement location="${lib.dir}/org.hamcrest.core.jar" />
+		<pathelement location="${build.dir}" />
+	</path>
+
+	<!-- Deletes the existing build, docs and dist directory-->
+	<target name="clean">
+		<delete dir="${build.dir}" />
+		<delete dir="${docs.dir}" />
+		<delete dir="${dist.dir}" />
+		<delete dir="${test.report.dir}" />
+	</target>
+
+	<!-- Creates the  build, docs and dist directory-->
+	<target name="makedir">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${docs.dir}" />
+		<mkdir dir="${dist.dir}" />
+		<mkdir dir="${test.report.dir}" />
+	</target>
+
+	<!-- Compile -->
+	<target name="compile" depends="clean, makedir">
+		<javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="true">
+			<classpath refid="junit.class.path" />
+		</javac>
+	</target>
+
+	<!-- Unit testing with JUnit -->
+	<target name="junit" depends="compile">
+		<junit printsummary="on" fork="true" haltonfailure="yes">
+			<classpath refid="junit.class.path" />
+			<formatter type="plain" usefile="false" />
+			<!-- to screen -->
+			<formatter type="plain" />
+			<!-- to file -->
+			<batchtest todir="${test.report.dir}">
+				<fileset dir="${src.dir}">
+					<include name="**/*Test*.java" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+	<!-- Create Javadoc -->
+	<target name="docs" depends="compile">
+		<record name="${test.report.dir}/javadoc.log" action="start" />
+		<javadoc packagenames="src" sourcepath="${src.dir}" destdir="${docs.dir}">
+			<classpath refid="junit.class.path" />
+			<fileset dir="${src.dir}">
+				<include name="**" />
+			</fileset>
+		</javadoc>
+		<record name="${test.report.dir}/javadoc.log" action="stop" />
+	</target>
+
+	<!--Creates the deployable jar file  -->
+	<target name="jar" depends="compile">
+		<jar destfile="${dist.dir}\AntGame.jar" basedir="${build.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="test.Main" />
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="main" depends="compile, junit, jar, docs">
+		<description>Main target</description>
+	</target>
+
+</project>

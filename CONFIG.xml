@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-<!-- numAntMarkers = the number of types of markers it is possible for an ant colony to leave -->
-<entry key="numAntMarkers">6</entry>
+	<entry key="numAntMarkers">6</entry>
+	<entry key="contestMapDimension">150</entry>
+	<entry key="contestMapRocks">14</entry>
+	<entry key="contestMapFoodBlobs">11</entry>
+	<entry key="contestMapAnthillSideLength">7</entry>
+	<entry key="contestMapFoodBlobSideLength">5</entry>
+	<entry key="contestMapFoodPerBlobCell">5</entry>
+	<entry key="maxAntBrainLines">10000</entry>
+	<entry key="gameRounds">300000</entry>
+	<entry key="restingRounds">14</entry>
+	<entry key="defaultAntDirection">0</entry>
+	<entry key="userPrefsDir">AntGame</entry>
 </properties>
