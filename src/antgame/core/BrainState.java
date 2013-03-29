@@ -8,9 +8,16 @@ package antgame.core;
  * @author Alex
  *
  */
-public enum BrainState {
+public class BrainState {
 
-	SENSE, MARK, UNMARK, PICKUP, DROP, TURN, MOVE, FLIP;
+	private Instruction instruction;
+	
+	public Instruction getInstruction(){
+		return instruction;
+	}
+	public void setInstruction(Instruction ins){
+		instruction = ins;
+	}
 	
 	/**
 	 * The numerical identifier of this brain state within an ant brain.
@@ -23,12 +30,12 @@ public enum BrainState {
 	 * In cases where the next brain state depends on some condition, this is the state
 	 * where the ant will be when that condition is met.
 	 */
-	private BrainState nextState;
+	private int nextIdState;
 	
 	/**
 	 * [Optional] The brain state the ant will be at if the provided condition is not met.
 	 */
-	private BrainState altNextState;
+	private int altNextIdState;
 	
 	/**
 	 * [Optional] For the SENSE instruction, this property denotes the cell that is being
@@ -46,7 +53,7 @@ public enum BrainState {
 	 * [Optional] For the MARK and UNMARK instructions, this property denotes the
 	 * marker that is being deposited/removed.
 	 */
-	private Marker marker;
+	private int marker;
 	
 	/**
 	 * [Optional] For the TURN instruction, this property denotes whether the ant is to
@@ -75,26 +82,26 @@ public enum BrainState {
 	/**
 	 * @return the nextState
 	 */
-	public BrainState getNextState() {
-		return nextState;
+	public int getNextState() {
+		return nextIdState;
 	}
 	/**
 	 * @param nextState the nextState to set
 	 */
-	public void setNextState(BrainState nextState) {
-		this.nextState = nextState;
+	public void setNextState(int nextState) {
+		this.nextIdState = nextState;
 	}
 	/**
 	 * @return the altNextState
 	 */
-	public BrainState getAltNextState() {
-		return altNextState;
+	public int getAltNextState() {
+		return altNextIdState;
 	}
 	/**
 	 * @param altNextState the altNextState to set
 	 */
-	public void setAltNextState(BrainState altNextState) {
-		this.altNextState = altNextState;
+	public void setAltNextState(int altNextState) {
+		this.altNextIdState = altNextState;
 	}
 	/**
 	 * @return the senseDirection
@@ -108,6 +115,22 @@ public enum BrainState {
 	public void setSenseDirection(SenseDirection senseDirection) {
 		this.senseDirection = senseDirection;
 	}
+	
+	public void setSenseDirection(String dir) {
+		if(dir.equals("here")){
+			this.senseDirection = SenseDirection.HERE;
+		}
+		else if (dir.equals("ahead")){
+			this.senseDirection = SenseDirection.AHEAD;
+		}
+		else if (dir.equals("lefthead")){
+			this.senseDirection = SenseDirection.LEFTAHEAD;
+		}
+		else if (dir.equals("rightahead")){
+			this.senseDirection = SenseDirection.RIGHTAHEAD;
+		}
+		
+	}
 	/**
 	 * @return the senseCondition
 	 */
@@ -120,16 +143,52 @@ public enum BrainState {
 	public void setSenseCondition(SenseCondition senseCondition) {
 		this.senseCondition = senseCondition;
 	}
+	public void setSenseCondition(String scon) {
+		
+	
+	if(scon.equals("friend")){
+		this.senseCondition = SenseCondition.FRIEND;
+	}
+	else if(scon.equals("foe")){
+		this.senseCondition = SenseCondition.FOE;
+	}
+	else if(scon.equals("friendwithfood")){
+		this.senseCondition = SenseCondition.FRIENDWITHFOOD;
+	}
+	else if(scon.equals("foewithfood")){
+		this.senseCondition = SenseCondition.FOEWITHFOOD;
+	}
+	else if(scon.equals("food")){
+		this.senseCondition = SenseCondition.FOOD;
+	}
+	else if(scon.equals("rock")){
+		this.senseCondition = SenseCondition.ROCK;
+	}
+	else if(scon.equals("marker")){
+		this.senseCondition = SenseCondition.MARKER;
+	}
+	else if(scon.equals("foemarker")){
+		this.senseCondition = SenseCondition.FOEMARKER;
+	}
+	else if(scon.equals("home")){
+		this.senseCondition = SenseCondition.HOME;
+	}
+	else if(scon.equals("foehome")){
+		this.senseCondition = SenseCondition.FOE;
+	}
+	
+	
+}
 	/**
 	 * @return the marker
 	 */
-	public Marker getMarker() {
+	public int getMarker() {
 		return marker;
 	}
 	/**
 	 * @param marker the marker to set
 	 */
-	public void setMarker(Marker marker) {
+	public void setMarker(int marker) {
 		this.marker = marker;
 	}
 	/**
@@ -144,6 +203,16 @@ public enum BrainState {
 	public void setLeftRight(LeftRight leftRight) {
 		this.leftRight = leftRight;
 	}
+	
+	public void setLeftRight(String lr) {
+		if(lr.equals("left")){
+			this.leftRight = LeftRight.LEFT;
+		}
+		else if(lr.equals("right")){
+			this.leftRight = LeftRight.RIGHT;
+		}
+	}
+	
 	/**
 	 * @return the randomInt
 	 */
@@ -155,6 +224,10 @@ public enum BrainState {
 	 */
 	public void setRandomInt(int randomInt) {
 		this.randomInt = randomInt;
+	}
+	
+	public void print(){
+		System.out.println("StateId: " + this.stateId +"\nInstructons: " + this.instruction + "\nNextState: " + this.nextIdState + "\nAltNextState: "+ this.altNextIdState + "\nSenseDiection: " + this.senseDirection + "\nSenseCondition: " + this.senseCondition + "\nMarker: " + this.marker +"\nTrun Dir: " + this.leftRight + "\nRandomInt: "+ this.randomInt +"\n");
 	}
 	
 
