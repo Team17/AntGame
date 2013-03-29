@@ -5,7 +5,7 @@ import java.math.BigInteger;
 /**
  * Pseudo-random number generator used for the "Flip" ant method.
  * Written according to the Project Overview specification
- * @author Alexsdf
+ * @author Alex
  *
  */
 public class RandomNumber {
