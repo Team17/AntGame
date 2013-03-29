@@ -27,7 +27,8 @@ public class Marker {
 	/**
 	 * Extraction of maximum legal number of ant markers from Properties file
 	 */
-	private static int NUM_ANT_MARKERS = Integer.parseInt(AntGame.CONFIG.getProperty("numAntMarkers"));
+	//private static int NUM_ANT_MARKERS = Integer.parseInt(AntGame.CONFIG.getProperty("numAntMarkers"));
+	
 	
 	/**
 	 * Hashcode generated based on this class's fields
@@ -75,8 +76,10 @@ public class Marker {
 	public Marker (int id, AntColour color) throws InvalidMarkerIdException {
 		
 		// validity check
-		if (id < 0 || id > NUM_ANT_MARKERS) {
+		if (id < 0 || id >6){ //NUM_ANT_MARKERS) {
+			System.err.print("ime");
 			throw new InvalidMarkerIdException();
+			
 		}
 		
 		this.id = id;
@@ -100,4 +103,9 @@ public class Marker {
 		return color;
 	}
 	
+	public static void main(String[] args) throws InvalidMarkerIdException{
+		
+			Marker m1 = new Marker(1,AntColour.RED);
+		
+	}
 }
