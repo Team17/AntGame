@@ -61,12 +61,26 @@ public class World {
 			}
 		}
 		map.printmap();
-		for(int i=0; i < 10000; i++){
+		for(int i=0; i < 300000; i++){
 			step();
 		}
 		map.printmap();
 		System.out.print("Food In Red AntHill: " + foodInRAH + "Food In Black AntHill: " + foodInBAH);
-		
+		int redAlive =0;
+		int blackAlive = 0;
+		for(Ant a:ants){
+			if(a.isAlive()){
+				if(a.getColour() == AntColour.RED){
+					redAlive++;
+				}
+				else if(a.getColour()==AntColour.BLACK){
+					blackAlive++;
+				}
+				
+			}
+			
+		}
+		System.out.println("Red Ants Alive: " + redAlive +"Black Ants Alive: " + blackAlive);
 	}
 
 	public void step(){
@@ -144,6 +158,7 @@ public class World {
 					curAnt.getCurrentPos().antMoveOut();
 					cellGoingTo.antMoveIn(curAnt);
 					curAnt.setCurrentPos(cellGoingTo);
+				//	curAnt.isResting();!!!!!!!!!!!!!!!!!!
 					curAnt.setBrainState(antsState.getNextState());
 					}
 					else{
@@ -279,7 +294,7 @@ public class World {
 	public static void main (String[] args){
 		String workingDir = System.getProperty("user.dir");
 		
-		World w1 = new World(workingDir+"\\files\\workingworld.world",workingDir+"\\files\\cleverbrain1.brain",workingDir+"\\files\\cleverbrain2.brain");
+		World w1 = new World("C://map.txt"/*workingDir+"\\files\\workingworld.world"**/,workingDir+"\\files\\cleverbrain1.brain",workingDir+"\\files\\cleverbrain2.brain");
 	
 	}
 

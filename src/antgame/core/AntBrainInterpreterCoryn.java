@@ -278,13 +278,15 @@ public class AntBrainInterpreterCoryn {
 		return false;
 	}
 	public static void main (String[] args){
+		String workingDir = System.getProperty("user.dir");
 		AntBrainInterpreterCoryn abi = new  AntBrainInterpreterCoryn();
-		System.out.println(abi.antBrainChecker("C://cleverbrain2.brain"));
-		BrainState[] bs = abi.antBrainGenerator("C://cleverbrain2.brain", AntColour.RED);
+		System.out.println(abi.antBrainChecker(workingDir+"\\files\\cleverbrain2.brain"));
+		BrainState[] bs = abi.antBrainGenerator(workingDir+"\\files\\cleverbrain2.brain", AntColour.RED);
 		for(BrainState b: bs){
 			b.print();
 		}
 		
+		bs[978].print();
 		
 	}
 }
