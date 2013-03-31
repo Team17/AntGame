@@ -45,8 +45,9 @@ public class Cell {
 		pos[1] = y;
 		markers = new HashMap<Marker, Boolean>();
 		//blackMarkers = new ArrayList<Marker>();
+		// Integer.parseInt(AntGame.CONFIG.getProperty("numAntMarkers"))
 		for(AntColour c: AntColour.values()){
-			for(int i = 0 ; i< Integer.parseInt(AntGame.CONFIG.getProperty("numAntMarkers")); i++){
+			for(int i = 0 ; i<6; i++){
 				try {
 					markers.put(new Marker(i,c), false);
 				} catch (InvalidMarkerIdException e) {
@@ -98,7 +99,6 @@ public class Cell {
 	
 	// gameplay setters
 	public void antMoveIn(Ant id){
-		//** do we need to check whether or no it is clear?
 		containsAnt = true;
 		ant = id;
 		isClear = false;
@@ -110,6 +110,7 @@ public class Cell {
 		containsAnt = false;
 		ant = null;
 		isClear = true;
+	
 		
 		
 	}
@@ -164,7 +165,7 @@ public class Cell {
 		
 		
 		
-		Marker[] _m = new Marker[Integer.parseInt(AntGame.CONFIG.getProperty("numAntMarkers"))];
+		Marker[] _m = new Marker[6];
 		for (int i = 0; i < _m.length; i++) {
 			try {
 				_m[i] = new Marker(i,c);
@@ -278,11 +279,11 @@ public class Cell {
 		case ROCK:
 			return containsRock;
 		case MARKER:
-			checkMarker(m);
+			return checkMarker(m);
 			
 			
 		case FOEMARKER:
-			this.checkAnyMarkerAt(a.getColour().otherColour());
+			return this.checkAnyMarkerAt(a.getColour().otherColour());
 			
 		case HOME:
 			if(a.getColour() == AntColour.RED){
@@ -361,8 +362,12 @@ public boolean containsBlackAntHill() {
 
 
 
-public static void main (String[] args){
+public static void main (String[] args) throws InvalidMarkerIdException{
 	Cell c = new Cell(0,0,"9");
+	System.out.println(c.getContent());
+	c.antMoveIn(new Ant(0, 0, AntColour.RED, 0, c,new AntBrain("C://brain2.txt", AntColour.RED)));
+	System.out.println(c.getContent());
+	c.antMoveOut();
 	System.out.println(c.getContent());
 }
 }

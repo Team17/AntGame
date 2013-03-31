@@ -3,6 +3,8 @@
  */
 package antgame.core;
 
+import antgame.InvalidMarkerIdException;
+
 /**
  * Enumerator for a single state of an Ant Brain
  * @author Alex
@@ -12,17 +14,12 @@ public class BrainState {
 
 	private Instruction instruction;
 	
-	public Instruction getInstruction(){
-		return instruction;
-	}
-	public void setInstruction(Instruction ins){
-		instruction = ins;
-	}
-	
 	/**
 	 * The numerical identifier of this brain state within an ant brain.
 	 */
 	private int	stateId;
+	
+	private BrainState nextState;
 	
 	/**
 	 * The next brain state the ant will have after this one.
@@ -31,12 +28,12 @@ public class BrainState {
 	 * where the ant will be when that condition is met.
 	 */
 	private int nextIdState;
-	
+
 	/**
 	 * [Optional] The brain state the ant will be at if the provided condition is not met.
 	 */
 	private int altNextIdState;
-	
+	private BrainState altNextState;
 	/**
 	 * [Optional] For the SENSE instruction, this property denotes the cell that is being
 	 * sensed relative to the ant.
@@ -53,7 +50,7 @@ public class BrainState {
 	 * [Optional] For the MARK and UNMARK instructions, this property denotes the
 	 * marker that is being deposited/removed.
 	 */
-	private int marker;
+	private Marker marker;
 	
 	/**
 	 * [Optional] For the TURN instruction, this property denotes whether the ant is to
@@ -67,6 +64,12 @@ public class BrainState {
 	 */
 	private int randomInt;
 	
+	public Instruction getInstruction(){
+		return instruction;
+	}
+	public void setInstruction(Instruction ins){
+		instruction = ins;
+	}
 	/**
 	 * @return the stateId
 	 */
@@ -79,28 +82,40 @@ public class BrainState {
 	public void setStateId(int stateId) {
 		this.stateId = stateId;
 	}
+	public BrainState getNextState() {
+		return nextState;
+	}
+	public void setNextState(BrainState nextState) {
+		this.nextState = nextState;
+	}
 	/**
 	 * @return the nextState
 	 */
-	public int getNextState() {
+	public int getNextIdState() {
 		return nextIdState;
 	}
 	/**
 	 * @param nextState the nextState to set
 	 */
-	public void setNextState(int nextState) {
+	public void setNextIdState(int nextState) {
 		this.nextIdState = nextState;
+	}
+	public BrainState getAltNextState() {
+		return altNextState;
+	}
+	public void setAltNextState(BrainState altNextState) {
+		this.altNextState = altNextState;
 	}
 	/**
 	 * @return the altNextState
 	 */
-	public int getAltNextState() {
+	public int getAltNextIdState() {
 		return altNextIdState;
 	}
 	/**
 	 * @param altNextState the altNextState to set
 	 */
-	public void setAltNextState(int altNextState) {
+	public void setAltNextIdState(int altNextState) {
 		this.altNextIdState = altNextState;
 	}
 	/**
@@ -123,7 +138,7 @@ public class BrainState {
 		else if (dir.equals("ahead")){
 			this.senseDirection = SenseDirection.AHEAD;
 		}
-		else if (dir.equals("lefthead")){
+		else if (dir.equals("leftahead")){
 			this.senseDirection = SenseDirection.LEFTAHEAD;
 		}
 		else if (dir.equals("rightahead")){
@@ -182,14 +197,19 @@ public class BrainState {
 	/**
 	 * @return the marker
 	 */
-	public int getMarker() {
+	public Marker getMarker() {
 		return marker;
 	}
 	/**
 	 * @param marker the marker to set
 	 */
-	public void setMarker(int marker) {
-		this.marker = marker;
+	public void setMarker(int marker, AntColour colour) {
+		try {
+			this.marker = new Marker(marker,colour);
+		} catch (InvalidMarkerIdException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	/**
 	 * @return the leftRight
@@ -227,7 +247,7 @@ public class BrainState {
 	}
 	
 	public void print(){
-		System.out.println("StateId: " + this.stateId +"\nInstructons: " + this.instruction + "\nNextState: " + this.nextIdState + "\nAltNextState: "+ this.altNextIdState + "\nSenseDiection: " + this.senseDirection + "\nSenseCondition: " + this.senseCondition + "\nMarker: " + this.marker +"\nTrun Dir: " + this.leftRight + "\nRandomInt: "+ this.randomInt +"\n");
+		System.out.println("StateId: " + this.stateId +"\nInstructons: " + this.instruction + "\nNextiDState: " + this.nextIdState + "\nNextStateptr: " + this.nextState.stateId + "\nAltNextidState: "+ this.altNextIdState +"\nAltNextState: "+ this.altNextState.stateId +  "\nSenseDiection: " + this.senseDirection + "\nSenseCondition: " + this.senseCondition + "\nMarker: " + this.marker  +"\nTrun Dir: " + this.leftRight + "\nRandomInt: "+ this.randomInt +"\n");
 	}
 	
 
