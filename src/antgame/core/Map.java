@@ -29,20 +29,23 @@ public class Map {
 	public void printmap() {
 		//System.out.println(ySize);
 		for (int j = 0; j < (ySize); j++) {
-			System.out.print("|");
+			System.out.print("");
 			if (j % 2 != 0) {
 				System.out.print(" ");
 			}
 			for (int i = 0; i < (xSize); i++) {
-				System.out.print(map[i][j].getContent());
+				
 				if(map[i][j].containsBlackAnt()){
 					System.out.print("(b)");
 				}
 				if(map[i][j].containsRedAnt()){
 					System.out.print("(a)");
 				}
+				else{
+					System.out.print(map[i][j].getContent());
+				}
 				
-				System.out.print(" | ");
+				System.out.print("");
 			}
 			System.out.println("");
 		}
