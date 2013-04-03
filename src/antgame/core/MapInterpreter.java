@@ -6,24 +6,27 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class MapInterpreter {
-	private int xSize;
-	private int ySize;
-	public Cell[][] mapArray;
-	public String[][] stringMapArray;
+
 	
-	public Cell[][] MapGenerator(String textmap){
-		translator(textmap);
-		mapArray = new Cell[xSize][ySize];
-		for (int y = 0; y < (ySize); y++) {
-			for (int x = 0; x < (xSize); x++) {
+	
+	public static Map MapGenerator(String textmap){
+		
+		Cell[][] mapArray;
+		String[][] stringMapArray = translator(textmap);
+		mapArray = new Cell[stringMapArray.length][stringMapArray.length];
+		for (int y = 0; y < (stringMapArray.length); y++) {
+			for (int x = 0; x < (stringMapArray.length); x++) {
 				mapArray[x][y] = new Cell(x, y, (stringMapArray[x][y]));
-				
 			}
 		}
-		return mapArray;
+		return new Map(mapArray);
 		
 	}
-	public String[][] translator(String textmap) {
+	public static String[][] translator(String textmap) {
+		int xSize;
+		int ySize;
+		String[][] stringMapArray = null;
+		
 		if (mapchecker(textmap)) {
 			try {
 
@@ -60,7 +63,7 @@ public class MapInterpreter {
 		return stringMapArray;
 	}
 
-	public Boolean mapchecker(String textmap) {
+	public static Boolean mapchecker(String textmap) {
 		int xcomparesize = 0;
 		int ycomparesize = 0;
 		
@@ -137,7 +140,7 @@ public class MapInterpreter {
 		return rightsize;
 
 	}
-	public boolean isInteger(String input) {
+	public static boolean isInteger(String input) {
 		try {
 			Integer.parseInt(input);
 			return true;
@@ -145,14 +148,4 @@ public class MapInterpreter {
 			return false;
 		}
 	}
-	public int getxSize() {
-		return xSize;
-	}
-	public int getySize() {
-		return ySize;
-	}
-	public Cell[][] getMapArray() {
-		return mapArray;
-	}
-
 }

@@ -9,23 +9,11 @@ public class Map {
 	private Cell[][] map;
 
 
-	public Map( String mapTextFile) {
-		MapInterpreter mapItp = new MapInterpreter();
-		map = mapItp.MapGenerator(mapTextFile);
-		xSize = mapItp.getxSize();
-		ySize = mapItp.getySize();
-		
-
-		
-		
+	public Map(Cell[][] map) {
+		this.map = map;
+		this.xSize = map.length;
+		this.ySize = map.length;
 	}
-
-
-
-
-
-
-
 	public void printmap() {
 		//System.out.println(ySize);
 		for (int j = 0; j < (ySize); j++) {
@@ -206,12 +194,5 @@ public class Map {
 		}
 		return adjacentCells;
 		
-	}
-	
-
-	public static void main(String[] args) {
-		Map m2 = new Map("C://map.txt");
-		m2.printmap();
-
 	}
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import antgame.AntGame;
 import antgame.services.RandomNumber;
-import antgame.guiAntGame.Observer;
+
 
 public class World {
 
@@ -21,7 +21,7 @@ public class World {
 	
 	
 	public World(String mapLocation, String antR, String antB){//, String antR, String antB){
-		this.map = new Map(mapLocation);
+		this.map = MapInterpreter.MapGenerator(mapLocation);
 		
 		this.redAntBrain = new AntBrain(antR, AntColour.RED);
 		this.blackAntBrain = new AntBrain(antB,AntColour.BLACK);
