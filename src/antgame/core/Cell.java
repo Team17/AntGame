@@ -161,9 +161,7 @@ public class Cell {
 	 */
 	
 	public boolean checkAnyMarkerAt(AntColour c){
-		
-		
-		
+			
 		
 		Marker[] _m = new Marker[6];
 		for (int i = 0; i < _m.length; i++) {
@@ -314,62 +312,46 @@ public class Cell {
 		}
 		
 		}
-		
 	
-
+	public String getContent() {
+			return content;
+		}
 	
-
-
-public String getContent() {
-		return content;
+	public int[] getPos() {
+		return pos;
 	}
-
-public int[] getPos() {
-	return pos;
-}
-
-public boolean isContainsFood() {
-	return containsFood;
-}
-
-public int getNumberOfFoodParticles() {
-	return numberOfFoodParticles;
-}
-
-public boolean containsRock() {
-	return containsRock;
-}
-
-public boolean isClear() {
-	return isClear;
-}
-
-public boolean isContainsAnt() {
-	return containsAnt;
-}
-
-public Ant getAnt() {
-	return ant;
-}
-
-public boolean containsRedAntHill() {
-	return containsRedAntHill;
-}
-
-public boolean containsBlackAntHill() {
-	return containsBlackAntHill;
-}
-
-
-
-public static void main (String[] args) throws InvalidMarkerIdException{
-	Cell c = new Cell(0,0,"9");
-	System.out.println(c.getContent());
-	c.antMoveIn(new Ant(0, 0, AntColour.RED, 0, c,new AntBrain("C://brain2.txt", AntColour.RED)));
-	System.out.println(c.getContent());
-	c.antMoveOut();
-	System.out.println(c.getContent());
-}
+	
+	public boolean isContainsFood() {
+		return containsFood;
+	}
+	
+	public int getNumberOfFoodParticles() {
+		return numberOfFoodParticles;
+	}
+	
+	public boolean containsRock() {
+		return containsRock;
+	}
+	
+	public boolean isClear() {
+		return isClear;
+	}
+	
+	public boolean isContainsAnt() {
+		return containsAnt;
+	}
+	
+	public Ant getAnt() {
+		return ant;
+	}
+	
+	public boolean containsRedAntHill() {
+		return containsRedAntHill;
+	}
+	
+	public boolean containsBlackAntHill() {
+		return containsBlackAntHill;
+	}
 }
 
 

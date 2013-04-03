@@ -28,7 +28,7 @@ public class AntBrainInterpreterCoryn {
 	private	Pattern pattMove = Pattern.compile("move\\s([0-9]{1,4})\\s([0-9]{1,4})(|\\s;.*)");
 	private	Pattern pattFlip = Pattern.compile("flip\\s([0-9]{1,4})\\s([0-9]{1,4})\\s([0-9]{1,4})(|\\s;.*)");
 
-	int stateInt;
+	static int stateInt;
 	
 	
 	public AntBrainInterpreterCoryn(){
@@ -204,8 +204,6 @@ public class AntBrainInterpreterCoryn {
 			
 		}
 		else{
-			
-			System.out.print("syntac Incorrect");
 			return null;
 		}
 	}
@@ -246,7 +244,6 @@ public class AntBrainInterpreterCoryn {
 	
 	public void updateBrainStates(BrainState[] states){
 		for(BrainState s:states){
-			
 			s.setNextState(states[s.getNextIdState()]);
 			s.setAltNextState(states[s.getAltNextIdState()]);
 		}
@@ -272,17 +269,5 @@ public class AntBrainInterpreterCoryn {
 			}	
 		}
 		return false;
-	}
-	public static void main (String[] args){
-		String workingDir = System.getProperty("user.dir");
-		AntBrainInterpreterCoryn abi = new  AntBrainInterpreterCoryn();
-		System.out.println(abi.antBrainChecker(workingDir+"\\files\\cleverbrain2.brain"));
-		BrainState[] bs = abi.antBrainGenerator(workingDir+"\\files\\cleverbrain2.brain", AntColour.RED);
-		for(BrainState b: bs){
-			b.print();
-		}
-		
-		bs[978].print();
-		
 	}
 }
