@@ -95,6 +95,10 @@ public class World {
 				BrainState antsState = curAnt.getBrainState();
 				//System.out.println(curAnt.getState().getInstruction());
 				//antsState.print();
+				if(curAnt.getResting()>0){
+					curAnt.decResting();
+				}
+				else{
 				switch (antsState.getInstruction()) {
 				case SENSE:
 				//	antsState.print();
@@ -154,6 +158,7 @@ public class World {
 					Cell cellGoingTo = map.adjacentCell(curAnt.getCurrentPos(), curAnt.getDir());
 					if(cellGoingTo.isClear()){
 					curAnt.getCurrentPos().antMoveOut();
+					curAnt.setResting();
 					cellGoingTo.antMoveIn(curAnt);
 					curAnt.setCurrentPos(cellGoingTo);
 				//	curAnt.isResting();!!!!!!!!!!!!!!!!!!
@@ -175,6 +180,7 @@ public class World {
 					break;
 				
 			}
+				}
 				
 			}}
 	}
@@ -208,7 +214,7 @@ public class World {
 	}
 	
 	public Ant getAnt(Cell cell){
-		if(cell.isContainsAnt()){
+		if(cell.containsAnt()){
 			return cell.getAnt();
 			
 		}
@@ -219,7 +225,7 @@ public class World {
 	}
 	public Ant getAnt(int[] pos){
 		Cell cell = map.getCell(pos);
-		if(cell.isContainsAnt()){
+		if(cell.containsAnt()){
 			
 			return cell.getAnt();
 			
@@ -230,16 +236,16 @@ public class World {
 		
 	}
 	public boolean isAntAt(Cell cell){
-		return cell.isContainsAnt();
+		return cell.containsAnt();
 	}
 	public boolean isAntAt(int[] pos){
 		
 		Cell cell = map.getCell(pos);
-		return cell.isContainsAnt();
+		return cell.containsAnt();
 	}
 	
 	public void killAntAt(Cell cell){
-		if(cell.isContainsAnt()){
+		if(cell.containsAnt()){
 			//cell.getAnt().die();
 			cell.addNumFood(3);
 			ants[cell.getAnt().getuID()] = null;
@@ -259,7 +265,7 @@ public class World {
 	}
 	
 	public boolean nieveIsAntSurronded(Ant ant){
-		ArrayList<Cell> adjCells = map.adjacentCells(ant.getCurrentPos());
+		ArrayList<Cell> adjCells = map.surrondingCells(ant.getCurrentPos());
 		boolean surrounded = true;
 		for(Cell c:adjCells){
 			if(c.isClear()){
@@ -270,7 +276,7 @@ public class World {
 		return surrounded;
 	}
 	public boolean isAntSurronded(Ant ant){
-		ArrayList<Cell> adjCells = map.adjacentCells(ant.getCurrentPos());
+		ArrayList<Cell> adjCells = map.surrondingCells(ant.getCurrentPos());
 		boolean surrounded = true;
 		for(Cell c:adjCells){
 			if(c.isClear()){

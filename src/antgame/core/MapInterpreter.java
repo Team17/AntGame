@@ -22,6 +22,8 @@ public class MapInterpreter {
 		return new Map(mapArray);
 		
 	}
+	
+	
 	public static String[][] translator(String textmap) {
 		int xSize;
 		int ySize;

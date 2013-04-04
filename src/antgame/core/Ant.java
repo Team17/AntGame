@@ -21,7 +21,7 @@ public class Ant {
 	private boolean alive;
 	
 	//How many turns an ant has to rest before moving.
-	private int resting;
+	private int numRestingLeft;
 	
 	//If ant has picked food, yet.
 	private boolean hasFood;
@@ -36,7 +36,7 @@ public class Ant {
 		this.colour = colour;
 		this.brainState = brain.getState(state);
 		this.alive = true;
-		this.resting = 0;
+		this.numRestingLeft = 0;
 		this.hasFood = false;
 		this.currentPos = initialCell;
 	}
@@ -91,35 +91,34 @@ public class Ant {
 	public void setBrainState(BrainState brainState) {
 		this.brainState = brainState;
 	}
+	
+	public void setResting(){
+		numRestingLeft = 14;
+	}
 
-	/**
-	*@return int of rounds remaining resting
-	*/
-	public int getResting() {
-		return resting;
+	public int getResting(){
+		return numRestingLeft;
 	}
 
 	/**
 	*Decrease by 1 resting period
 	*/
 	public void decResting() {
-		if(this.resting%14<=0){
-			this.resting=14;
+		if(this.numRestingLeft>0){
+			this.numRestingLeft --;
 		}
-		else{
-			this.resting--;
-		}
+		
 	}
 	
 	/**
 	*@return true if ant is resting, false otherwise
 	*/	
 	public boolean isResting()	{
-		if(resting%14==0){
-			return false;
-		}
-		else {
+		if(numRestingLeft!=0){
 			return true;
+		}
+		else{
+			return false;
 		}
 	}
 

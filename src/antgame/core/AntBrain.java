@@ -19,55 +19,55 @@ public class AntBrain {
 		return brain[state];
 	}
 	
-	public int[] adjacentCell(int[] pos,int d){
-		switch(d) {
-			case 0: 
-				pos[0]++;
-				return pos;
-			case 1: 
-				if(pos[1]%2==0){
-					pos[1]++;
-				}
-				else{
-					pos[0]++;
-					pos[1]++;
-				}
-				break;
-			case 2: 
-				if(pos[1]%2==0){
-					pos[0]--;
-					pos[1]++;
-				}
-				else{
-					pos[1]++;
-				}
-				break;
-			case 3: 
-				pos[0]--;
-				break;
-			case 4: 
-				if(pos[1]%2==0){
-					pos[0]--;
-					pos[1]--;
-				}
-				else{
-					pos[1]--;
-				}
-				break;
-			case 5: 
-				if(pos[1]%2==0){
-					pos[1]--;
-				}
-				else{
-					pos[0]++;
-					pos[1]--;
-				}
-				break;
-			default:
-				break;
-		}
-		return pos;
-	}
+//	public int[] adjacent1Cell(int[] pos,int d){
+//		switch(d) {
+//			case 0: 
+//				pos[0]++;
+//				return pos;
+//			case 1: 
+//				if(pos[1]%2==0){
+//					pos[1]++;
+//				}
+//				else{
+//					pos[0]++;
+//					pos[1]++;
+//				}
+//				break;
+//			case 2: 
+//				if(pos[1]%2==0){
+//					pos[0]--;
+//					pos[1]++;
+//				}
+//				else{
+//					pos[1]++;
+//				}
+//				break;
+//			case 3: 
+//				pos[0]--;
+//				break;
+//			case 4: 
+//				if(pos[1]%2==0){
+//					pos[0]--;
+//					pos[1]--;
+//				}
+//				else{
+//					pos[1]--;
+//				}
+//				break;
+//			case 5: 
+//				if(pos[1]%2==0){
+//					pos[1]--;
+//				}
+//				else{
+//					pos[0]++;
+//					pos[1]--;
+//				}
+//				break;
+//			default:
+//				break;
+//		}
+//		return pos;
+//	}
 	
 	public int turn(String leftOrRight, int dir){
 		if(leftOrRight.equals("left")){
@@ -78,20 +78,20 @@ public class AntBrain {
 		}
 	}
 	
-	public int[] sensed_cell(int[] pos, int dir, SenseDirection senseDir){
-		switch (senseDir){
-			case HERE:
-				return pos;
-			case AHEAD:
-				return adjacentCell(pos,dir);
-			case LEFTAHEAD:
-				return adjacentCell(pos,turn("left",dir));
-			case RIGHTAHEAD:
-				return adjacentCell(pos,turn("right",dir));
-			default:
-				return null;
-		}
-	}
+//	public int[] sensed_cell(int[] pos, int dir, SenseDirection senseDir){
+//		switch (senseDir){
+//			case HERE:
+//				return pos;
+//			case AHEAD:
+//				return adjacentCell(pos,dir);
+//			case LEFTAHEAD:
+//				return adjacentCell(pos,turn("left",dir));
+//			case RIGHTAHEAD:
+//				return adjacentCell(pos,turn("right",dir));
+//			default:
+//				return null;
+//		}
+//	}
 	public static void main(String[] args){
 		AntBrain ab1 = new AntBrain("C://cleverbrain1.brain",AntColour.RED);
 		for(BrainState bs: ab1.brain){
