@@ -8,33 +8,41 @@ import antgame.services.RandomNumber;
 
 
 public class World {
-
+	//ants stores an array of ants black and red
 	private Ant[] ants;
+	//noAnts stores the number of ants
 	int noAnts;
+	//map stores the map
 	private Map map;
+	//redAntBrain stores the red Ant Brain
 	private AntBrain redAntBrain;
+	//blackAntBrain stores the black Ant Brain
 	private AntBrain blackAntBrain;
-	private ArrayList<Cell> bAHLoc = new ArrayList<Cell>();
+	//rAHLoc stores the red ant hill locations, used for finding the number of food particles in the ant hill
 	private ArrayList<Cell> rAHLoc = new ArrayList<Cell>();
+	//bAHLoc stores the black ant hill locations, used for finding the number of food particles in the ant hill
+	private ArrayList<Cell> bAHLoc = new ArrayList<Cell>();
+	//foodInBAH stores the number of food particles in the red ant hill
 	private int foodInRAH;
+	//foodInBAH stores the number of food particles in the black ant hill
 	private int foodInBAH;
 	
-	
+	/**
+	 * World constuctor takes the dirctory of the map, it then passes this to the MapInterpreter who returns an instance of map.
+	 * It also takes the dirctory of each ant brain and creates a new instance of ant brain for each, at creation the ant brain passes the file through
+	 * the AntBrainInterpreter.
+	 * The constructor sets up all the ants as well as calles the step function.
+	 * @param mapLocation
+	 * @param antR
+	 * @param antB
+	 */
 	public World(String mapLocation, String antR, String antB){//, String antR, String antB){
 		this.map = MapInterpreter.MapGenerator(mapLocation);
 		
 		this.redAntBrain = new AntBrain(antR, AntColour.RED);
 		this.blackAntBrain = new AntBrain(antB,AntColour.BLACK);
 		
-		// antPointer is the pointer in the array of ants to point to the next free positon also used as the uID
-		
-		/* the following goes trough all of the cells looking for cells that contain an anthill
-		 * once it finds an anthill it creates an ant sets its antid to the ant pointer, its direction to zero, its color dependant on the color
-		 * ant hill, its state which is 0 and its intial location.
-		 * it then adds the ant to the map !!!!!! should this be the constructor or call the method ant.
-		 * it then increases the pointer
-		 * 
-		 */
+		//the following basically counts the number of ant hill cells and thus how many ants there will be.
 		for (int y = 0; y < (map.getYSize()); y++) {
 			for (int x = 0; x < (map.getXSize()); x++) {
 				if(map.getCell(x, y).containsRedAntHill() || map.getCell(x, y).containsBlackAntHill()){
@@ -43,27 +51,42 @@ public class World {
 				}
 			}
 		}
+		//based on the number of ants which the for loop above found the ant array can now be initialised.
 		ants = new Ant[noAnts];
+		
+		
+				/* the following loop iterated over each cells in the map looking for cells that contain an anthill
+				 * once it finds an anthill it creates an ant and sets its current location there. It then sets that ant's antid to the antPointer,
+				 * its direction to zero, its colour dependent on the colour of the ant hill, its initial brain state which is 0.
+				 * it then increases the pointer, as well as adding the cell itself to the array of ant hills, respective of colour.
+				 * 
+				 */
+		
+		// antPointer is the pointer in the array of ants to point to the next free position also used as the uID
 		int antPointer = 0;
 		for (int y = 0; y < (map.getYSize()); y++) {
 			for (int x = 0; x < (map.getXSize()); x++) {
 				if(map.getCell(x, y).containsRedAntHill()){
 					ants[antPointer] = new Ant(antPointer, 0, AntColour.RED, 0,map.getCell(x, y),redAntBrain);
-					rAHLoc.add(map.getCell(x, y));
 					map.getCell(x, y).antMoveIn(ants[antPointer]);
 					antPointer ++;
+					rAHLoc.add(map.getCell(x, y));
 				}
 				if(map.getCell(x, y).containsBlackAntHill()){
 					ants[antPointer] = new Ant(antPointer, 0, AntColour.BLACK, 0,map.getCell(x, y),blackAntBrain);	
-					bAHLoc.add(map.getCell(x, y));
 					map.getCell(x, y).antMoveIn(ants[antPointer]);
 					antPointer ++;
+					bAHLoc.add(map.getCell(x, y));
 				}
 			}
 		}
+		
+		//calles the step method.
 		for(int i=0; i < 300000; i++){
 			step();
 		}
+		
+		//just for stats.
 		int redAlive =0;
 		int blackAlive = 0;
 		for(Ant a:ants){
@@ -80,7 +103,10 @@ public class World {
 		}
 		map.printmap();
 	}
-
+	
+	/**
+	 * step is the function that is called 300,000 times 
+	 */
 	public void step(){
 		
 		
