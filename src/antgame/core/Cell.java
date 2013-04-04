@@ -34,7 +34,7 @@ public class Cell {
 	//this field holds the markers as an HashMap
 	private HashMap<Marker,Boolean>  markers;
 
-	
+
 	/**
 	 * The Cell Constructor takes the x and y coordinate of the cell in respect to the map 
 	 * (the map passes the location to the constructor on creation of each cell)
@@ -61,49 +61,49 @@ public class Cell {
 				}
 			}
 		}
-		
-	    if (content.equals("#")){
-	    	containsRock = true;
-	    	isClear = false;
-	    }
-	    else if (content.equals(".")){
-	    	isClear = true;
+
+		if (content.equals("#")){
+			containsRock = true;
+			isClear = false;
+		}
+		else if (content.equals(".")){
+			isClear = true;
 		}
 		else if(content.equals("+")){
 			containsRedAntHill = true;
 			isClear = true;
-	    	
-	    }
+
+		}
 		else if(content.equals("-")){
 			containsBlackAntHill = true;
 			isClear = true;
-			
+
 		}
 		else if(isInteger(content)){
 			containsFood = true;
 			numberOfFoodParticles = Integer.parseInt(content);
 			isClear = true;
-			
+
 		}
-	    
-	        
-}
+
+
+	}
 	/**
 	 * IsInteger is a method used to check if a string is an integer.
 	 * @param input - the string to check
 	 * @return true if is integer false if not
 	 */
 	public boolean isInteger( String input ) {
-		    try {
-		        Integer.parseInt( input );
-		        return true;
-		    }
-		    catch( Exception e ) {
-		        return false;
-		    }
+		try {
+			Integer.parseInt( input );
+			return true;
 		}
-	
-	
+		catch( Exception e ) {
+			return false;
+		}
+	}
+
+
 	/**
 	 * AntMoveIn simulates an Ant moving in, it sets the containsAnt field to true, sets the ant field to the ant that is passed in the parameter.
 	 * @param ant this is the ant that is moving into the cell
@@ -113,7 +113,7 @@ public class Cell {
 		this.ant = ant;
 		this.isClear = false;
 	}
-	
+
 	/**
 	 * AntMoveOut simulates the Ant moving out, sets the field containsAnt to false, ant field to null and is clear to true.
 	 */
@@ -122,7 +122,7 @@ public class Cell {
 		ant = null;
 		isClear = true;
 	}
-	
+
 	/**
 	 * addFood() increments the number of food particles by 1, and contains food to true.
 	 */
@@ -130,7 +130,7 @@ public class Cell {
 		numberOfFoodParticles++;
 		containsFood = true;
 	}
-	
+
 	/**
 	 * addNumFood is similar to addFood but this adds a number of particles of food rather than just incrementing it.
 	 * @param n the number of food particles that is being added.
@@ -139,7 +139,7 @@ public class Cell {
 		numberOfFoodParticles = numberOfFoodParticles + n;
 		containsFood = true;
 	}
-	
+
 	/**
 	 * removeFood takes one particle of food out of the cell, if there is any food in the cell, else it prints an err (this should never be reached),
 	 * if all the food has been removed then it sets the containsFood to false.
@@ -156,7 +156,7 @@ public class Cell {
 			containsFood = false;
 		}
 	}
-	
+
 	/**
 	 * setMarker places a marker in the cell based on the marker passed to it in the parameter.
 	 * @param marker the marker to place
@@ -164,7 +164,7 @@ public class Cell {
 	public void setMarker(Marker marker){
 		markers.put(marker, true);
 	}
-	
+
 	/**
 	 * clearMarker unmarks a marker in the cell based on the marker passed to it in the parameter.
 	 * @param marker the marker to unmark
@@ -181,7 +181,7 @@ public class Cell {
 	public boolean checkMarker(Marker marker){
 		return markers.get(marker);
 	}
-		
+
 	/**
 	 * checkAnyMarkerAt checks whether there is any marker of the colour passed in the parameter.
 	 * The method creates a new set of markers of colour c and then attempts get each marker, if any marker successfully returns then the method returns true and terminates
@@ -208,7 +208,7 @@ public class Cell {
 		}	
 		return false;	
 	}
-	
+
 	/**
 	 * containsRedAnt returns true if there is ant present that is red.
 	 * @return true if there is ant present that is red, false if no ant is present or a black ant
@@ -222,7 +222,7 @@ public class Cell {
 		}
 		return containsRedAnt;
 	}
-	
+
 	/**
 	 * containsBlackAnt returns true if there is ant present that is black.
 	 * @return true if there is ant present that is black, false if no ant is present or a red ant
@@ -236,7 +236,7 @@ public class Cell {
 		}
 		return containsBlackAnt;
 	}
-	
+
 	/**
 	 * senseCheck is used when by the step function in the world class, for when an ant is sensing. it takes three parameters.
 	 * @param a is the Ant that is sensing
@@ -258,7 +258,7 @@ public class Cell {
 			else{
 				return false;
 			}
-		
+
 		case FOE:
 			if(containsAnt){
 				if(ant.getColour() != a.getColour()){
@@ -271,20 +271,20 @@ public class Cell {
 			else{
 				return false;
 			}
-		
+
 		case FRIENDWITHFOOD:
 			if(containsAnt){
 				if(ant.getColour() == a.getColour() && ant.isHasFood()){
-						return true;
-					}
+					return true;
+				}
 				else{
 					return false;
 				}
 			}
 			else{
-					return false;
+				return false;
 			}
-			
+
 		case FOEWITHFOOD:
 			if(containsAnt){
 				if(ant.getColour() != a.getColour() && ant.isHasFood()){
@@ -305,7 +305,7 @@ public class Cell {
 			return checkMarker(m);
 		case FOEMARKER:
 			return this.checkAnyMarkerAt(a.getColour().otherColour());
-			
+
 		case HOME:
 			if(a.getColour() == AntColour.RED){
 				return containsRedAntHill;
@@ -316,25 +316,25 @@ public class Cell {
 			else{
 				return false;
 			}
-			
+
 		case FOEHOME:
 			if(a.getColour() == AntColour.BLACK){
 				return containsRedAntHill;
 			}
-			
+
 			else if(a.getColour() == AntColour.RED){
 				return containsBlackAntHill;
 			}
 			else{
 				return false;
 			}
-			
+
 		default:
 			return false;	
 		}
-		
+
 	}
-	
+
 	/**
 	 * getContent returns a string of the current content of the map bases on the boolean fields
 	 * @return String of the current content.
@@ -344,17 +344,17 @@ public class Cell {
 		if(containsRock){
 			content  = content + "#";
 		}
-	    else if(containsRedAntHill){
+		else if(containsRedAntHill){
 			content  = content + "+";
-	    }
+		}
 		else if(containsBlackAntHill){
 			content  = content + "-";
 		}
-		
+
 		if(isClear){
 			content = content + ".";
 		}
-		
+
 		if(containsAnt){
 			if(ant.getColour() == AntColour.BLACK){
 				content = content + "(b)";
@@ -363,14 +363,14 @@ public class Cell {
 				content = content + "(r)";
 			}
 		}
-		
+
 		if(containsFood){
 			content  = content + this.numberOfFoodParticles;
 		}
-		
+
 		return content;
 	}
-	
+
 	/**
 	 * getPos
 	 * @return int[] the current position as an int array
@@ -378,7 +378,7 @@ public class Cell {
 	public int[] getPos() {
 		return pos;
 	}
-	
+
 	/**
 	 * isContainsFood
 	 * @return boolean whether or not the cell contains food
@@ -386,7 +386,7 @@ public class Cell {
 	public boolean isContainsFood() {
 		return containsFood;
 	}
-	
+
 	/**
 	 * getNumberOfFoodParticles
 	 * @return int the number of food particles in the cell
@@ -394,7 +394,7 @@ public class Cell {
 	public int getNumberOfFoodParticles() {
 		return numberOfFoodParticles;
 	}
-	
+
 	/**
 	 * containsRock
 	 * @return boolean whether or not the cell contains a rock
@@ -402,7 +402,7 @@ public class Cell {
 	public boolean containsRock() {
 		return containsRock;
 	}
-	
+
 	/**
 	 * isClear
 	 * @return  boolean whether or not the cell is clear or not - Clear = anything but a ant or a rock
@@ -410,7 +410,7 @@ public class Cell {
 	public boolean isClear() {
 		return isClear;
 	}
-	
+
 	/**
 	 * containsAnt
 	 * @return boolean whether or not the cell contains an Ant
@@ -418,7 +418,7 @@ public class Cell {
 	public boolean containsAnt() {
 		return containsAnt;
 	}
-	
+
 	/**
 	 * getAnt returns the ant currently in the cell
 	 * @return Ant the current ant in the cell
@@ -426,7 +426,7 @@ public class Cell {
 	public Ant getAnt() {
 		return ant;
 	}
-	
+
 	/**
 	 * containsRedAntHill 
 	 * @return boolean whether or not the cell contains a red ant hill
@@ -434,7 +434,7 @@ public class Cell {
 	public boolean containsRedAntHill() {
 		return containsRedAntHill;
 	}
-	
+
 	/**
 	 * containsBlackAntHill
 	 * @return boolean whether or not the cell contains a black ant hill
@@ -442,12 +442,12 @@ public class Cell {
 	public boolean containsBlackAntHill() {
 		return containsBlackAntHill;
 	}
-	
-	
+
+
 	public static void main(String [] args){
-	
+
 	}
-	
+
 }
 
 
