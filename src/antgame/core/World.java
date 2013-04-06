@@ -383,6 +383,9 @@ public class World {
 		return surrounded;
 	}
 
+	public Map getMap(){
+		return map;
+	}
 
 	public static void main (String[] args) {
 		String workingDir = System.getProperty("user.dir");
