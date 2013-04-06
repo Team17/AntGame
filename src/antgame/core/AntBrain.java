@@ -69,14 +69,14 @@ public class AntBrain {
 //		return pos;
 //	}
 	
-	public int turn(String leftOrRight, int dir){
-		if(leftOrRight.equals("left")){
-			return (dir+5)%6;
-		}
-		else{
-			return (dir+1)%6;	
-		}
-	}
+//	public int turn(String leftOrRight, int dir){
+//		if(leftOrRight.equals("left")){
+//			return (dir+5)%6;
+//		}
+//		else{
+//			return (dir+1)%6;	
+//		}
+//	}
 	
 //	public int[] sensed_cell(int[] pos, int dir, SenseDirection senseDir){
 //		switch (senseDir){
