@@ -18,18 +18,27 @@ public class Ant {
 	//Current state of the ant in reference to the AntBrain.
 	private BrainState brainState;
 	
+	// boolean of wether the ant is alive or not	
 	private boolean alive;
 	
-	//How many turns an ant has to rest before moving.
+	//How many turns an ant has to rest before it can carry out another step.
 	private int numRestingLeft;
 	
-	//If ant has picked food, yet.
+	//If ant is carrying food.
 	private boolean hasFood;
 	
 	//Current cell of the ant
 	private Cell currentPos;
 	
-	//Creates an ant with given values
+	/**
+	 * constructor of Ant just sets all the fields based on the parameters.
+	 * @param uID
+	 * @param dir
+	 * @param colour
+	 * @param state
+	 * @param initialCell
+	 * @param brain
+	 */
 	public Ant(int uID, int dir, AntColour colour, int state, Cell initialCell,AntBrain brain){
 		this.uID = uID;
 		this.dir = dir;
@@ -71,31 +80,30 @@ public class Ant {
 	}
 
 	/**
-	*@return Int state of the ant.
+	*@return BrainState current BrainState of the ant.
 	*/
 	public BrainState getState() {
 		return brainState;
 	}
 
 	/**
-	*Set the state of the ant in int.
+	*Set the current brainstate(BrainState) of the ant.
 	*/
 	public void setState(BrainState state) {
 		this.brainState = state;
 	}
 
-	public BrainState getBrainState() {
-		return brainState;
-	}
-
-	public void setBrainState(BrainState brainState) {
-		this.brainState = brainState;
-	}
-	
+	/**
+	 * Sets the ant to be resting by setting the number of rounds left before the ant can take a turn to 14
+	 */
 	public void setResting(){
 		numRestingLeft = 14;
 	}
-
+	
+	/**
+	 * 
+	 * @return int the number of rounds left before the ant can have a round.
+	 */
 	public int getResting(){
 		return numRestingLeft;
 	}
@@ -107,7 +115,6 @@ public class Ant {
 		if(this.numRestingLeft>0){
 			this.numRestingLeft --;
 		}
-		
 	}
 	
 	/**
@@ -130,17 +137,23 @@ public class Ant {
 	}
 
 	/**
-	*Toggles if ant has food.
+	*Sets the ant to be carrying food.
 	*/
 	public void pickupFood() {
 		this.hasFood = true;
 	}
+	
+	/**
+	 * Sets the ant to not be carrying food
+	 */
 	public void dropFood() {
-		
 			this.hasFood = false;
-		
 	}
 	
+	/**
+	 * turns the ants direction based on the current direction and the parameter lr if turing left or right.	
+	 * @param lr which direction the ant is going to turn.
+	 */
 	public void turn(LeftRight lr){
 		if(lr == LeftRight.LEFT){
 			dir = (dir+5)%6;
@@ -164,10 +177,16 @@ public class Ant {
 		this.currentPos = currentPos;
 	}
 
+	/**
+	 * 
+	 * @return boolean whether or not the ant is alive or not
+	 */
 	public boolean isAlive() {
 		return alive;
 	}
-
+	/**
+	 * kills the ant i.e. sets alive to false.
+	 */
 	public void die() {
 		this.alive = false;
 	}
