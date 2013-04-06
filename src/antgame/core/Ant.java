@@ -168,10 +168,8 @@ public class Ant {
 		return alive;
 	}
 
-	public void killAnt() {
+	public void die() {
 		this.alive = false;
-		currentPos.antMoveOut();
-		currentPos.addNumFood(3);
 	}
 	
 }
