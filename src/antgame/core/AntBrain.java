@@ -1,5 +1,6 @@
 package antgame.core;
 
+
 /**
  * AntBrain class responsible controling values in the Ant and the map. 
  * @author Doniyor Ulmasov (13158)
@@ -95,7 +96,8 @@ public class AntBrain {
 	public static void main(String[] args){
 		AntBrain ab1 = new AntBrain("C://cleverbrain1.brain",AntColour.RED);
 		for(BrainState bs: ab1.brain){
-			bs.print();
+				bs.print();
+		
 		}
 	}
 }

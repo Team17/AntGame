@@ -18,7 +18,7 @@ public class Ant {
 	//Current state of the ant in reference to the AntBrain.
 	private BrainState brainState;
 	
-	// boolean of wether the ant is alive or not	
+	// boolean of whether the ant is alive or not	
 	private boolean alive;
 	
 	//How many turns an ant has to rest before it can carry out another step.
@@ -82,15 +82,15 @@ public class Ant {
 	/**
 	*@return BrainState current BrainState of the ant.
 	*/
-	public BrainState getState() {
+	public BrainState getBrainState() {
 		return brainState;
 	}
 
 	/**
 	*Set the current brainstate(BrainState) of the ant.
 	*/
-	public void setState(BrainState state) {
-		this.brainState = state;
+	public void setBrainState(BrainState brainState) {
+		this.brainState = brainState;
 	}
 
 	/**

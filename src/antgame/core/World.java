@@ -39,7 +39,7 @@ public class World {
 	 * @param antR string representation of the directory path of the red ant brain file.
 	 * @param antB string representation of the directory path of the black ant brain file.
 	 */
-	public World(String mapLocation, String antR, String antB){
+	public World(String mapLocation, String antR, String antB) {
 		this.map = MapInterpreter.MapGenerator(mapLocation);
 
 		this.redAntBrain = new AntBrain(antR, AntColour.RED);
@@ -384,7 +384,7 @@ public class World {
 	}
 
 
-	public static void main (String[] args){
+	public static void main (String[] args) {
 		String workingDir = System.getProperty("user.dir");
 
 		World w1 = new World("C:/workingworld.world"/*workingDir+"\\files\\workingworld.world"**/,workingDir+"\\files\\cleverbrain1.brain",workingDir+"\\files\\cleverbrain2.brain");
