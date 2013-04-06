@@ -85,14 +85,14 @@ public class World {
 			}
 		}
 
-		//calls the step method.
-		for(int i=0; i < 300000; i++){
-			step();
-		}
-
-
-		System.out.println("Red Ants Alive: " + redAlive + " Black Ants Ailve: " + blackAlive);
-		map.printmap();
+//		//calls the step method.
+//		for(int i=0; i < 300000; i++){
+//			step();
+//		}
+//
+//
+//		System.out.println("Red Ants Alive: " + redAlive + " Black Ants Ailve: " + blackAlive);
+//		map.printmap();
 	}
 
 	/**

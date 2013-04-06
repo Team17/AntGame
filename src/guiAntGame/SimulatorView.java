@@ -18,8 +18,8 @@ public class SimulatorView extends PApplet {
 //	public void setup(Observer obiwan,int xSize, int ySize) {
 	public void setup() {
 		
-		String workingDir = System.getProperty("user.dir");
 		
+		String workingDir = "..";
 		World w1 = new World("C:/workingworld.world"/*workingDir+"\\files\\workingworld.world"**/,workingDir+"\\files\\cleverbrain1.brain",workingDir+"\\files\\cleverbrain2.brain");
 
 		size(800, 800);
@@ -32,11 +32,11 @@ public class SimulatorView extends PApplet {
 		
 		rock = loadImage("rock.png");
 		food = loadImage("food.png");
-		antHR = loadImage("antHR.png");
-		antHB = loadImage("antHB.png");
+		antHR = loadImage("redH.png");
+		antHB = loadImage("blackH.png");
 		clear = loadImage("clear.png");
-		antB = loadImage("antB.png");
-		antR = loadImage("antR.png");
+		antB = loadImage("blackAnt.png");
+		antR = loadImage("redAnt.png");
 		
 		board =  new Hexagon[xSize][ySize];
 		Cell cCell;
