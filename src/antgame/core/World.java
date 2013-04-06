@@ -280,7 +280,7 @@ public class World {
 		}
 		foodInBAH = blackFood;
 	}
-	
+
 	/**
 	 * antsStillAlive counts the number of ants still alive and updates the redAlive and blackAlive fields;
 	 */
