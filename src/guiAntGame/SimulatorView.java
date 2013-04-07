@@ -45,6 +45,7 @@ public class SimulatorView extends PApplet {
 		antB = loadImage("blackAnt.png");
 		antR = loadImage("redAnt.png");
 		deadRed = loadImage("deadRedAnt.png");
+		deadBlack = loadImage("deadBlackAnt.png");
 		
 		board =  new Hexagon[xSize][ySize];
 		Cell cCell;
@@ -103,7 +104,6 @@ public class SimulatorView extends PApplet {
 				}
 			}
 		}
-//		updateBoard();
 		w.step();
 		
 		updateBoard(obiwan.getToUpdate());
@@ -117,57 +117,30 @@ public class SimulatorView extends PApplet {
 	public void updateBoard(ArrayList<Cell> toUpdate){
 		for(Cell cCell:toUpdate){
 					if(cCell.containsBlackAnt() && !cCell.getAnt().isAlive()){
-						board[cCell.getPos()[1]][cCell.getPos()[0]].setIcon(deadRed);
+						board[cCell.getPos()[1]][cCell.getPos()[0]].setIcon(deadBlack);
 					}
 					else if(cCell.containsBlackAnt()){
-						board[cCell.getPos()[1]][cCell.getPos()[0]]  = new Hexagon(this, antB);
+						board[cCell.getPos()[1]][cCell.getPos()[0]].setIcon(antB);
+					}
+					else if(cCell.containsRedAnt() && !cCell.getAnt().isAlive()){
+						board[cCell.getPos()[1]][cCell.getPos()[0]].setIcon(deadRed);
 					}
 					else if(cCell.containsRedAnt()){
-						board[cCell.getPos()[1]][cCell.getPos()[0]]  = new Hexagon(this, antR);
+						board[cCell.getPos()[1]][cCell.getPos()[0]].setIcon(antR);
 					}
 					else if(cCell.isContainsFood()){
-						board[cCell.getPos()[1]][cCell.getPos()[0]]  = new Hexagon(this, food);
+						board[cCell.getPos()[1]][cCell.getPos()[0]].setIcon(food);
 					}	
 					else if(cCell.containsBlackAntHill()){
-						board[cCell.getPos()[1]][cCell.getPos()[0]]  = new Hexagon(this, antHB);
+						board[cCell.getPos()[1]][cCell.getPos()[0]].setIcon(antHB);
 					}
 					else if(cCell.containsRedAntHill()){
-						board[cCell.getPos()[1]][cCell.getPos()[0]]  = new Hexagon(this, antHR);
+						board[cCell.getPos()[1]][cCell.getPos()[0]].setIcon(antHR);
 					}
 					else if(cCell.isClear()){
-						board[cCell.getPos()[1]][cCell.getPos()[0]]  = new Hexagon(this, clear);
+						board[cCell.getPos()[1]][cCell.getPos()[0]].setIcon(clear);
 					}					
 			}
 	}
-//	public void updateBoard(){
-//		Cell cCell;
-//		for(int y=0; y<ySize;y++){
-//			for(int x=0;x<xSize;x++){
-//				cCell = curMap.getCell(y, x);
-//					if(cCell.containsRock()){
-//						board[x][y] = new Hexagon(this, rock);
-//					}
-//
-//					else if(cCell.containsBlackAnt()){
-//						board[x][y] = new Hexagon(this, antB);
-//					}
-//					else if(cCell.containsRedAnt()){
-//						board[x][y] = new Hexagon(this, antR);
-//					}
-//					else if(cCell.isContainsFood()){
-//						board[x][y] = new Hexagon(this, food);
-//					}	
-//					else if(cCell.containsBlackAntHill()){
-//						board[x][y] = new Hexagon(this, antHB);
-//					}
-//					else if(cCell.containsRedAntHill()){
-//						board[x][y] = new Hexagon(this, antHR);
-//					}
-//					else if(cCell.isClear()){
-//						board[x][y] = new Hexagon(this, clear);
-//					}
-//				
-//			}
-//		}
-//}
+
 }
