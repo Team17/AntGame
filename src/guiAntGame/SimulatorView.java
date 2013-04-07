@@ -20,7 +20,7 @@ public class SimulatorView extends PApplet {
 		
 		
 		String workingDir = "..";
-		World w1 = new World("C:/workingworld.world"/*workingDir+"\\files\\workingworld.world"**/,workingDir+"\\files\\cleverbrain1.brain",workingDir+"\\files\\cleverbrain2.brain");
+		World w1 = new World("C:/workingworld2.world"/*workingDir+"\\files\\workingworld.world"**/,workingDir+"\\files\\cleverbrain1.brain",workingDir+"\\files\\cleverbrain2.brain");
 
 		size(800, 800);
 		frameRate(2000);
@@ -44,7 +44,7 @@ public class SimulatorView extends PApplet {
 		Cell cCell;
 		for(int x=0; x<xSize;x++){
 			for(int y=0;y<ySize;y++){
-				cCell = curMap.getCell(x, y);
+				cCell = curMap.getCell(y, x);
 					if(cCell.containsRock()){
 						board[x][y] = new Hexagon(this, rock);
 					}
@@ -76,12 +76,12 @@ public class SimulatorView extends PApplet {
 		
 	background(70);
 	zoomer.transform();
-		for(int x=0; x<xSize;x++){
-			for(int y=0;y<ySize;y++){
+		for(int y=0; y<ySize;y++){
+			for(int x=0;x<xSize;x++){
 				if(x%2==0){
-					board[x][y].display(45*y, x*40, 40, 47);
+					board[x][y].display(40*y, x*35, 40, 47);
 				}else{
-					board[x][y].display(45*y+25, x*40, 40, 47);
+					board[x][y].display(40*y+20, x*35, 40, 47);
 				}
 			}
 		}
