@@ -102,7 +102,7 @@ public class World {
 	 */
 	public void step(){
 		for(Ant curAnt:ants){
-			if(isAntSurronded(curAnt)){
+			if(isAntSurronded(curAnt) && curAnt.isAlive()){
 				System.out.println(" kill");
 				switch (curAnt.getColour()){
 				case RED:
@@ -353,19 +353,16 @@ public class World {
 	 */
 	public boolean isAntSurronded(Ant ant){
 		ArrayList<Cell> adjCells = map.surrondingCells(ant.getCurrentPos());
-		boolean surrounded = true;
+		int surrounded = 0;
+		
 		for(Cell c:adjCells){
-			if(c.isClear()){
-				surrounded = false;
-			}
-			else if(ant.getColour() ==  AntColour.RED && c.containsRedAnt()){
-				surrounded = false;
-			}
-			else if(ant.getColour() == AntColour.BLACK && c.containsBlackAnt()){
-				surrounded = false;
+			if(c.containsAnt()){
+				if(AntColour.otherColour(ant.getColour()) == c.getAnt().getColour()){
+					surrounded++;
+				}
 			}
 		}
-		return surrounded;
+		return 2<=surrounded;
 	}
 
 	/**
