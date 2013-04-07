@@ -1,9 +1,11 @@
 package antgame.core;
 
 public class WorldStats {
-	private int foodUnitsRed=0;
-	//foodInBAH stores the number of food particles in the black ant hill
-	private int foodUnitsBlack=0;
+	//stores the number of food particles in the red ant hill
+	private int foodUnitsRedHill=0;
+	//stores the number of food particles in the black ant hill
+	private int foodUnitsBlackHill=0;
+	
 	//redAlive is the number of redAntsAlive
 	private int redAlive;
 	//blackAlive is the number of blackAntsAlive
@@ -23,26 +25,40 @@ public class WorldStats {
 	/**
 	 * @return Amount of food collected by Red ants
 	 */
-	public int getFoodUnitsRed() {
-		return foodUnitsRed;
+	public int getFoodUnitsRedHill() {
+		return foodUnitsRedHill;
 	}
 	/**
-	 * @param Incriment amount of food by Reds by one
+	 * Increases amount of food in the red hill by one
 	 */
-	public void incFoodUnitsRed() {
-		this.foodUnitsRed++;
+	public void incFoodUnitsRedHill() {
+		this.foodUnitsRedHill++;
 	}
+	
+	/**
+	 * Decreases amount of food in the red hill by one
+	 */
+	public void decFoodUnitsRedHill() {
+		this.foodUnitsRedHill--;
+	}
+	
 	/**
 	 * @return Amount of food collected by Black ants
 	 */
-	public int getFoodUnitsBlack() {
-		return foodUnitsBlack;
+	public int getFoodUnitsBlackHill() {
+		return foodUnitsBlackHill;
 	}
 	/**
-	 * @param Incriment amount of food by Black by one
+	 * Increases amount of food in the black hill by one
 	 */
-	public void incFoodUnitsBlack() {
-		this.foodUnitsBlack++;
+	public void incFoodUnitsBlackHill() {
+		this.foodUnitsBlackHill++;
+	}
+	/**
+	 * Decreases amount of food in the black hill by one
+	 */
+	public void decFoodUnitsBlackHill() {
+		this.foodUnitsBlackHill--;
 	}
 	/**
 	 * @return the redAlive
@@ -65,7 +81,7 @@ public class WorldStats {
 	/**
 	 * @param Decrease amount of Red ants by one
 	 */
-	public void decBlackAlive(int blackAlive) {
+	public void decBlackAlive() {
 		this.blackAlive--;
 	}
 	/**

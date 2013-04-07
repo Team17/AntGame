@@ -99,6 +99,11 @@ public class World {
 		for(int j = 0; j<noAnts;j++){
 			Ant curAnt = ants[j];
 			if(isAntSurronded(curAnt)){
+				if(curAnt.getColour() == AntColour.RED){
+					stats.decRedAlive();
+				}else{
+					stats.decBlackAlive();
+				}
 				killAnt(curAnt);
 			}
 			if(curAnt.isAlive()){
@@ -164,6 +169,13 @@ public class World {
 							curAnt.getCurrentPos().removeFood();
 							curAnt.pickupFood();
 							curAnt.setBrainState(antsState.getNextState());
+							
+							if(curAnt.getCurrentPos().containsBlackAntHill()){
+								stats.decFoodUnitsBlackHill();
+							}
+							if(curAnt.getCurrentPos().containsRedAntHill()){
+								stats.decFoodUnitsRedHill();
+							}
 						}
 						else{
 							curAnt.setBrainState(antsState.getAltNextState());
@@ -178,6 +190,12 @@ public class World {
 						if(curAnt.isHasFood()){
 							curAnt.dropFood();
 							curAnt.getCurrentPos().addFood();
+							if(curAnt.getCurrentPos().containsBlackAntHill()){
+								stats.incFoodUnitsBlackHill();
+							}
+							if(curAnt.getCurrentPos().containsRedAntHill()){
+								stats.incFoodUnitsRedHill();
+							}
 						}
 
 						curAnt.setBrainState(antsState.getNextState());	
@@ -336,8 +354,18 @@ public class World {
 		return surrounded;
 	}
 
+	/**
+	 * @return current map
+	 */	
 	public Map getMap(){
 		return map;
+	}
+	
+	/**
+	 * @return current map
+	 */	
+	public WorldStats getStats(){
+		return this.stats;
 	}
 
 	public static void main (String[] args) {
