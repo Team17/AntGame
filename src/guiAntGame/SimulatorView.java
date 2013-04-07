@@ -10,7 +10,7 @@ import org.gicentre.utils.move.*;
 
 public class SimulatorView extends PApplet {
 	private Hexagon[][] board;
-	private PImage rock, food, antB, antR, antHR, antHB, clear;
+	private PImage rock, food, antB, antR, antHR, antHB, clear,scoreboard;
 	private int xSize, ySize;
 	private ObserverAntWorld obiwan;
 	private Map curMap;
@@ -45,6 +45,8 @@ public class SimulatorView extends PApplet {
 		clear = loadImage("clear.png");
 		antB = loadImage("blackAnt.png");
 		antR = loadImage("redAnt.png");
+		
+		scoreboard = loadImage("scorebaord.png");
 
 		
 		board =  new Hexagon[xSize][ySize];
@@ -110,6 +112,8 @@ public class SimulatorView extends PApplet {
 		obiwan.clearList();
 		round++;
 		popMatrix();
+		
+		image(scoreboard,0,0);
 		textAlign(CENTER);
 		text((frameRate) + " fps",width/2,60); 
 		text("Round: "+round,width/2,80); 
