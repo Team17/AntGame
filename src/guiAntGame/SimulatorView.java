@@ -42,8 +42,8 @@ public class SimulatorView extends PApplet {
 		
 		board =  new Hexagon[xSize][ySize];
 		Cell cCell;
-		for(int x=0; x<xSize;x++){
-			for(int y=0;y<ySize;y++){
+		for(int y=0; y<ySize;y++){
+			for(int x=0;x<xSize;x++){
 				cCell = curMap.getCell(y, x);
 					if(cCell.containsRock()){
 						board[x][y] = new Hexagon(this, rock);
@@ -76,8 +76,8 @@ public class SimulatorView extends PApplet {
 		
 	background(70);
 	zoomer.transform();
-		for(int y=0; y<ySize;y++){
-			for(int x=0;x<xSize;x++){
+		for(int x=0; x<xSize;x++){
+			for(int y=0;y<ySize;y++){
 				if(x%2==0){
 					board[x][y].display(40*y, x*35, 40, 47);
 				}else{
@@ -91,9 +91,9 @@ public class SimulatorView extends PApplet {
 	
 	public void updateBoard(){
 		Cell cCell;
-		for(int x=0; x<xSize;x++){
-			for(int y=0;y<ySize;y++){
-				cCell = curMap.getCell(x, y);
+		for(int y=0; y<ySize;y++){
+			for(int x=0;x<xSize;x++){
+				cCell = curMap.getCell(y, x);
 					if(cCell.containsRock()){
 						board[x][y] = new Hexagon(this, rock);
 					}
