@@ -83,8 +83,8 @@ public class SimulatorView extends PApplet {
 		}
 
 		f = createFont("Arial", 24, true);
-		 cp5 = new ControlP5(this);
-		 cp5.addFrameRate().setInterval(10).setPosition(0,height - 10);
+		cp5 = new ControlP5(this);
+		cp5.addFrameRate().setInterval(10).setPosition(0, height - 10);
 		cp5.addSlider("speed").setPosition(50, 770).setSize(150, 20)
 				.setRange(30, 500).setValue(60);
 
@@ -151,6 +151,6 @@ public class SimulatorView extends PApplet {
 	}
 
 	void speed(float rate) {
-		  frameRateInt = rate;
-		}
+		frameRateInt = rate;
+	}
 }
