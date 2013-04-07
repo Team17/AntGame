@@ -18,18 +18,10 @@ public class World {
 	private AntBrain redAntBrain;
 	//blackAntBrain stores the black Ant Brain
 	private AntBrain blackAntBrain;
-	//rAHLoc stores the red ant hill locations, used for finding the number of food particles in the ant hill
-	private ArrayList<Cell> rAHLoc = new ArrayList<Cell>();
-	//bAHLoc stores the black ant hill locations, used for finding the number of food particles in the ant hill
-	private ArrayList<Cell> bAHLoc = new ArrayList<Cell>();
-	//foodInBAH stores the number of food particles in the red ant hill
-	private int foodInRAH;
-	//foodInBAH stores the number of food particles in the black ant hill
-	private int foodInBAH;
-	//redAlive is the number of redAntsAlive
-	private int redAlive =0;
-	//blackAlive is the number of blackAntsAlive
-	private int blackAlive = 0;
+
+	//Keeps all the stats of the word
+	private WorldStats stats;
+
 	/**
 	 * World constructor takes the directory of the map, it then passes this to the MapInterpreter who returns an instance of map.
 	 * It also takes the directory of each ant brain and creates a new instance of ant brain for each, at creation the ant brain passes the file through
@@ -67,23 +59,25 @@ public class World {
 
 		// antPointer is the pointer in the array of ants to point to the next free position also used as the uID
 		int antPointer = 0;
-
+		int reds=0;
+		int blacks=0;
 		for (int y = 0; y < (map.getYSize()); y++) {
 			for (int x = 0; x < (map.getXSize()); x++) {
 				if(map.getCell(x, y).containsRedAntHill()){
 					ants[antPointer] = new Ant(antPointer, 0, AntColour.RED, 0,map.getCell(x, y),redAntBrain);
 					map.getCell(x, y).antMoveIn(ants[antPointer]);
 					antPointer ++;
-					rAHLoc.add(map.getCell(x, y));
+					reds++;
 				}
 				if(map.getCell(x, y).containsBlackAntHill()){
 					ants[antPointer] = new Ant(antPointer, 0, AntColour.BLACK, 0,map.getCell(x, y),blackAntBrain);	
 					map.getCell(x, y).antMoveIn(ants[antPointer]);
 					antPointer ++;
-					bAHLoc.add(map.getCell(x, y));
+					blacks++;
 				}
 			}
 		}
+		this.stats = new WorldStats(reds,blacks);
 
 //		//calls the step method.
 //		for(int i=0; i < 300000; i++){
@@ -102,10 +96,6 @@ public class World {
 	 * based on the instruction of the antsState. it carries on for each ant.
 	 */
 	public void step(){
-
-		foodInEachAntHill();
-		antsStillAlive();
-
 		for(int j = 0; j<noAnts;j++){
 			Ant curAnt = ants[j];
 			if(isAntSurronded(curAnt)){
@@ -262,43 +252,6 @@ public class World {
 		default:
 			return null;
 		}
-	}
-
-	/**
-	 * foodInEachAntHill is used to update the field foodInRAH and foodInBAH, by searching the anthills for food and updating the foodIn*AH.
-	 */
-	public void foodInEachAntHill(){
-		int redFood = 0;
-		for(int i = 0; i<rAHLoc.size();i++){
-			redFood = redFood + rAHLoc.get(i).getNumberOfFoodParticles();
-		}
-		foodInRAH = redFood;
-
-		int blackFood = 0;
-		for(int i = 0; i<bAHLoc.size();i++){
-			blackFood = blackFood + bAHLoc.get(i).getNumberOfFoodParticles();
-		}
-		foodInBAH = blackFood;
-	}
-
-	/**
-	 * antsStillAlive counts the number of ants still alive and updates the redAlive and blackAlive fields;
-	 */
-	public void antsStillAlive(){
-		int tempRedAlive = 0;
-		int tempBlackAlive = 0;
-		for(Ant a:ants){
-			if(a.isAlive()){
-				if(a.getColour() == AntColour.RED){
-					tempRedAlive++;
-				}
-				else if(a.getColour()==AntColour.BLACK){
-					tempBlackAlive++;
-				}
-			}
-		}
-		redAlive = tempRedAlive;
-		blackAlive = tempBlackAlive;
 	}
 
 	/**
