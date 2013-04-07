@@ -22,5 +22,7 @@ public class Hexagon {
 	public void setIcon(PImage newImage){
 		iconFile = newImage;
 	}
-	
+	public boolean toCompare(PImage toCompare){
+		return iconFile.equals(toCompare);
+	}
 }

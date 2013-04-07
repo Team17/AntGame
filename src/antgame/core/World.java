@@ -1,6 +1,8 @@
 package antgame.core;
 
 
+import guiAntGame.ObserverAntWorld;
+
 import java.util.ArrayList;
 
 import antgame.AntGame;
@@ -21,6 +23,9 @@ public class World {
 
 	//Keeps all the stats of the word
 	private WorldStats stats;
+	
+	//Observer which stores which cells to update in the SimulatorView
+	private ObserverAntWorld obiwan;
 
 	/**
 	 * World constructor takes the directory of the map, it then passes this to the MapInterpreter who returns an instance of map.
@@ -78,7 +83,7 @@ public class World {
 			}
 		}
 		this.stats = new WorldStats(reds,blacks);
-
+		obiwan = new ObserverAntWorld(this);
 //		//calls the step method.
 //		for(int i=0; i < 300000; i++){
 //			step();
@@ -96,15 +101,16 @@ public class World {
 	 * based on the instruction of the antsState. it carries on for each ant.
 	 */
 	public void step(){
-		for(int j = 0; j<noAnts;j++){
-			Ant curAnt = ants[j];
+		for(Ant curAnt:ants){
 			if(isAntSurronded(curAnt)){
 				if(curAnt.getColour() == AntColour.RED){
 					stats.decRedAlive();
 				}else{
 					stats.decBlackAlive();
 				}
+				obiwan.addToUpdate(curAnt.getCurrentPos());
 				killAnt(curAnt);
+				
 			}
 			if(curAnt.isAlive()){
 				BrainState antsState = curAnt.getBrainState();
@@ -169,7 +175,7 @@ public class World {
 							curAnt.getCurrentPos().removeFood();
 							curAnt.pickupFood();
 							curAnt.setBrainState(antsState.getNextState());
-							
+							obiwan.addToUpdate(curAnt.getCurrentPos());
 							if(curAnt.getCurrentPos().containsBlackAntHill()){
 								stats.decFoodUnitsBlackHill();
 							}
@@ -190,6 +196,7 @@ public class World {
 						if(curAnt.isHasFood()){
 							curAnt.dropFood();
 							curAnt.getCurrentPos().addFood();
+							obiwan.addToUpdate(curAnt.getCurrentPos());
 							if(curAnt.getCurrentPos().containsBlackAntHill()){
 								stats.incFoodUnitsBlackHill();
 							}
@@ -220,9 +227,11 @@ public class World {
 					case MOVE:
 						Cell cellGoingTo = map.adjacentCell(curAnt.getCurrentPos(), curAnt.getDir());
 						if(cellGoingTo.isClear()){
+							obiwan.addToUpdate(curAnt.getCurrentPos());
 							curAnt.getCurrentPos().antMoveOut();
 							cellGoingTo.antMoveIn(curAnt);
 							curAnt.setCurrentPos(cellGoingTo);
+							obiwan.addToUpdate(curAnt.getCurrentPos());
 							curAnt.setResting();
 							curAnt.setBrainState(antsState.getNextState());
 						}
@@ -368,6 +377,13 @@ public class World {
 		return this.stats;
 	}
 
+	/**
+	 * @return current map
+	 */	
+	public ObserverAntWorld getObserver(){
+		return this.obiwan;
+	}
+	
 	public static void main (String[] args) {
 		String workingDir = System.getProperty("user.dir");
 

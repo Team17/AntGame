@@ -1,5 +1,7 @@
 package guiAntGame;
 
+import java.util.ArrayList;
+
 import antgame.core.Cell;
 import antgame.core.Map;
 import antgame.core.World;
@@ -10,25 +12,28 @@ public class SimulatorView extends PApplet {
 	private Hexagon[][] board;
 	private PImage rock, food, antB, antR, antHR, antHB, clear;
 	private int xSize, ySize;
-//	private Observer obiwan;
+	private ObserverAntWorld obiwan;
 	private Map curMap;
 	private World w;
 	ZoomPan zoomer;
+	PFont f;
 	
 //	public void setup(Observer obiwan,int xSize, int ySize) {
 	public void setup() {
-		
+		smooth();
+		noStroke();
 		
 		String workingDir = "..";
 		World w1 = new World("C:/workingworld2.world"/*workingDir+"\\files\\workingworld.world"**/,workingDir+"\\files\\cleverbrain1.brain",workingDir+"\\files\\cleverbrain2.brain");
 
 		size(800, 800);
-		frameRate(2000);
+		
 		zoomer = new ZoomPan(this);
 		zoomer.allowZoomButton(false);
 
-//		this.obiwan = obiwan;
+		
 		this.w = w1;
+		this.obiwan = w.getObserver();
 		curMap = w.getMap();
 		this.xSize=curMap.getXSize();
 		this.ySize=curMap.getYSize();
@@ -70,25 +75,69 @@ public class SimulatorView extends PApplet {
 				
 			}
 		}
+
+		f = createFont("Arial",160,true); 
+		
+		frameRate(2000);
 	}
 
 	public void draw() {
 		
 	background(70);
+	pushMatrix();
 	zoomer.transform();
+
+	
 		for(int x=0; x<xSize;x++){
 			for(int y=0;y<ySize;y++){
 				if(x%2==0){
-					board[x][y].display(40*y, x*35, 40, 47);
+					if(!board[x][y].toCompare(clear)){
+						board[x][y].display(40*y, x*35, 40, 47);
+					}
+					
 				}else{
-					board[x][y].display(40*y+20, x*35, 40, 47);
+					if(!board[x][y].toCompare(clear)){
+						board[x][y].display(40*y+20, x*35, 40, 47);
+					}		
 				}
 			}
 		}
 		updateBoard();
 		w.step();
+		
+//		updateBoard(obiwan.getToUpdate());
+//		obiwan.clearList();
+		
+		popMatrix();
+		textAlign(CENTER);
+		text((frameRate) + " fps",width/2,60); 
 	}
 	
+//	public void updateBoard(ArrayList<Cell> toUpdate){
+//		for(Cell cCell:toUpdate){
+//					if(cCell.containsRock()){
+//						board[cCell.getPos()[1]][cCell.getPos()[0]] = new Hexagon(this, rock);
+//					}
+//					else if(cCell.containsBlackAnt()){
+//						board[cCell.getPos()[1]][cCell.getPos()[0]]  = new Hexagon(this, antB);
+//					}
+//					else if(cCell.containsRedAnt()){
+//						board[cCell.getPos()[1]][cCell.getPos()[0]]  = new Hexagon(this, antR);
+//					}
+//					else if(cCell.isContainsFood()){
+//						board[cCell.getPos()[1]][cCell.getPos()[0]]  = new Hexagon(this, food);
+//					}	
+//					else if(cCell.containsBlackAntHill()){
+//						board[cCell.getPos()[1]][cCell.getPos()[0]]  = new Hexagon(this, antHB);
+//					}
+//					else if(cCell.containsRedAntHill()){
+//						board[cCell.getPos()[1]][cCell.getPos()[0]]  = new Hexagon(this, antHR);
+//					}
+//					else if(cCell.isClear()){
+//						board[cCell.getPos()[1]][cCell.getPos()[0]]  = new Hexagon(this, clear);
+//					}					
+//			}
+//	}
 	public void updateBoard(){
 		Cell cCell;
 		for(int y=0; y<ySize;y++){
@@ -97,7 +146,7 @@ public class SimulatorView extends PApplet {
 					if(cCell.containsRock()){
 						board[x][y] = new Hexagon(this, rock);
 					}
-	
+
 					else if(cCell.containsBlackAnt()){
 						board[x][y] = new Hexagon(this, antB);
 					}
@@ -115,9 +164,9 @@ public class SimulatorView extends PApplet {
 					}
 					else if(cCell.isClear()){
 						board[x][y] = new Hexagon(this, clear);
-					}					
+					}
+				
 			}
 		}
-	}
-
+}
 }
