@@ -10,13 +10,14 @@ import org.gicentre.utils.move.*;
 
 public class SimulatorView extends PApplet {
 	private Hexagon[][] board;
-	private PImage rock, food, antB, antR, antHR, antHB, clear,deadRed,deadBlack;
+	private PImage rock, food, antB, antR, antHR, antHB, clear;
 	private int xSize, ySize;
 	private ObserverAntWorld obiwan;
 	private Map curMap;
 	private World w;
-	ZoomPan zoomer;
-	PFont f;
+	private ZoomPan zoomer;
+	private int round = 0;
+	private PFont f;
 	
 //	public void setup(Observer obiwan,int xSize, int ySize) {
 	public void setup() {
@@ -44,8 +45,7 @@ public class SimulatorView extends PApplet {
 		clear = loadImage("clear.png");
 		antB = loadImage("blackAnt.png");
 		antR = loadImage("redAnt.png");
-		deadRed = loadImage("deadRedAnt.png");
-		deadBlack = loadImage("deadBlackAnt.png");
+
 		
 		board =  new Hexagon[xSize][ySize];
 		Cell cCell;
@@ -85,7 +85,7 @@ public class SimulatorView extends PApplet {
 
 	public void draw() {
 		
-	background(70);
+	background(170);
 	pushMatrix();
 	zoomer.transform();
 
@@ -108,22 +108,22 @@ public class SimulatorView extends PApplet {
 		
 		updateBoard(obiwan.getToUpdate());
 		obiwan.clearList();
-		
+		round++;
 		popMatrix();
 		textAlign(CENTER);
 		text((frameRate) + " fps",width/2,60); 
+		text("Round: "+round,width/2,80); 
+		text("Red have " + obiwan.getWorld().getStats().getFoodUnitsRedHill() + " units of food",width/2,100); 
+		text("Red have " + obiwan.getWorld().getStats().getRedAlive() + " ants alive",width/2,120); 
+		text("Blacks have " + obiwan.getWorld().getStats().getFoodUnitsBlackHill() + " units of food",width/2,140); 
+		text("Blacks have " + obiwan.getWorld().getStats().getBlackAlive() + " ants alive",width/2,160); 
+		
 	}
 	
 	public void updateBoard(ArrayList<Cell> toUpdate){
 		for(Cell cCell:toUpdate){
-					if(cCell.containsBlackAnt() && !cCell.getAnt().isAlive()){
-						board[cCell.getPos()[1]][cCell.getPos()[0]].setIcon(deadBlack);
-					}
-					else if(cCell.containsBlackAnt()){
+					if(cCell.containsBlackAnt()){
 						board[cCell.getPos()[1]][cCell.getPos()[0]].setIcon(antB);
-					}
-					else if(cCell.containsRedAnt() && !cCell.getAnt().isAlive()){
-						board[cCell.getPos()[1]][cCell.getPos()[0]].setIcon(deadRed);
 					}
 					else if(cCell.containsRedAnt()){
 						board[cCell.getPos()[1]][cCell.getPos()[0]].setIcon(antR);

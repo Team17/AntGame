@@ -103,10 +103,15 @@ public class World {
 	public void step(){
 		for(Ant curAnt:ants){
 			if(isAntSurronded(curAnt)){
-				if(curAnt.getColour() == AntColour.RED){
+				System.out.println(" kill");
+				switch (curAnt.getColour()){
+				case RED:
 					stats.decRedAlive();
-				}else{
+					System.out.println(" kill red");
+				case BLACK:
 					stats.decBlackAlive();
+					System.out.println(" kill black");
+				default:
 				}
 				obiwan.addToUpdate(curAnt.getCurrentPos());
 				killAnt(curAnt);
