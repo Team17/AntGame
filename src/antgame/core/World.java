@@ -101,16 +101,14 @@ public class World {
 	 * based on the instruction of the antsState. it carries on for each ant.
 	 */
 	public void step(){
+		stats.incRound();
 		for(Ant curAnt:ants){
 			if(isAntSurronded(curAnt) && curAnt.isAlive()){
-				System.out.println(" kill");
 				switch (curAnt.getColour()){
 				case RED:
 					stats.decRedAlive();
-					System.out.println(" kill red");
 				case BLACK:
 					stats.decBlackAlive();
-					System.out.println(" kill black");
 				default:
 				}
 				obiwan.addToUpdate(curAnt.getCurrentPos());
@@ -362,7 +360,7 @@ public class World {
 				}
 			}
 		}
-		return 2<=surrounded;
+		return 5<=surrounded;
 	}
 
 	/**
@@ -384,6 +382,27 @@ public class World {
 	 */	
 	public ObserverAntWorld getObserver(){
 		return this.obiwan;
+	}
+	/**
+	 * @return the team with most food, if equal, with most alive, if a tie returns null
+	 */	
+	public AntColour whoWon(){
+		if(stats.getFoodUnitsRedHill()==stats.getFoodUnitsBlackHill()){
+			if(stats.getBlackAlive()==stats.getRedAlive()){
+				return null;
+			}
+			else if(stats.getBlackAlive()>stats.getRedAlive()){
+				return AntColour.BLACK;
+			}
+			else if(stats.getBlackAlive()<stats.getRedAlive()){
+				return AntColour.RED;
+			}
+		}else if(stats.getFoodUnitsRedHill()>stats.getFoodUnitsBlackHill()){
+			return AntColour.RED;
+		}else if(stats.getFoodUnitsRedHill()<stats.getFoodUnitsBlackHill()){
+			return AntColour.BLACK;
+		}
+		return null;
 	}
 	
 	public static void main (String[] args) {

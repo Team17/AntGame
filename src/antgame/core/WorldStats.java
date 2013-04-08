@@ -15,11 +15,14 @@ public class WorldStats {
 	private int totalRed;
 	private int totalBlack;
 	
+	//Round
+	private int round;
 	public WorldStats(int reds, int blacks){
 		this.totalBlack = blacks;
 		this.blackAlive = blacks;
 		this.totalRed = reds;
 		this.redAlive = reds;
+		this.round = 0;
 	}
 	
 	/**
@@ -98,7 +101,18 @@ public class WorldStats {
 		return totalRed - redAlive;
 	}
 
-	
+	/**
+	 * @return Round
+	 */
+	public int getRound() {
+		return round;
+	}
+	/**
+	 * Increases round by one
+	 */
+	public void incRound() {
+		this.round++;
+	}
 	
 	
 	
