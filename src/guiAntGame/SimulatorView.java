@@ -29,13 +29,7 @@ public class SimulatorView extends PApplet {
 		noStroke();
 
 		String workingDir = System.getProperty("user.dir");
-		World w1 = new World("C:/workingworld2.world"/*
-													 * workingDir+
-													 * "\\files\\workingworld.world"
-													 * *
-													 */, workingDir
-				+ "\\files\\cleverbrain1.brain", workingDir
-				+ "\\files\\cleverbrain2.brain");
+		World w1 = new World(workingDir+"curFiles//map.world",workingDir+"curFiles//r.brain",workingDir+"curFiles//b.brain");
 
 		size(800, 700);
 
