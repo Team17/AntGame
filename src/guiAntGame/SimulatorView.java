@@ -37,7 +37,7 @@ public class SimulatorView extends PApplet {
 				+ "\\files\\cleverbrain1.brain", workingDir
 				+ "\\files\\cleverbrain2.brain");
 
-		size(800, 800);
+		size(800, 700);
 
 		zoomer = new ZoomPan(this);
 		zoomer.allowZoomButton(false);
@@ -92,10 +92,10 @@ public class SimulatorView extends PApplet {
 		
 		
 		
-		cp5.addSlider("speed").setPosition(50, 770).setSize(150, 20)
+		cp5.addSlider("speed").setPosition(50, 670).setSize(150, 20)
 				.setRange(40, 500).setValue(60);
 
-		cp5.addButton("endgame").setPosition(700, 770)
+		cp5.addButton("endgame").setPosition(700, 670)
 				.setSize(60, 20);
 
 	}

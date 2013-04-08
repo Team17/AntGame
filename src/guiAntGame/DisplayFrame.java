@@ -6,7 +6,7 @@ import java.awt.FlowLayout;
 
 public class DisplayFrame extends javax.swing.JFrame {
     public DisplayFrame(){
-        this.setSize(803, 835); //The window Dimensions
+        this.setSize(803, 735); //The window Dimensions
         
         
         javax.swing.JPanel panel = new javax.swing.JPanel();
