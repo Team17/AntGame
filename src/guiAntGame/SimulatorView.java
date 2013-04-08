@@ -23,13 +23,12 @@ public class SimulatorView extends PApplet {
 	private float frameRateInt = 60;
 	private boolean didthegamefinallyend = false;
 
-	// public void setup(Observer obiwan,int xSize, int ySize) {
 	public void setup() {
 		smooth();
 		noStroke();
 
 		String workingDir = System.getProperty("user.dir");
-		World w1 = new World(workingDir+"curFiles//map.world",workingDir+"curFiles//r.brain",workingDir+"curFiles//b.brain");
+		World w1 = new World(workingDir+"\\curFiles\\map.world",workingDir+"\\curFiles\\r.brain",workingDir+"\\curFiles\\b.brain");
 
 		size(800, 700);
 

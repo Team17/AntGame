@@ -17,7 +17,7 @@ public class DisplayFrame extends javax.swing.JFrame {
         this.add(panel);
         sketch.init(); //this is the function used to start the execution of the sketch
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        this.setResizable(false);
+        this.setResizable(true);
         this.setVisible(true);
     }
 }
