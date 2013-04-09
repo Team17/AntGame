@@ -294,7 +294,7 @@ public class AntBrainInterpreterCoryn {
 	 * used in testing to see if the class constructor is adding all the regex to the array
 	 * @return int
 	 */
-	public static ArrayList getRegExpressions() {
+	public static ArrayList<String> getRegExpressions() {
 		
 		return regExpressions;
 	}
