@@ -1,9 +1,18 @@
-package antgame.core;
+package antgame.test;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import antgame.core.AntBrainInterpreterCoryn;
+import antgame.core.AntColour;
+import antgame.core.BrainState;
+
+/**
+ * Test class for AntBrainInterpreterCoryn class
+ * @author George
+ * 
+ */
 public class AntBrainInterpreterCorynTest {
 	
 	private AntBrainInterpreterCoryn ABInt = new AntBrainInterpreterCoryn();
@@ -75,12 +84,8 @@ public class AntBrainInterpreterCorynTest {
 	 */
 	@Test
 	public void testIsInteger() {
-		
-		boolean temp = ABInt.isInteger("112");
-		boolean temp2 = ABInt.isInteger("one112");
-
-		assertEquals(true, temp);
-		assertEquals(false, temp2);
+		assertTrue(ABInt.isInteger("112"));
+		assertFalse(ABInt.isInteger("one112"));
 	}
 
 	/**
@@ -91,8 +96,8 @@ public class AntBrainInterpreterCorynTest {
 		final String regSense = "sense\\s(here|ahead|leftahead|rightahead)\\s[0-9]{1,4}\\s[0-9]{1,4}\\s(friend|foe|friendwithfood|foewithfood|food|rock|marker\\s\\d|foemarker|home|foehome)(|\\s;.*)";
 		final String regWrong = "mark\\s(0|1|2|7|4|5)\\s[0-9]{1,4}(|\\s;.*)"; //replace 7 with 3 for this to work
 
-		assertEquals(true, AntBrainInterpreterCoryn.getRegExpressions().contains(regSense));
-		assertEquals(false, AntBrainInterpreterCoryn.getRegExpressions().contains(regWrong));
+		assertTrue(AntBrainInterpreterCoryn.getRegExpressions().contains(regSense));
+		assertFalse(AntBrainInterpreterCoryn.getRegExpressions().contains(regWrong));
 	}
 
 }
