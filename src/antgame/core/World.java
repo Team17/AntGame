@@ -28,6 +28,23 @@ public class World {
 	private ObserverAntWorld obiwan;
 
 	/**
+	 * Constructor
+	 * @param	map			The Map to use
+	 * @param	redBrain	The AntBrain to be used by the red colony
+	 * @param	blackBrain	The AntBrain to be used by the black colony
+	 */
+	public World(Map map, AntBrain redBrain, AntBrain blackBrain) {
+		
+		this.map = map;
+		this.redAntBrain = redBrain;
+		this.blackAntBrain = blackBrain;
+		
+		// Call to complete construction-time routines
+		_construct();
+		
+	}
+	
+	/**
 	 * World constructor takes the directory of the map, it then passes this to the MapInterpreter who returns an instance of map.
 	 * It also takes the directory of each ant brain and creates a new instance of ant brain for each, at creation the ant brain passes the file through
 	 * the AntBrainInterpreter.
@@ -42,6 +59,15 @@ public class World {
 		this.redAntBrain = new AntBrain(antR, AntColour.RED);
 		this.blackAntBrain = new AntBrain(antB,AntColour.BLACK);
 
+		// Call to complete construction-time routines
+		_construct();
+		
+	}
+
+	/**
+	 * Private constructor method invoked by all World constructors
+	 */
+	private void _construct() {
 		//the following basically counts the number of ant hill cells and thus how many ants there will be.
 		for (int y = 0; y < (map.getYSize()); y++) {
 			for (int x = 0; x < (map.getXSize()); x++) {
@@ -84,16 +110,32 @@ public class World {
 		}
 		this.stats = new WorldStats(reds,blacks);
 		obiwan = new ObserverAntWorld(this);
-//		//calls the step method.
-//		for(int i=0; i < 300000; i++){
-//			step();
-//		}
+//				//calls the step method.
+//				for(int i=0; i < 300000; i++){
+//					step();
+//				}
 //
 //
-//		System.out.println("Red Ants Alive: " + redAlive + " Black Ants Ailve: " + blackAlive);
-//		map.printmap();
+//				System.out.println("Red Ants Alive: " + redAlive + " Black Ants Ailve: " + blackAlive);
+//				map.printmap();
 	}
-
+	
+	/**
+	 * Returns the AntBrain assigned to the red colony
+	 * @return	The red AntBrain
+	 */
+	public AntBrain getRedBrain() {
+		return redAntBrain;
+	}
+	
+	/**
+	 * Returns the AntBrain assigned to the black colony
+	 * @return	The black AntBrain
+	 */
+	public AntBrain getBlackBrain() {
+		return blackAntBrain;
+	}
+	
 	/**
 	 * step is the function that is called 300,000 times, it starts of by calling foodInEachAntHill which calculates how many particles of food there are in each ant hill.
 	 * It then starts a for loop for each ant which it calls curAnt. It checks if the ant is surrounded if it is it kills the ant. otherwise it checks if the ant is alive

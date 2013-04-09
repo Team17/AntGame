@@ -80,6 +80,16 @@ public class AntGameProperties extends Properties {
 	 * The directory Ant Game uses to store user preferences.
 	 */
 	public final File USER_PREFS_DIR;
+
+	/**
+	 * The minimum number of AntBrains required for a Tournament
+	 */
+	public final int MIN_TOURANAMENT_BRAINS;
+
+	/**
+	 * The maximum number of AntBrains that can partake in the same Tournament
+	 */
+	public final int MAX_TOURANAMENT_BRAINS;
 	
 	/**
 	 * Constructor
@@ -101,6 +111,8 @@ public class AntGameProperties extends Properties {
 		CONTEST_MAP_FOOD_PER_BLOB_CELL = Integer.parseInt(this.getAntGameProperty("contestMapFoodPerBlobCell"));
 		DEFAULT_ANT_DIRECTION = Integer.parseInt(this.getAntGameProperty("defaultAntDirection"));
 		USER_PREFS_DIR = new File(AntGame.APP_DATA_DIR + "\\" + this.getAntGameProperty("userPrefsDir"));
+		MIN_TOURANAMENT_BRAINS = Integer.parseInt(this.getAntGameProperty("minTournamentBrains"));
+		MAX_TOURANAMENT_BRAINS = Integer.parseInt(this.getAntGameProperty("maxTournamentBrains"));
 	}
 
 	/**
