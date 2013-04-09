@@ -237,6 +237,8 @@ public class AntBrainInterpreterCoryn {
 				numStates ++;
 				curLine = reader.readLine();
 			}
+			
+			reader.close();
 			//this set the number of states which has just been found by iterating over all of the lines of the ant brain.
 			stateInt = numStates;
 		} catch (FileNotFoundException e) {
@@ -285,5 +287,15 @@ public class AntBrainInterpreterCoryn {
 			}	
 		}
 		return false;
+	}
+	
+	/**
+	 * returns the length of the array with the regular expressions
+	 * used in testing to see if the class constructor is adding all the regex to the array
+	 * @return int
+	 */
+	public static ArrayList getRegExpressions() {
+		
+		return regExpressions;
 	}
 }
