@@ -18,6 +18,7 @@ public class WorldTest {
 
 	static Ant ant1;
 
+
 	private static String workingDir = System.getProperty("user.dir");
 	private static BrainState bs = new BrainState();
 	private static Cell[][] map = new Cell[10][10];
@@ -78,61 +79,64 @@ public class WorldTest {
 				fail("incorrect ant found in cell");
 			}
 		}else {
-			
+
 			fail("No ant in cell");
+		}
+
+
 	}
 
-	
-}
+	@Test
+	public void testGetAntIntArray() {
+		fail("Not yet implemented");
+	}
 
-@Test
-public void testGetAntIntArray() {
-	fail("Not yet implemented");
-}
+	@Test
+	public void testIsAntAtCell() {
+		Ant ant2 = new Ant(2, 2, AntColour.RED, bs.getStateId(), map[3][3], brain);
 
-@Test
-public void testIsAntAtCell() {
-	fail("Not yet implemented");
-}
+		assertTrue("Correct ant is in cell", ant2 == map[3][3].getAnt());
 
-@Test
-public void testIsAntAtIntArray() {
-	fail("Not yet implemented");
-}
+	}
 
-@Test
-public void testKillAnt() {
-	fail("Not yet implemented");
-}
+	@Test
+	public void testIsAntAtIntArray() {
+		fail("Not yet implemented");
+	}
 
-@Test
-public void testIsAntSurronded() {
-	fail("Not yet implemented");
-}
+	@Test
+	public void testKillAnt() {
+		fail("Not yet implemented");
+	}
 
-@Test
-public void testGetMap() {
-	fail("Not yet implemented");
-}
+	@Test
+	public void testIsAntSurronded() {
+		fail("Not yet implemented");
+	}
 
-@Test
-public void testGetStats() {
-	fail("Not yet implemented");
-}
+	@Test
+	public void testGetMap() {
+		fail("Not yet implemented");
+	}
 
-@Test
-public void testGetObserver() {
-	fail("Not yet implemented");
-}
+	@Test
+	public void testGetStats() {
+		fail("Not yet implemented");
+	}
 
-@Test
-public void testWhoWon() {
-	fail("Not yet implemented");
-}
+	@Test
+	public void testGetObserver() {
+		fail("Not yet implemented");
+	}
 
-@Test
-public void testMain() {
-	fail("Not yet implemented");
-}
+	@Test
+	public void testWhoWon() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testMain() {
+		fail("Not yet implemented");
+	}
 
 }
