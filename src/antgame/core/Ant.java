@@ -24,6 +24,9 @@ public class Ant {
 	//How many turns an ant has to rest before it can carry out another step.
 	private int numRestingLeft;
 	
+	//variable with how many rounds an ant should rest
+	private static int restingLimit = 14;
+	
 	//If ant is carrying food.
 	private boolean hasFood;
 	
@@ -58,7 +61,8 @@ public class Ant {
 	}
 	
 	/**
-	*@return int Direction of the ant.
+	 * accessor metod for direction (dir) variable
+	*@return int 
 	*/
 	public int getDir() {
 		return dir;
@@ -97,7 +101,9 @@ public class Ant {
 	 * Sets the ant to be resting by setting the number of rounds left before the ant can take a turn to 14
 	 */
 	public void setResting(){
-		numRestingLeft = 14;
+		
+		//moved the magic number 14 into a static final variable for easy change in future
+		numRestingLeft = restingLimit;
 	}
 	
 	/**
@@ -191,4 +197,19 @@ public class Ant {
 		this.alive = false;
 	}
 	
+	/**
+	 * accessor method for variable restingRounds
+	 * @return int
+	 */
+	public static int getRestingLimit() {
+		return restingLimit;
+	}
+	
+	/**
+	 * mutator method for variable restingRounds
+	 * @param int
+	 */
+	public static void setRestingLimit(int newLimit){
+		restingLimit = newLimit;
+	}
 }
