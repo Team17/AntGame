@@ -17,6 +17,7 @@ import antgame.core.Cell;
 public class WorldTest {
 
 	static Ant ant1;
+	static Ant ant2;
 
 
 	private static String workingDir = System.getProperty("user.dir");
@@ -38,6 +39,9 @@ public class WorldTest {
 
 		ant1 = new Ant(1, 1, AntColour.RED, bs.getStateId(), map[2][3], brain);
 		map[2][3].antMoveIn(ant1);
+		
+		ant2 = new Ant(1, 1, AntColour.RED, bs.getStateId(), map[4][3], brain);
+		map[4][3].antMoveIn(ant1);
 
 
 	}
@@ -71,7 +75,8 @@ public class WorldTest {
 
 	@Test
 	public void testGetAntCell() {
-		Cell cell = map[2][3];
+		Cell cell = map[2][3];		
+		
 		if(cell.containsAnt()){
 			assertTrue("Ant is found in cell", cell.containsAnt());
 
@@ -79,7 +84,6 @@ public class WorldTest {
 				fail("incorrect ant found in cell");
 			}
 		}else {
-
 			fail("No ant in cell");
 		}
 
@@ -93,9 +97,10 @@ public class WorldTest {
 
 	@Test
 	public void testIsAntAtCell() {
-		Ant ant2 = new Ant(2, 2, AntColour.RED, bs.getStateId(), map[3][3], brain);
-
-		assertTrue("Correct ant is in cell", ant2 == map[3][3].getAnt());
+		Ant ant3 = new Ant(2, 2, AntColour.RED, bs.getStateId(), map[3][3], brain);
+		map[3][3].antMoveIn(ant3);
+	
+		assertTrue("Correct ant is in cell", (ant3 == map[3][3].getAnt()));
 
 	}
 
@@ -106,7 +111,18 @@ public class WorldTest {
 
 	@Test
 	public void testKillAnt() {
-		fail("Not yet implemented");
+		Ant ant4 = new Ant(3, 3, AntColour.RED, bs.getStateId(), map[1][1], brain);
+		Cell tempCell = ant4.getCurrentPos();
+		int numFood = tempCell.getNumberOfFoodParticles();
+		ant4.die();
+		ant4.getCurrentPos().addNumFood(3);
+		ant4.getCurrentPos().antMoveOut();
+		
+		assertFalse("Ant still alive", ant4.isAlive());
+		assertTrue("Food correctly added to cell", tempCell.getNumberOfFoodParticles() == numFood + 3);
+		assertTrue("cell correctly dealth with dead ant", !tempCell.containsAnt()&&tempCell.isClear());
+		
+		
 	}
 
 	@Test
