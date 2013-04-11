@@ -97,7 +97,7 @@ public class Marker {
 
 	/**
 	 * Return the colour of the colony to which this marker belongs
-	 * @return the color
+	 * @return AntColour
 	 */
 	public AntColour getAntColor() {
 		return color;

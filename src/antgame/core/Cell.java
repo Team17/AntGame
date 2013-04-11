@@ -186,8 +186,8 @@ public class Cell {
 	 * checkAnyMarkerAt checks whether there is any marker of the colour passed in the parameter.
 	 * The method creates a new set of markers of colour c and then attempts get each marker, if any marker successfully returns then the method returns true and terminates
 	 * otherwise it returns false.	
-	 * @param c the colour of markers that we want to check
-	 * @return true if any marker of the colour c is present false otherwise
+	 * @param AntColour
+	 * @return boolean
 	 */
 	public boolean checkAnyMarkerAt(AntColour c){
 		Marker[] _m = new Marker[6];

@@ -121,14 +121,16 @@ public class BrainState {
 	}
 
 	/**
-	 * @return int the nextState as integer.
+	 * Get the next state
+	 * @return int
 	 */
 	public int getNextIdState() {
 		return nextIdState;
 	}
 
 	/**
-	 * @param nextState the nextState to set as integer
+	 * Set the next state id
+	 * @param int
 	 */
 	public void setNextIdState(int nextState) {
 		this.nextIdState = nextState;
@@ -136,7 +138,7 @@ public class BrainState {
 
 	/**
 	 * get the alternative next step as BrainState
-	 * @return BrainState alternative brain state.
+	 * @return BrainState
 	 */
 	public BrainState getAltNextState() {
 		return altNextState;
@@ -180,10 +182,15 @@ public class BrainState {
 	}
 
 	/**
-	 * sets the sense direction based on a string passsed to it and converts it to a SenseDirection enum.
+	 * sets the sense direction based on a string passed to it and 
+	 * converts it to a SenseDirection enum.
 	 * @param dir string of the direction to sense
 	 */
 	public void setSenseDirection(String dir) {
+		
+		//make sure the string is in lower case
+		dir.toLowerCase();
+		
 		if(dir.equals("here")){
 			this.senseDirection = SenseDirection.HERE;
 		}
@@ -199,14 +206,16 @@ public class BrainState {
 	}
 	
 	/**
-	 * @return the senseCondition
+	 * Get te sensed condition
+	 * @return SenseCondition
 	 */
 	public SenseCondition getSenseCondition() {
 		return senseCondition;
 	}
 	
 	/**
-	 * @param senseCondition the senseCondition to set
+	 * Set senseCondition
+	 * @param SenseCondition
 	 */
 	public void setSenseCondition(SenseCondition senseCondition) {
 		this.senseCondition = senseCondition;
@@ -214,40 +223,43 @@ public class BrainState {
 
 	/**
 	 * sets the sense condition based on a string passed to it and converts it to a SenseCondition enum.
-	 * @param scon string of the condition to sense for
+	 * @param String
 	 */
-	public void setSenseCondition(String scon) {
-		if(scon.equals("friend")){
+	public void setSenseCondition(String senseCondition) {
+		
+		//make sure is to lower case
+		senseCondition.toLowerCase();
+		
+		if(senseCondition.equals("friend")){
 			this.senseCondition = SenseCondition.FRIEND;
 		}
-		else if(scon.equals("foe")){
+		else if(senseCondition.equals("foe")){
 			this.senseCondition = SenseCondition.FOE;
 		}
-		else if(scon.equals("friendwithfood")){
+		else if(senseCondition.equals("friendwithfood")){
 			this.senseCondition = SenseCondition.FRIENDWITHFOOD;
 		}
-		else if(scon.equals("foewithfood")){
+		else if(senseCondition.equals("foewithfood")){
 			this.senseCondition = SenseCondition.FOEWITHFOOD;
 		}
-		else if(scon.equals("food")){
+		else if(senseCondition.equals("food")){
 			this.senseCondition = SenseCondition.FOOD;
 		}
-		else if(scon.equals("rock")){
+		else if(senseCondition.equals("rock")){
 			this.senseCondition = SenseCondition.ROCK;
 		}
-		else if(scon.equals("marker")){
+		else if(senseCondition.equals("marker")){
 			this.senseCondition = SenseCondition.MARKER;
 		}
-		else if(scon.equals("foemarker")){
+		else if(senseCondition.equals("foemarker")){
 			this.senseCondition = SenseCondition.FOEMARKER;
 		}
-		else if(scon.equals("home")){
+		else if(senseCondition.equals("home")){
 			this.senseCondition = SenseCondition.HOME;
 		}
-		else if(scon.equals("foehome")){
+		else if(senseCondition.equals("foehome")){
 			this.senseCondition = SenseCondition.FOE;
 		}
-
 
 	}
 	
@@ -259,7 +271,9 @@ public class BrainState {
 	}
 	
 	/**
-	 * @param marker the marker to set
+	 * Set the marker as marker id and ant colour
+	 * @param int
+	 * @param AntColour
 	 */
 	public void setMarker(int marker, AntColour colour) {
 		try {
@@ -278,7 +292,8 @@ public class BrainState {
 	}
 	
 	/**
-	 * @param leftRight the leftRight to set
+	 * Set direction
+	 * @param LeftRight
 	 */
 	public void setLeftRight(LeftRight leftRight) {
 		this.leftRight = leftRight;
@@ -286,9 +301,13 @@ public class BrainState {
 
 	/**
 	 * sets the left right condition based on a string passed to it and converts it to a LeftRight enum.
-	 * @param dir string of left or right
+	 * @param String
 	 */
 	public void setLeftRight(String lr) {
+		
+		//string to lower case
+		lr.toLowerCase();
+		
 		if(lr.equals("left")){
 			this.leftRight = LeftRight.LEFT;
 		}
@@ -298,14 +317,16 @@ public class BrainState {
 	}
 
 	/**
-	 * @return the randomInt
+	 * Get randomInt
+	 * @return int
 	 */
 	public int getRandomInt() {
 		return randomInt;
 	}
 	
 	/**
-	 * @param randomInt the randomInt to set
+	 * Set randomInt
+	 * @param int
 	 */
 	public void setRandomInt(int randomInt) {
 		this.randomInt = randomInt;
@@ -317,7 +338,5 @@ public class BrainState {
 	public void print(){
 		System.out.println("StateId: " + this.stateId +"\nInstructons: " + this.instruction + "\nNextiDState: " + this.nextIdState + "\nNextStateptr: " + this.nextState.stateId + "\nAltNextidState: "+ this.altNextIdState +"\nAltNextState: "+ this.altNextState.stateId +  "\nSenseDiection: " + this.senseDirection + "\nSenseCondition: " + this.senseCondition + "\nMarker: " + this.marker  +"\nTrun Dir: " + this.leftRight + "\nRandomInt: "+ this.randomInt +"\n");
 	}
-
-
 
 }
