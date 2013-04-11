@@ -2,6 +2,8 @@ package antgame.test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -13,17 +15,22 @@ import antgame.core.AntBrain;
 import antgame.core.AntColour;
 import antgame.core.BrainState;
 import antgame.core.Cell;
+import antgame.core.Map;
+import antgame.core.World;
 
 public class WorldTest {
 
+	
 	static Ant ant1;
 	static Ant ant2;
 
-
+	
 	private static String workingDir = System.getProperty("user.dir");
+	
+	World w1 = new World(workingDir+"\\files\\workingworld.world",workingDir+"\\files\\cleverbrain1.brain",workingDir+"\\files\\cleverbrain2.brain");
+	private Map theMap = w1.getMap();
 	private static BrainState bs = new BrainState();
 	private static Cell[][] map = new Cell[10][10];
-
 
 	private static AntBrain brain = new AntBrain(workingDir + "\\files\\TestBrainGood.brain",AntColour.RED);
 
@@ -86,13 +93,33 @@ public class WorldTest {
 		}else {
 			fail("No ant in cell");
 		}
-
-
 	}
 
 	@Test
 	public void testGetAntIntArray() {
-		fail("Not yet implemented");
+	
+		int[] coordinates = {2,3};
+		Cell cell2 = w1.getMap().getCell(coordinates);
+		Cell cell = w1.getMap().getCell(coordinates);
+		
+		System.out.println("Outcome: " + (cell == cell2));
+		
+		System.out.println(cell.getPos());
+		System.out.println(cell2.getPos());
+		if(cell2.containsAnt()){
+			System.out.println("1");
+			assertTrue("Ant is found in cell", cell2.containsAnt());
+
+			if (!(cell2.getAnt() == ant1)){
+				System.out.println("2");
+				fail("incorrect ant found in cell");
+			}
+		}else {
+			System.out.println("3");
+			fail("No ant in cell");
+		}
+		
+		
 	}
 
 	@Test
@@ -106,7 +133,17 @@ public class WorldTest {
 
 	@Test
 	public void testIsAntAtIntArray() {
-		fail("Not yet implemented");
+		Ant ant5 = new Ant(5, 5, AntColour.RED, bs.getStateId(), map[1][4], brain);
+		map[1][4].antMoveIn(ant5);
+		System.out.println("sdgfsa: gds" );
+		int[] coordinate = new int[2];
+		coordinate[0] = 1;
+		coordinate[1] = 4;
+		System.out.println("sdgfsa: dfhfhfhfhfhgds" );
+		Cell cells = theMap.getCell(coordinate);
+		//Cell cell1 = theMap[4][1];
+		System.out.println("sdgfsa: " );
+		assertTrue("Correct ant is in cell", cells.containsAnt());
 	}
 
 	@Test
@@ -118,6 +155,7 @@ public class WorldTest {
 		ant4.getCurrentPos().addNumFood(3);
 		ant4.getCurrentPos().antMoveOut();
 		
+		
 		assertFalse("Ant still alive", ant4.isAlive());
 		assertTrue("Food correctly added to cell", tempCell.getNumberOfFoodParticles() == numFood + 3);
 		assertTrue("cell correctly dealth with dead ant", !tempCell.containsAnt()&&tempCell.isClear());
@@ -127,12 +165,32 @@ public class WorldTest {
 
 	@Test
 	public void testIsAntSurronded() {
+		
+		
+		
+//		ArrayList<Cell> adjCells = theMap.surrondingCells(ant1.getCurrentPos());
+//		int surrounded = 0;
+//		
+//		for(Cell c:adjCells){
+//			if(c.containsAnt()){
+//				if(AntColour.otherColour(ant1.getColour()) == c.getAnt().getColour()){
+//					surrounded++;
+//				}
+//			}
+//		}
+//		if (5<=surrounded){
+//			
+//	}
+		
+		
+		
+		
 		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testGetMap() {
-		fail("Not yet implemented");
+		assertEquals(theMap, w1.getMap());
 	}
 
 	@Test
