@@ -50,17 +50,7 @@ public class Cell {
 	public Cell(int x, int y, String content){
 		pos[0] = x;
 		pos[1] = y;
-		markers = new HashMap<Marker, Boolean>();
-		for(AntColour c: AntColour.values()){
-			for(int i = 0 ; i<6/* i<Integer.parseInt(AntGame.CONFIG.getProperty("numAntMarkers"))*/; i++){
-				try {
-					markers.put(new Marker(i,c), false);
-				} catch (InvalidMarkerIdException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
+
 
 		if (content.equals("#")){
 			containsRock = true;
@@ -86,8 +76,105 @@ public class Cell {
 
 		}
 
+		_construct();
 
 	}
+	
+	/**
+	 * Constructor
+	 * @param	x	The x-position of the cell
+	 * @param	y	The y-position of the cell
+	 */
+	public Cell(int x, int y) {
+		pos[0] = x;
+		pos[1] = y;
+		
+		_construct();
+		
+	}
+	
+	/**
+	 * Private method invoked by all Cell constructors
+	 */
+	private void _construct() {
+		markers = new HashMap<Marker, Boolean>();
+		for(AntColour c: AntColour.values()){
+			for(int i = 0 ; i<6/* i<Integer.parseInt(AntGame.CONFIG.getProperty("numAntMarkers"))*/; i++){
+				try {
+					markers.put(new Marker(i,c), false);
+				} catch (InvalidMarkerIdException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Set this cell as rocky
+	 */
+	public void setRock() {
+		containsRock = true;
+		isClear = false;
+	}
+	
+	/**
+	 * Set this cell as non-rocky
+	 */
+	public void clearRock() {
+		containsRock = false;
+		_clearCheck();
+	}
+	
+	/**
+	 * Add food particles to this cell
+	 * @param	food	The total number of food particles this Cell is to contain
+	 */
+	public void setFood(int food) {
+		numberOfFoodParticles = food;
+		containsFood = true;
+	}
+	
+	/**
+	 * Clear all food particles to this cell
+	 */
+	public void clearFood() {
+		numberOfFoodParticles = 0;
+		containsFood = false;
+	}
+	
+	/**
+	 * Set this cell to be part of an anthill
+	 * @param	colour	The colour of the colony to which this anthill is associated
+	 */
+	public void setAnthill(AntColour colour) {
+		switch(colour) {
+		case RED:
+			containsRedAntHill = true;
+			containsBlackAntHill = false;
+			break;
+		case BLACK:
+			containsRedAntHill = false;
+			containsBlackAntHill = true;
+			break;
+		}
+	}
+	
+	/**
+	 * Clears any anthill associations this Cell has
+	 */
+	public void clearAnthill() {
+		containsRedAntHill = false;
+		containsBlackAntHill = false;
+	}
+	
+	/**
+	 * Sets the isClear variable depending on cell conditions
+	 */
+	private void _clearCheck() {
+		isClear = !( containsRock || containsAnt );
+	}
+	
 	/**
 	 * IsInteger is a method used to check if a string is an integer.
 	 * @param input - the string to check
