@@ -378,6 +378,22 @@ public class Cell {
 	public int[] getPos() {
 		return pos;
 	}
+	
+	/**
+	 * Return the x-position of this Cell
+	 * @return	The x-position of this Cell
+	 */
+	public int getX() {
+		return pos[0];
+	}
+	
+	/**
+	 * Return the y-position of this Cell
+	 * @return	The y-position of this Cell
+	 */
+	public int getY() {
+		return pos[1];
+	}
 
 	/**
 	 * isContainsFood
