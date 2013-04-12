@@ -14,5 +14,5 @@
 	<entry key="defaultAntDirection">0</entry>
 	<entry key="userPrefsDir">AntGame</entry>
 	<entry key="minTournamentBrains">3</entry>
-	<entry key="maxTouranmentBrains">20</entry>
+	<entry key="maxTournamentBrains">20</entry>
 </properties>

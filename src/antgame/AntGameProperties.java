@@ -97,6 +97,7 @@ public class AntGameProperties extends Properties {
 	 * @throws Exception
 	 */
 	public AntGameProperties() throws Exception {
+		loadFromXML(new FileInputStream(AntGame.CONFIG_FILE));
 		// ** (Optional) Pull individual properties into named constants for easier access **
 		// This is optional as properties are still accessible using the Properties.getProperty(String key) : String method.
 		NUM_MARKERS = Integer.parseInt(this.getAntGameProperty("numAntMarkers"));

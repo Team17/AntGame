@@ -48,11 +48,6 @@ public class AntGame {
 	 */
 	private static void _init() {
 		
-		// Set up this user if this is the first time they have played
-		if (firstTimeUser()) {
-			setUpUser();
-		}
-		
 	}
 	
 	/**
@@ -104,17 +99,14 @@ public class AntGame {
 	 */
 	private static AntGameProperties _initCONFIG() {
 		try {
-			AntGameProperties p = new AntGameProperties();
-			p.loadFromXML(new FileInputStream(CONFIG_FILE));
 			return new AntGameProperties();
 		} catch (Exception e) {
-			//TODO: Handle exception
+			e.printStackTrace();
 			return null;
 		}
 	}
 	
 	public static void main(String[] args) {
-		_init();
 	}
 	
 }

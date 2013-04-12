@@ -45,6 +45,52 @@ public class Map {
 		}
 
 	}
+	
+	/**
+	 * Alternate Map-to-ASCII printing function that conforms to the standards
+	 * laid out in the Project Overview document
+	 */
+	public void printStandard() {
+		
+		// Converts cells[x][y] representation to cells[y][x] representation
+		// so we can print entire rows at a time instead of columns at a time (yuk)
+		Cell[][] cells = MapCreator.invertCells(map);
+		
+		// Iterate over each cell, printing its contents
+		for (int y = 0; y < cells.length; y++) {
+			
+			// Initialise row
+			String row = "";
+			
+			// Loop over cells in row
+			for (int x = 0; x < cells[y].length; x++) {
+				
+				// Grab a cell
+				Cell c = cells[y][x];
+				
+				// Print a single character to denote its contents
+				if (c.containsRock()) {
+					row += "#";
+				} else if (c.getNumberOfFoodParticles() > 0) {
+					row += c.getNumberOfFoodParticles();
+				} else if (c.containsRedAntHill()) {
+					row += "+";
+				} else if (c.containsBlackAntHill()) {
+					row += "-";
+				} else {
+					row += ".";
+				}
+				
+				// Print a trailing whitespace character
+				row += " ";
+				
+			}
+			
+			// Print out the row to the console
+			System.out.println(row);
+			
+		}
+	}
 
 	/**
 	 * getCell returns a specific cell in the map, based on x and y coordinates
@@ -56,6 +102,37 @@ public class Map {
 		return map[x][y];
 	}
 
+	/**
+	 * Return an array of the Cells adjacent to the one specified
+	 * @param	c	The specified Cell
+	 * @return		An array of the Cells adjacent to this one
+	 */
+	public ArrayList<Cell> getAdjacentCells(Cell c) {
+		
+		// Pull out x and y coordinates
+		int x = c.getX();
+		int y = c.getY();
+		
+		// Initialise an ArrayList of Cells
+		ArrayList<Cell> cells = new ArrayList<Cell>();
+		// Pull out adjacent cells where they exist
+		try {
+			cells.add(getCell(x - 1, y));
+			cells.add(getCell(x - 1, y - 1));
+			cells.add(getCell(x - 1, y + 1));
+			cells.add(getCell(x + 1, y));
+			cells.add(getCell(x, y - 1));
+			cells.add(getCell(x, y + 1));
+		}
+		catch (ArrayIndexOutOfBoundsException e) {
+			// no adjacent cell in this direction, do nothing
+		}
+		
+		// Return the adjacent cells
+		return cells;
+		
+	}
+	
 	/**
 	 * getCell returns a specific cell in the map, based on an int array
 	 * @param pos is an int array of x and y coordinates of the cell that is requested
