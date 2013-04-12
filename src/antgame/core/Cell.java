@@ -109,6 +109,14 @@ public class Cell {
 			}
 		}
 	}
+
+	/**
+	 * Return the number of food particles in this Cell
+	 * @return	The number of food particles in this Cell
+	 */
+	public int getFood() {
+		return numberOfFoodParticles;
+	}
 	
 	/**
 	 * Set this cell as rocky
