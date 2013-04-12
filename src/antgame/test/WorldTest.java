@@ -2,6 +2,10 @@ package antgame.test;
 
 import static org.junit.Assert.*;
 
+import guiAntGame.ObserverAntWorld;
+
+import java.util.ArrayList;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -13,17 +17,26 @@ import antgame.core.AntBrain;
 import antgame.core.AntColour;
 import antgame.core.BrainState;
 import antgame.core.Cell;
+import antgame.core.Map;
+import antgame.core.World;
+import antgame.core.WorldStats;
 
 public class WorldTest {
 
+	
 	static Ant ant1;
 	static Ant ant2;
 
-
+	
 	private static String workingDir = System.getProperty("user.dir");
+	
+	World w1 = new World(workingDir+"\\files\\workingworld.world",workingDir+"\\files\\cleverbrain1.brain",workingDir+"\\files\\cleverbrain2.brain");
+	private Map theMap = w1.getMap();
 	private static BrainState bs = new BrainState();
+	private WorldStats stats = w1.getStats();
+	private ObserverAntWorld obs = w1.getObserver();
+	private AntColour colour;
 	private static Cell[][] map = new Cell[10][10];
-
 
 	private static AntBrain brain = new AntBrain(workingDir + "\\files\\TestBrainGood.brain",AntColour.RED);
 
@@ -86,13 +99,27 @@ public class WorldTest {
 		}else {
 			fail("No ant in cell");
 		}
-
-
 	}
 
 	@Test
 	public void testGetAntIntArray() {
-		fail("Not yet implemented");
+	
+		int[] coordinates = {2,3};
+		Cell cell = map[coordinates[0]][coordinates[1]];
+
+		if(cell.containsAnt()){
+			assertTrue("Ant is found in cell", cell.containsAnt());
+
+			if (!(cell.getAnt() == ant1)){
+				System.out.println("2");
+				fail("incorrect ant found in cell");
+			}
+		}else {
+			System.out.println("3");
+			fail("No ant in cell");
+		}
+		
+		
 	}
 
 	@Test
@@ -106,7 +133,16 @@ public class WorldTest {
 
 	@Test
 	public void testIsAntAtIntArray() {
-		fail("Not yet implemented");
+		
+		Ant ant7 = new Ant(7, 7, AntColour.RED, bs.getStateId(), map[4][1], brain);
+		map[4][1].antMoveIn(ant7);
+		
+		int[] coordinates = {4,1};
+		Cell cell = map[coordinates[0]][coordinates[1]];
+		
+		assertTrue("Correct ant is in cell", (ant7 ==cell.getAnt()));
+		
+		
 	}
 
 	@Test
@@ -118,6 +154,7 @@ public class WorldTest {
 		ant4.getCurrentPos().addNumFood(3);
 		ant4.getCurrentPos().antMoveOut();
 		
+		
 		assertFalse("Ant still alive", ant4.isAlive());
 		assertTrue("Food correctly added to cell", tempCell.getNumberOfFoodParticles() == numFood + 3);
 		assertTrue("cell correctly dealth with dead ant", !tempCell.containsAnt()&&tempCell.isClear());
@@ -127,27 +164,66 @@ public class WorldTest {
 
 	@Test
 	public void testIsAntSurronded() {
+		
+		
+		
+//		ArrayList<Cell> adjCells = theMap.surrondingCells(ant1.getCurrentPos());
+//		int surrounded = 0;
+//		
+//		for(Cell c:adjCells){
+//			if(c.containsAnt()){
+//				if(AntColour.otherColour(ant1.getColour()) == c.getAnt().getColour()){
+//					surrounded++;
+//				}
+//			}
+//		}
+//		if (5<=surrounded){
+//			
+//	}
+		
+		
+		
+		
 		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testGetMap() {
-		fail("Not yet implemented");
+		assertEquals(theMap, w1.getMap());
 	}
 
 	@Test
 	public void testGetStats() {
-		fail("Not yet implemented");
+		assertEquals(stats, w1.getStats());
 	}
 
 	@Test
 	public void testGetObserver() {
-		fail("Not yet implemented");
+		assertEquals(obs, w1.getObserver());
 	}
 
 	@Test
 	public void testWhoWon() {
-		fail("Not yet implemented");
+		// Red has more food than black
+		for (int i =0; i<=3; i++){
+		stats.incFoodUnitsRedHill();
+		}
+		
+		
+		assertEquals(colour.RED, w1.whoWon());
+		
+		//Equal number of food and ants alive
+		for (int i =0; i<=3; i++){
+			stats.incFoodUnitsBlackHill();
+			}		
+		assertEquals(null, w1.whoWon());
+		
+		//Equal number of food
+		stats.decBlackAlive();
+		assertEquals(colour.RED, w1.whoWon());
+		
+		
+		
 	}
 
 	@Test
