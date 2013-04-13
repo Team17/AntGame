@@ -11,7 +11,7 @@ import controlP5.*;
 
 public class SimulatorView extends PApplet {
 	private Hexagon[][] board;
-	private PImage rock, food, antB, antR, antHR, antHB, clear, scoreboard;
+	private PImage rock, food, antB, antR, antHR, antHB, clear, scoreboard_round,scoreboard_red,scoreboard_black;
 	private int xSize, ySize;
 	private ObserverAntWorld obiwan;
 	private Map curMap;
@@ -27,7 +27,7 @@ public class SimulatorView extends PApplet {
 		smooth();
 		noStroke();
 
-		String workingDir = System.getProperty("user.dir");
+		String workingDir = System.getProperty("");
 		World w1 = new World(workingDir+"\\curFiles\\map.world",workingDir+"\\curFiles\\r.brain",workingDir+"\\curFiles\\b.brain");
 
 		size(800, 700);
@@ -48,8 +48,10 @@ public class SimulatorView extends PApplet {
 		antB = loadImage("blackAnt.png");
 		antR = loadImage("redAnt.png");
 
-		scoreboard = loadImage("scoreboard.png");
-
+		scoreboard_round = loadImage("scoreboard_round.png");
+		scoreboard_red = loadImage("scoreboard_red.png");
+		scoreboard_black = loadImage("scoreboard_black.png");
+		
 		board = new Hexagon[xSize][ySize];
 		Cell cCell;
 		for (int y = 0; y < ySize; y++) {
@@ -159,8 +161,13 @@ public class SimulatorView extends PApplet {
 			obiwan.clearList();
 			round++;
 			
-			image(scoreboard, 0, 0);
+			image(scoreboard_round, 0, width-75);
+			image(scoreboard_red, 0, 0);
+			image(scoreboard_red, 0, width-189);
+			fill(40);
+			rect(0,0,70,width);
 			textAlign(CENTER);
+			fill(255);
 			textFont(f);
 			text(round, width / 2, 75);
 			textAlign(RIGHT);
