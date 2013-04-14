@@ -77,6 +77,23 @@ public class BrainState {
 	private int randomInt;
 
 	/**
+	 * Constructor.  Defaults all fields to null or -1 if they are ints.
+	 */
+	public BrainState() {
+		this.altNextIdState = -1;
+		this.altNextState = null;
+		this.instruction = null;
+		this.leftRight = null;
+		this.marker = null;
+		this.nextIdState = -1;
+		this.nextState = null;
+		this.randomInt = -1;
+		this.senseCondition = null;
+		this.senseDirection = null;
+		this.stateId = -1;
+	}
+	
+	/**
 	 * @return the instruction of the brainstate i.e. Sense Move PickUp.
 	 */
 	public Instruction getInstruction(){
@@ -330,6 +347,16 @@ public class BrainState {
 	 */
 	public void setRandomInt(int randomInt) {
 		this.randomInt = randomInt;
+	}
+	
+	/**
+	 * Sets the Colour of the attached Marker *if* the attached Marker is not null
+	 * @param	colour	Sets the Marker colour if a marker exists
+	 */
+	public void setMarkerColourIfExists(AntColour colour) {
+		if (this.marker != null) {
+			marker.setColour(colour);
+		}
 	}
 
 	/**

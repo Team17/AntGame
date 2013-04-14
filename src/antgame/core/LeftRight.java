@@ -6,5 +6,18 @@ package antgame.core;
  *
  */
 public enum LeftRight {
-	LEFT,RIGHT
+	LEFT,RIGHT;
+	
+	public String toString() {
+		switch (this) {
+			case LEFT:
+				return "Left";
+			case RIGHT:
+				return "Right";
+			default:
+				// Unreachable block
+				return "";
+		}
+	}
+	
 }

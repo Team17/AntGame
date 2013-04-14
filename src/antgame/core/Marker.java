@@ -103,6 +103,14 @@ public class Marker {
 		return color;
 	}
 	
+	/**
+	 * Set the Colour of this Marker
+	 * @param	The Colour of this Marker
+	 */
+	public void setColour(AntColour colour) {
+		this.color = colour;
+	}
+	
 	public static void main(String[] args) throws InvalidMarkerIdException{
 		
 			Marker m1 = new Marker(1,AntColour.RED);
