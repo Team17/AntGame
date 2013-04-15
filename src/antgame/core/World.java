@@ -470,6 +470,16 @@ public class World {
 	public void killAnt(Ant ant) {
 		ant.die();
 		ant.getCurrentPos().addNumFood(3);
+		if (ant.getCurrentPos().containsBlackAntHill()) {
+			stats.decFoodUnitsBlackHill();
+			stats.decFoodUnitsBlackHill();
+			stats.decFoodUnitsBlackHill();
+		}
+		if (ant.getCurrentPos().containsRedAntHill()) {
+			stats.decFoodUnitsRedHill();
+			stats.decFoodUnitsRedHill();
+			stats.decFoodUnitsRedHill();
+		}
 		ant.getCurrentPos().antMoveOut();
 	}
 
