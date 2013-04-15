@@ -65,15 +65,8 @@ public class AntGameTest {
 		try {
 			
 			// Check that all paths actually exist
-			if (!AntGame.PATH.exists()) {
+			if (!AntGame.CONFIG_FILE.exists()) {
 				fail("AntGame.PATH does not exist");
-			}
-			if (!AntGame.PATH_CONFIG.exists()) {
-				fail("AntGame.PATH_CONFIG does not exist");
-			}
-			
-			if (!AntGame.PATH_USER_DIR.exists()) {
-				fail("AntGame.PATH_USER_DIR does not exist");
 			}
 
 			// Check that the CONFIG file loaded

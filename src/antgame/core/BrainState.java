@@ -80,17 +80,17 @@ public class BrainState {
 	 * Constructor.  Defaults all fields to null or -1 if they are ints.
 	 */
 	public BrainState() {
-		this.altNextIdState = (Integer) null;
+		this.altNextIdState = -1;
 		this.altNextState = null;
 		this.instruction = null;
 		this.leftRight = null;
 		this.marker = null;
 		this.nextIdState = -1;
 		this.nextState = null;
-		this.randomInt = (Integer) null;
+		this.randomInt = -1;
 		this.senseCondition = null;
 		this.senseDirection = null;
-		this.stateId = (Integer) null;
+		this.stateId = -1;
 	}
 	
 	/**

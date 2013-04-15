@@ -21,6 +21,11 @@ public class AntBrain {
 	public AntColour colour;
 	
 	/**
+	 * Id of the AntBrain (for testing purposes)
+	 */
+	private int id;
+	
+	/**
 	 * Constructor for an AntBrain
 	 * @param	antLoc	Path to the .brain file from which this AntBrain is to be constructed
 	 * @param	colour	The colour assigned to this AntBrain
@@ -31,6 +36,22 @@ public class AntBrain {
 		AntBrainInterpreterCoryn aBI = new AntBrainInterpreterCoryn();
 		brain = aBI.antBrainGenerator(antLoc, colour);
 		
+	}
+	
+	/**
+	 * Return the Id of the AntBrain
+	 * @return	The Id of the AntBrain
+	 */
+	public int getId() {
+		return id;
+	}
+	
+	/**
+	 * Set the Id of the AntBrain
+	 * @param id	The Id of the AntBrain
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	/**

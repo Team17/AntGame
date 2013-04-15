@@ -277,7 +277,7 @@ public class Cell {
 	 * @return boolean
 	 */
 	public boolean checkAnyMarkerAt(AntColour c){
-		Marker[] _m = new Marker[6];
+		Marker[] _m = new Marker[AntGame.CONFIG.NUM_MARKERS];
 		for (int i = 0; i < _m.length; i++) {
 			try {
 				_m[i] = new Marker(i,c);
@@ -287,7 +287,7 @@ public class Cell {
 			}
 		}	
 		int ptr = 0;	
-		while(ptr<markers.size()){
+		while(ptr < _m.length){
 			if(markers.get(_m[ptr])) {
 				return true;
 			}

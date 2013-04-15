@@ -44,6 +44,23 @@ public class AntGame {
 	public static final AntGameProperties CONFIG = _initCONFIG();
 	
 	/**
+	 * Line break character
+	 */
+	public static final String LINEBREAK = System.getProperty("line.separator");
+	
+	/**
+	 * Returns the number of seconds passed since startTime (from System.nanoTime())
+	 * @param	startTime	The start time (from System.nanoTime());
+	 * @return				The number of seconds passed since startTime
+	 */
+	public static double timeSeconds(long startTime) {
+		long endTime = System.nanoTime();
+		long timePassed = endTime - startTime;
+		Long t = new Long(timePassed);
+		return t.doubleValue() / (1000000000);
+	}
+	
+	/**
 	 * AntGame initialiser
 	 */
 	private static void _init() {
