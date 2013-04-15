@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 
+import antgame.core.AntBrain;
+import antgame.core.AntColour;
 import antgame.core.Cell;
 import antgame.core.Map;
 import antgame.core.World;
@@ -22,6 +24,7 @@ public class MainMenu extends PApplet {
 	controlP5.Button selectRedBrain, selectBlackBrain, selectMap, startButton;
 	private PFont arialMain, arialB;
 	private File redBrain, blackBrain, mapFile;
+	private Map mapMap;
 
 	public void setup() {
 
@@ -172,6 +175,11 @@ public class MainMenu extends PApplet {
 				selectMap.getCaptionLabel().getStyle().setMarginLeft(10);
 				setButtonGreen(selectMap);
 				mapFile = file;
+				mapMap = null;
+				createMap.unlock();
+				setButtonGrey(createMap);
+				createMap.getCaptionLabel().setText("Random Map").getStyle().setMarginLeft(22);
+				
 			} else {
 				selectMap.getCaptionLabel().set("Wrong Map");
 				setButtonRed(selectMap);
@@ -180,6 +188,16 @@ public class MainMenu extends PApplet {
 		}
 	}
 
+	public void createMap(){
+		mapMap = MapCreator.getRandomMap();
+		setButtonGreen(createMap);
+		createMap.getCaptionLabel().setText("Map Generated").getStyle().setMarginLeft(15);
+		createMap.lock();
+		mapFile = null;
+		setButtonGrey(selectMap);
+		checkStart();
+		
+	}
 	public void setButtonRed(controlP5.Button darthMaul) {
 		darthMaul.setColorBackground(color(115, 73, 74))
 				.setColorActive(color(175, 73, 74))
@@ -190,6 +208,12 @@ public class MainMenu extends PApplet {
 		yoda.setColorBackground(color(80, 113, 60))
 				.setColorActive(color(73, 113, 74))
 				.setColorForeground(color(73, 113, 24));
+	}
+	
+	private void setButtonGrey(controlP5.Button darthVader){
+		darthVader.setColorBackground(color(0, 50))
+		.setColorActive(color(0, 200))
+		.setColorForeground(color(0, 150));
 	}
 
 	public String shortText(String toBeShort, int len) {
@@ -207,9 +231,23 @@ public class MainMenu extends PApplet {
 							.getAbsolutePath()) && AntBrainInterpreterCoryn.antBrainChecker(redBrain
 									.getAbsolutePath())){
 				try {
-					new DisplayFrame(mapFile.getAbsolutePath(),redBrain
+					
+					new DisplayFrame(new World(mapFile.getAbsolutePath(),redBrain
 								.getAbsolutePath(),blackBrain
-								.getAbsolutePath());
+								.getAbsolutePath()));
+				} catch (Exception e) {
+
+				}
+			}
+		}else if(mapMap != null && redBrain != null && blackBrain!=null){
+			if(AntBrainInterpreterCoryn.antBrainChecker(blackBrain
+							.getAbsolutePath()) && AntBrainInterpreterCoryn.antBrainChecker(redBrain
+									.getAbsolutePath())){
+				try {
+					
+					new DisplayFrame(new World(mapMap,
+							new AntBrain(redBrain.getAbsolutePath(), AntColour.RED),
+							new AntBrain(blackBrain.getAbsolutePath(), AntColour.BLACK)));
 				} catch (Exception e) {
 
 				}
@@ -227,9 +265,19 @@ public class MainMenu extends PApplet {
 				setButtonGreen(startButton);
 			}
 			else{
-				startButton.setColorBackground(color(115, 73, 73))
-				.setColorActive(color(215, 73, 73))
-				.setColorForeground(color(115, 73, 73)).lock();
+				setButtonRed(startButton);
+				startButton.lock();
+			}
+		}else if(mapMap!= null && redBrain != null && blackBrain!=null){
+			if(	AntBrainInterpreterCoryn.antBrainChecker(blackBrain
+							.getAbsolutePath()) && AntBrainInterpreterCoryn.antBrainChecker(redBrain
+									.getAbsolutePath())){
+				startButton.unlock();
+				setButtonGreen(startButton);
+			}
+			else{
+				setButtonRed(startButton);
+				startButton.lock();
 			}
 		}
 

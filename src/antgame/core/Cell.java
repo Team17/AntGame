@@ -88,7 +88,7 @@ public class Cell {
 	public Cell(int x, int y) {
 		pos[0] = x;
 		pos[1] = y;
-		
+		this.isClear = true;
 		_construct();
 		
 	}

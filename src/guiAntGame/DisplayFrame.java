@@ -3,16 +3,19 @@ package guiAntGame;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
+import antgame.core.World;
+
 
 public class DisplayFrame extends javax.swing.JFrame {
-    public DisplayFrame(String map, String redB, String blackB){
+    public DisplayFrame(World w){
         this.setSize(803, 745); //The window Dimensions
         this.setMinimumSize(getSize());
         
         javax.swing.JPanel panel = new javax.swing.JPanel();
         panel.setLayout(new  BorderLayout());
         SimulatorView sketch = new SimulatorView();
-        sketch.setFiles(map, redB, blackB);
+
+        sketch.setWorld(w);
         panel.add(sketch);
         this.add(panel);
         sketch.init(); //this is the function used to start the execution of the sketch

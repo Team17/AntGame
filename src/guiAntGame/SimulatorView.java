@@ -25,24 +25,19 @@ public class SimulatorView extends PApplet {
 	private boolean didthegamefinallyend = false;
 	private String mapF, redBF, blackBF;
 	
-	public void setFiles(String mapF,String redBF,String blackBF){
-		this.mapF = mapF;
-		this.redBF = redBF;
-		this.blackBF = blackBF;
+	public void setWorld(World w){
+		this.w = w;
 	}
 	
 	public void setup() {
 		smooth();
 		noStroke();
 
-		World w1 = new World(mapF, redBF, blackBF);
-
 		size(800, 700);
 
 		zoomer = new ZoomPan(this);
 		zoomer.allowZoomButton(false);
 
-		this.w = w1;
 		this.obiwan = w.getObserver();
 		curMap = w.getMap();
 		this.xSize = curMap.getXSize();
@@ -105,6 +100,7 @@ public class SimulatorView extends PApplet {
 
 		for (int x = 0; x < xSize; x++) {
 			for (int y = 0; y < ySize; y++) {
+
 				if (x % 2 == 0) {
 					if (!board[x][y].toCompare(clear)) {
 						board[x][y].display(40 * y, x * 35, 40, 47);

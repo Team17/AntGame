@@ -1,9 +1,12 @@
 package guiAntGame;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Observer;
 
 import javax.swing.JFileChooser;
 
+import antgame.core.AntBrain;
 import antgame.core.AntBrainInterpreterCoryn;
 import antgame.core.MapInterpreter;
 import controlP5.ControlP5;
@@ -16,7 +19,7 @@ public class Tournament extends PApplet{
 	controlP5.Button addBrain , selectBrain, selectMap, startButton;
 	private PFont arialMain, arialB;
 	private File mapFile, toBeAdded;
-	private ArrayList<File> listOfBrains;
+	private List<AntBrain> listOfBrains;
 	private Textarea listBrainsArea;
 
 	public void setup() {
@@ -179,16 +182,14 @@ public class Tournament extends PApplet{
 	}
 	
 	public void startButton(){
-//		if(mapFile!= null && redBrain != null && blackBrain!=null){
-//			if((MapInterpreter.mapchecker(mapFile.getAbsolutePath())) && 
-//					AntBrainInterpreterCoryn.antBrainChecker(blackBrain
-//							.getAbsolutePath()) && AntBrainInterpreterCoryn.antBrainChecker(redBrain
-//									.getAbsolutePath())){
-//				new DisplayFrame(mapFile.getAbsolutePath(),redBrain
-//							.getAbsolutePath(),blackBrain
-//							.getAbsolutePath());
-//			}
-//		}
+		if(mapFile !=null){
+			if(listOfBrains.size()>2 && (MapInterpreter.mapchecker(mapFile.getAbsolutePath()))){
+				new antgame.Tournament(listOfBrains, MapInterpreter.MapGenerator(mapFile.getAbsolutePath()), new Observer());
+			}else{
+				setButtonRed(startButton);
+				startButton.setCaptionLabel("ERROR!").lock();
+			}	
+		}
 	}
 	
 
