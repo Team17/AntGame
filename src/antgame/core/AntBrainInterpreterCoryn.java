@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 public class AntBrainInterpreterCoryn {
 	//regexStrings are used for checking the ant brain
-	private final static String regSense = "sense\\s(here|ahead|leftahead|rightahead)\\s[0-9]{1,4}\\s[0-9]{1,4}\\s(friend|foe|friendwithfood|foewithfood|food|rock|marker\\s\\d|foemarker|home|foehome)(|\\s*\\t*;.*)";
+	private final static String regSense = "sense\\s(here|ahead|leftahead|rightahead)\\s[0-9]{1,4}\\s[0-9]{1,4}\\s(friend|foe|friendwithfood|foewithfood|food|rock|marker\\s[0-5]|foemarker|home|foehome)(|\\s*\\t*;.*)";
 	private final static String regMark = "mark\\s(0|1|2|3|4|5)\\s[0-9]{1,4}(|\\s*\\t*;.*)";
 	private final static String regUnMark = "unmark\\s(0|1|2|3|4|5)\\s[0-9]{1,4}(|\\s*\\t*;.*)";
 	private final static String regPickUp = "pickup\\s[0-9]{1,4}\\s[0-9]{1,4}(|\\s*\\t*;.*)";
@@ -444,7 +444,7 @@ public class AntBrainInterpreterCoryn {
 	}
 	public static void corynTest(String loc){
 		String workingDir = System.getProperty("user.dir");
-		System.out.print(loc+"\t");
+		System.out.print(loc+" \t");
 		System.out.println(antBrainChecker(workingDir+"\\files\\"+loc));
 		//System.out.println(loc);
 		
