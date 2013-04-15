@@ -92,6 +92,26 @@ public class AntGameProperties extends Properties {
 	public final int MAX_TOURANAMENT_BRAINS;
 	
 	/**
+	 * The score awarded to an AntBrain that won a Game
+	 */
+	public final int SCORE_FOR_WIN;
+	
+	/**
+	 * The score awarded to an AntBrain that drew a Game
+	 */
+	public final int SCORE_FOR_DRAW;
+	
+	/**
+	 * The score awarded to an AntBrain that LOST THE GAME
+	 */
+	public final int SCORE_FOR_LOSS;
+	
+	/**
+	 * The initial total score of every AntBrain at the beginning of a Tournament
+	 */
+	public final int INITIAL_TOURNAMENT_SCORE;
+	
+	/**
 	 * Constructor
 	 * @param	antGame	The AntGame object that is creating this AntGameProperties object
 	 * @throws Exception
@@ -114,6 +134,10 @@ public class AntGameProperties extends Properties {
 		USER_PREFS_DIR = new File(AntGame.APP_DATA_DIR + "\\" + this.getAntGameProperty("userPrefsDir"));
 		MIN_TOURANAMENT_BRAINS = Integer.parseInt(this.getAntGameProperty("minTournamentBrains"));
 		MAX_TOURANAMENT_BRAINS = Integer.parseInt(this.getAntGameProperty("maxTournamentBrains"));
+		SCORE_FOR_WIN = Integer.parseInt(this.getAntGameProperty("scoreForWin"));
+		SCORE_FOR_DRAW = Integer.parseInt(this.getAntGameProperty("scoreForDraw"));
+		SCORE_FOR_LOSS = Integer.parseInt(this.getAntGameProperty("scoreForLoss"));
+		INITIAL_TOURNAMENT_SCORE = Integer.parseInt(this.getAntGameProperty("initialTournamentScore"));
 	}
 
 	/**

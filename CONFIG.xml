@@ -15,4 +15,8 @@
 	<entry key="userPrefsDir">AntGame</entry>
 	<entry key="minTournamentBrains">3</entry>
 	<entry key="maxTournamentBrains">20</entry>
+	<entry key="scoreForWin">2</entry>
+	<entry key="scoreForDraw">1</entry>
+	<entry key="scoreForLoss">0</entry>
+	<entry key="initialTournamentScore">0</entry>
 </properties>
