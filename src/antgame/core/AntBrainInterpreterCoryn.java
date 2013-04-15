@@ -241,7 +241,6 @@ public class AntBrainInterpreterCoryn {
 				
 				//calls the regChecker that checks that the curLine fits one of the regular expressions. if it doesn't legitimate is set to false
 				if(curLine.equals("")){
-					System.out.println("BlankLine");
 				}
 				else if(regChecker(curLine) == false){
 					legit = false;
@@ -258,6 +257,9 @@ public class AntBrainInterpreterCoryn {
 			reader.close();
 			//this set the number of states which has just been found by iterating over all of the lines of the ant brain.
 			stateInt = numStates;
+			if(numStates==0){
+				return false;
+			}
 			BufferedReader reader1 = new BufferedReader(new FileReader(antBrainTextFile));
 
 			String curLine1 = reader1.readLine();
@@ -267,7 +269,6 @@ public class AntBrainInterpreterCoryn {
 				
 				if(!checkvalidstate(curLine1.toLowerCase())){
 					legit = false;
-					System.err.println("state out of bounds");
 				}
 				curLine1 = reader1.readLine();
 			}
@@ -404,7 +405,6 @@ public class AntBrainInterpreterCoryn {
 					return true;
 				
 		}
-		System.out.println(line);
 		return false;
 		
 	
@@ -444,26 +444,24 @@ public class AntBrainInterpreterCoryn {
 	}
 	public static void corynTest(String loc){
 		String workingDir = System.getProperty("user.dir");
+		System.out.print(loc+"\t");
+		System.out.println(antBrainChecker(workingDir+"\\files\\"+loc));
+		//System.out.println(loc);
+		
+	
 		AntBrainInterpreterCoryn abi = new AntBrainInterpreterCoryn();
 		
-		//BrainState[] abibs= abi.antBrainGenerator(workingDir+ "\\files\\" + loc, AntColour.BLACK);
-		//if(abibs.length >0){
-		//	for(BrainState s:abibs){
-		//	System.out.println(loc);
-		//	s.print1();
-		//}}
-		//
-		//	else{
-		//		System.err.println("emptyBrain");
-		//	}
-		System.out.println(antBrainChecker(workingDir+"\\files\\"+loc));
-	}
+		BrainState[] abibs= abi.antBrainGenerator(workingDir+ "\\files\\" + loc, AntColour.BLACK);
+	
+
+		
+		}
+	
 	public static void main(String [] args){
 		corynTest("cleverbrain1.brain");
 		corynTest("cleverbrain2.brain");
 		corynTest("cleverbrain3.brain");
 		corynTest("cleverbrain4.brain");
-		//System.out.println("cleverbrain6:");
 		corynTest("cleverbrain6.brain");
 		corynTest("dumbbrain1.brain");
 		corynTest("emptybrain.brain");
