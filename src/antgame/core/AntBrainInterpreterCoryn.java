@@ -244,7 +244,7 @@ public class AntBrainInterpreterCoryn {
 				}
 				else if(regChecker(curLine) == false){
 					legit = false;
-					System.err.println("error in brain as follows: " +curLine);
+					//System.err.print("error in brain as follows: " +curLine);
 				}
 				else{
 					numStates ++;
