@@ -11,27 +11,28 @@ import java.util.regex.Pattern;
 
 public class AntBrainInterpreterCoryn {
 	//regexStrings are used for checking the ant brain
-	private final static String regSense = "sense\\s(here|ahead|leftahead|rightahead)\\s[0-9]{1,4}\\s[0-9]{1,4}\\s(friend|foe|friendwithfood|foewithfood|food|rock|marker\\s\\d|foemarker|home|foehome)(|\\s;.*)";
-	private final static String regMark = "mark\\s(0|1|2|3|4|5)\\s[0-9]{1,4}(|\\s;.*)";
-	private final static String regUnMark = "unmark\\s(0|1|2|3|4|5)\\s[0-9]{1,4}(|\\s;.*)";
-	private final static String regPickUp = "pickup\\s[0-9]{1,4}\\s[0-9]{1,4}(|\\s;.*)";
-	private final static String regDrop = "drop\\s[0-9]{1,4}(|\\s;.*)";
-	private final static String regTurn = "turn\\s(left|right)\\s[0-9]{1,4}(|\\s;.*)";
-	private final static String regMove = "move\\s[0-9]{1,4}\\s[0-9]{1,4}(|\\s;.*)";
-	private final static String regFlip = "flip\\s[0-9]{1,4}\\s[0-9]{1,4}\\s[0-9]{1,4}(|\\s;.*)";
+	private final static String regSense = "sense\\s(here|ahead|leftahead|rightahead)\\s[0-9]{1,4}\\s[0-9]{1,4}\\s(friend|foe|friendwithfood|foewithfood|food|rock|marker\\s\\d|foemarker|home|foehome)(|\\s*\\t*;.*)";
+	private final static String regMark = "mark\\s(0|1|2|3|4|5)\\s[0-9]{1,4}(|\\s*\\t*;.*)";
+	private final static String regUnMark = "unmark\\s(0|1|2|3|4|5)\\s[0-9]{1,4}(|\\s*\\t*;.*)";
+	private final static String regPickUp = "pickup\\s[0-9]{1,4}\\s[0-9]{1,4}(|\\s*\\t*;.*)";
+	private final static String regDrop = "drop\\s[0-9]{1,4}(|\\s*\\t*;.*)";
+	private final static String regTurn = "turn\\s(left|right)\\s[0-9]{1,4}(|\\s*\\t*;.*)";
+	private final static String regMove = "move\\s[0-9]{1,4}\\s[0-9]{1,4}(|\\s*\\t*;.*)";
+	private final static String regFlip = "flip\\s[0-9]{1,4}\\s[0-9]{1,4}\\s[0-9]{1,4}(|\\s*\\t*;.*)";
 	//the array stores all the string regexpressions
 	private static ArrayList<String> regExpressions = new ArrayList<String>();
 
 	//patterns are used for extracting the relevant information
-	private Pattern pattSense = Pattern.compile("sense\\s(here|ahead|leftahead|rightahead)\\s([0-9]{1,4})\\s([0-9]{1,4})\\s(friend|foe|friendwithfood|foewithfood|food|rock|marker\\s\\d|foemarker|home|foehome)(|\\s;.*)");
-	private Pattern pattMark = Pattern.compile("mark\\s(0|1|2|3|4|5)\\s([0-9]{1,4})(|\\s;.*)");
-	private Pattern pattUnMark = Pattern.compile("unmark\\s(0|1|2|3|4|5)\\s([0-9]{1,4})(|\\s;.*)");
-	private Pattern pattPickUp = Pattern.compile("pickup\\s([0-9]{1,4})\\s([0-9]{1,4})(|\\s;.*)");
-	private	Pattern pattDrop = Pattern.compile("drop\\s([0-9]{1,4})(|\\s;.*)");
-	private	Pattern pattTurn = Pattern.compile("turn\\s(left|right)\\s([0-9]{1,4})(|\\s;.*)");
-	private	Pattern pattMove = Pattern.compile("move\\s([0-9]{1,4})\\s([0-9]{1,4})(|\\s;.*)");
-	private	Pattern pattFlip = Pattern.compile("flip\\s([0-9]{1,4})\\s([0-9]{1,4})\\s([0-9]{1,4})(|\\s;.*)");
+	private static Pattern pattSense = Pattern.compile("sense\\s(here|ahead|leftahead|rightahead)\\s([0-9]{1,4})\\s([0-9]{1,4})\\s(friend|foe|friendwithfood|foewithfood|food|rock|marker\\s\\d|foemarker|home|foehome)(|\\s*\\t*;.*)");
+	private static Pattern pattMark = Pattern.compile("mark\\s(0|1|2|3|4|5)\\s([0-9]{1,4})(|\\s*\\t*;.*)");
+	private static Pattern pattUnMark = Pattern.compile("unmark\\s(0|1|2|3|4|5)\\s([0-9]{1,4})(|\\s*\\t*;.*)");
+	private static Pattern pattPickUp = Pattern.compile("pickup\\s([0-9]{1,4})\\s([0-9]{1,4})(|\\s*\\t*;.*)");
+	private static	Pattern pattDrop = Pattern.compile("drop\\s([0-9]{1,4})(|\\s;.*)");
+	private static	Pattern pattTurn = Pattern.compile("turn\\s(left|right)\\s([0-9]{1,4})(|\\s*\\t*;.*)");
+	private static	Pattern pattMove = Pattern.compile("move\\s([0-9]{1,4})\\s([0-9]{1,4})(|\\s*\\t*;.*)");
+	private static	Pattern pattFlip = Pattern.compile("flip\\s([0-9]{1,4})\\s([0-9]{1,4})\\s([0-9]{1,4})(|\\s*\\t*;.*)");
 
+	
 	//stores the number of states.
 	static int stateInt;
 
@@ -40,14 +41,6 @@ public class AntBrainInterpreterCoryn {
 	 */
 	public AntBrainInterpreterCoryn(){
 
-		regExpressions.add(regSense);
-		regExpressions.add(regMark);
-		regExpressions.add(regUnMark);
-		regExpressions.add(regPickUp);
-		regExpressions.add(regDrop);
-		regExpressions.add(regTurn);
-		regExpressions.add(regMove);
-		regExpressions.add(regFlip);
 
 
 	}
@@ -69,7 +62,8 @@ public class AntBrainInterpreterCoryn {
 				int ptr = 0;
 				String curLineup = reader.readLine();
 				while(curLineup != null){
-					String curLine = curLineup.toLowerCase();									
+					String curLine = curLineup.toLowerCase();	
+					
 					if(curLine.matches(regSense)){
 						BrainState bs =  new BrainState();
 						bs.setInstruction(Instruction.SENSE);
@@ -90,7 +84,7 @@ public class AntBrainInterpreterCoryn {
 							}
 						}
 						states[ptr] = bs;
-
+						ptr++;
 					}
 					else if(curLine.matches(regMark)){
 						BrainState bs =  new BrainState();
@@ -104,7 +98,7 @@ public class AntBrainInterpreterCoryn {
 							bs.setNextIdState(Integer.parseInt(mattMark.group(2)));
 						}
 						states[ptr] = bs;
-
+						ptr++;
 					}
 					else if(curLine.matches(regUnMark)){
 						BrainState bs =  new BrainState();
@@ -118,7 +112,7 @@ public class AntBrainInterpreterCoryn {
 							bs.setNextIdState(Integer.parseInt(mattUnMark.group(2)));
 						}
 						states[ptr] = bs;
-
+						ptr++;
 					}
 					else if(curLine.matches(regPickUp)){
 						BrainState bs =  new BrainState();
@@ -132,7 +126,7 @@ public class AntBrainInterpreterCoryn {
 							bs.setAltNextIdState(Integer.parseInt(mattPickUp.group(2)));
 						}
 						states[ptr] = bs;
-
+						ptr++;
 
 					}
 					else if(curLine.matches(regDrop)){
@@ -146,7 +140,7 @@ public class AntBrainInterpreterCoryn {
 							bs.setNextIdState(Integer.parseInt(mattDrop.group(1)));
 						}
 						states[ptr] = bs;
-
+						ptr++;
 
 					}
 					else if(curLine.matches(regTurn)){
@@ -162,7 +156,7 @@ public class AntBrainInterpreterCoryn {
 							bs.setNextIdState(Integer.parseInt(mattTurn.group(2)));
 						}
 						states[ptr] = bs;
-
+						ptr++;
 
 					}
 					else if(curLine.matches(regMove)){
@@ -178,7 +172,7 @@ public class AntBrainInterpreterCoryn {
 							bs.setAltNextIdState(Integer.parseInt(mattMove.group(2)));
 						}
 						states[ptr] = bs;
-
+						ptr++;
 
 					}
 					else if(curLine.matches(regFlip)){
@@ -194,8 +188,9 @@ public class AntBrainInterpreterCoryn {
 							bs.setAltNextIdState(Integer.parseInt(mattFlip.group(3)));
 						}
 						states[ptr] = bs;
+						ptr++;
 					}
-					ptr++;
+					
 					curLineup = reader.readLine();
 				}
 
@@ -207,19 +202,31 @@ public class AntBrainInterpreterCoryn {
 				e.printStackTrace();
 			}
 			updateBrainStates(states);
-			return states;	
+			return states;
+			
 		}
 		else{
 			return null;
 		}
 	}
 
+	
 	/**
 	 * antBrainChecker checks that an antbrain is legitimate, by checking that each line is an acceptable instruction based on the regex array list.
 	 * @param antBrainTextFile this is the location of the file for the ant brain
 	 * @return true if the ant brain is acceptable false if not.
 	 */
 	public static boolean antBrainChecker(String antBrainTextFile) {
+
+		regExpressions.add(regSense);
+		regExpressions.add(regMark);
+		regExpressions.add(regUnMark);
+		regExpressions.add(regPickUp);
+		regExpressions.add(regDrop);
+		regExpressions.add(regTurn);
+		regExpressions.add(regMove);
+		regExpressions.add(regFlip);
+		
 		boolean legit = false;
 		//counter for the number of states
 		int numStates = 0;
@@ -228,19 +235,44 @@ public class AntBrainInterpreterCoryn {
 			BufferedReader reader = new BufferedReader(new FileReader(antBrainTextFile));
 
 			String curLine = reader.readLine();
+			
 			while(curLine != null && legit)
 			{
+				
 				//calls the regChecker that checks that the curLine fits one of the regular expressions. if it doesn't legitimate is set to false
-				if(regChecker(curLine) == false){
-					legit = false;
+				if(curLine.equals("")){
+					System.out.println("BlankLine");
 				}
-				numStates ++;
+				else if(regChecker(curLine) == false){
+					legit = false;
+					System.err.println("error in brain as follows: " +curLine);
+				}
+				else{
+					numStates ++;
+				}
+				
+				
 				curLine = reader.readLine();
 			}
 			
 			reader.close();
 			//this set the number of states which has just been found by iterating over all of the lines of the ant brain.
 			stateInt = numStates;
+			BufferedReader reader1 = new BufferedReader(new FileReader(antBrainTextFile));
+
+			String curLine1 = reader1.readLine();
+			while(curLine1 != null && legit)
+			{
+				
+				
+				if(!checkvalidstate(curLine1.toLowerCase())){
+					legit = false;
+					System.err.println("state out of bounds");
+				}
+				curLine1 = reader1.readLine();
+			}
+			reader1.close();
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -254,17 +286,129 @@ public class AntBrainInterpreterCoryn {
 		return legit;
 	}
 	
+	
+	
 	/**
 	 * updatebrainstates is used to convert each brainstate next state and alt next state in integers to the brainstates as brainstate objects.
 	 * @param states array of brainstates
 	 */
 	public void updateBrainStates(BrainState[] states){
 		for(BrainState s:states){
-			s.setNextState(states[s.getNextIdState()]);
-			s.setAltNextState(states[s.getAltNextIdState()]);
+			if(s.getNextIdState() != -1){
+			//	System.out.println(s.getNextIdState());
+				s.setNextState(states[s.getNextIdState()]);
+			}
+			if(s.getAltNextIdState() != -1){
+			//	System.out.println(s.getAltNextIdState());
+				s.setAltNextState(states[s.getAltNextIdState()]);
+			}
+					
+			
 		}
 	}
 	
+	public static boolean checkvalidstate(String line){
+		if(line.matches(regSense)){
+			Matcher mattSense = pattSense.matcher(line);
+			if (mattSense.find())
+			{
+				if(Integer.parseInt(mattSense.group(2))<stateInt && Integer.parseInt(mattSense.group(3))<stateInt){
+					return true;
+				}
+				
+			}
+		}
+			
+			
+		
+		else if(line.matches(regMark)){
+			Matcher mattMark = pattMark.matcher(line);
+			if (mattMark.find())
+			{
+				if(Integer.parseInt(mattMark.group(2))<stateInt){
+					return true;
+				}
+				
+				
+			}
+			
+		}
+		else if(line.matches(regUnMark)){
+		
+
+			Matcher mattUnMark = pattUnMark.matcher(line);
+			if (mattUnMark.find())
+			{
+				if(Integer.parseInt(mattUnMark.group(2))<stateInt){
+					return true;
+				}
+			
+			}
+		}
+		else if(line.matches(regPickUp)){
+
+			Matcher mattPickUp = pattPickUp.matcher(line);
+			if (mattPickUp.find())
+			{
+				if(Integer.parseInt(mattPickUp.group(1))<stateInt && Integer.parseInt(mattPickUp.group(2))<stateInt){
+					return true;
+				}
+			}
+			
+
+		}
+		else if(line.matches(regDrop)){
+			Matcher mattDrop = pattDrop.matcher(line);
+			if (mattDrop.find())
+			{
+				if(Integer.parseInt(mattDrop.group(1))<stateInt){
+					return true;
+				}
+			}
+			
+
+		}
+		else if(line.matches(regTurn)){
+			Matcher mattTurn = pattTurn.matcher(line);
+			if (mattTurn.find())
+			{
+				if(Integer.parseInt(mattTurn.group(2))<stateInt){
+					return true;
+				}
+			}
+			
+
+		}
+		else if(line.matches(regMove)){
+			Matcher mattMove = pattMove.matcher(line);
+			if (mattMove.find())
+			{
+				if(Integer.parseInt(mattMove.group(1))<stateInt && Integer.parseInt(mattMove.group(2))<stateInt){
+					return true;
+				}
+			}
+
+		}
+		else if(line.matches(regFlip)){
+
+			Matcher mattFlip = pattFlip.matcher(line);
+			if (mattFlip.find())
+			{
+				if(Integer.parseInt(mattFlip.group(2))<stateInt && Integer.parseInt(mattFlip.group(3))<stateInt){
+					return true;
+				}
+			}
+		}
+		else if(line.equals("")){
+
+					return true;
+				
+		}
+		System.out.println(line);
+		return false;
+		
+	
+	}
 	public boolean isInteger(String input) {
 		try {
 			Integer.parseInt(input);
@@ -297,5 +441,35 @@ public class AntBrainInterpreterCoryn {
 	public static ArrayList<String> getRegExpressions() {
 		
 		return regExpressions;
+	}
+	public static void corynTest(String loc){
+		String workingDir = System.getProperty("user.dir");
+		AntBrainInterpreterCoryn abi = new AntBrainInterpreterCoryn();
+		
+		//BrainState[] abibs= abi.antBrainGenerator(workingDir+ "\\files\\" + loc, AntColour.BLACK);
+		//if(abibs.length >0){
+		//	for(BrainState s:abibs){
+		//	System.out.println(loc);
+		//	s.print1();
+		//}}
+		//
+		//	else{
+		//		System.err.println("emptyBrain");
+		//	}
+		System.out.println(antBrainChecker(workingDir+"\\files\\"+loc));
+	}
+	public static void main(String [] args){
+		corynTest("cleverbrain1.brain");
+		corynTest("cleverbrain2.brain");
+		corynTest("cleverbrain3.brain");
+		corynTest("cleverbrain4.brain");
+		//System.out.println("cleverbrain6:");
+		corynTest("cleverbrain6.brain");
+		corynTest("dumbbrain1.brain");
+		corynTest("emptybrain.brain");
+		corynTest("horseshoe.brain");
+		corynTest("sampleant.brain");
+		corynTest("snakebrain.brain");
+		
 	}
 }
