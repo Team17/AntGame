@@ -13,8 +13,10 @@
 
 	<!-- Define the classpath which includes the junit.jar and the classes after compiling-->
 	<path id="junit.class.path">
-		<pathelement location="${lib.dir}/junit.jar" />
-		<pathelement location="${lib.dir}/org.hamcrest.core.jar" />
+		<pathelement location="${lib.dir}" />
+		<fileset dir="${lib.dir}">
+			<include name="*.jar" />
+		</fileset>
 		<pathelement location="${build.dir}" />
 	</path>
 
