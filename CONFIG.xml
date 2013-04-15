@@ -19,4 +19,5 @@
 	<entry key="scoreForDraw">1</entry>
 	<entry key="scoreForLoss">0</entry>
 	<entry key="initialTournamentScore">0</entry>
+	<entry key="defaultEncoding">UTF-8</entry>
 </properties>

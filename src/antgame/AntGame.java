@@ -14,6 +14,11 @@ import java.util.Properties;
  */
 public class AntGame {
 	
+	/**
+	 * Global DEBUG flag to allow specific behaviour when running in debug mode
+	 */
+	public static final boolean DEBUG = true;
+	
 	// Core paths
 	
 	/**
@@ -101,6 +106,16 @@ public class AntGame {
 	private static void setUpUser() {
 		CONFIG.USER_PREFS_DIR.mkdirs();
 		// TODO: Generate user preferences file
+	}
+	
+	/**
+	 * Prints a string to the console if running in debug mode
+	 * @param	s	The string to print to the console
+	 */
+	public static void debug(String s) {
+		if (DEBUG) {
+			System.out.println(s);
+		}
 	}
 	
 	/**

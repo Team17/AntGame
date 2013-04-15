@@ -112,6 +112,11 @@ public class AntGameProperties extends Properties {
 	public final int INITIAL_TOURNAMENT_SCORE;
 	
 	/**
+	 * The default encoding used for Strings
+	 */
+	public final String DEFAULT_ENCODING;
+	
+	/**
 	 * Constructor
 	 * @param	antGame	The AntGame object that is creating this AntGameProperties object
 	 * @throws Exception
@@ -138,6 +143,7 @@ public class AntGameProperties extends Properties {
 		SCORE_FOR_DRAW = Integer.parseInt(this.getAntGameProperty("scoreForDraw"));
 		SCORE_FOR_LOSS = Integer.parseInt(this.getAntGameProperty("scoreForLoss"));
 		INITIAL_TOURNAMENT_SCORE = Integer.parseInt(this.getAntGameProperty("initialTournamentScore"));
+		DEFAULT_ENCODING = this.getAntGameProperty("defaultEncoding");
 	}
 
 	/**
