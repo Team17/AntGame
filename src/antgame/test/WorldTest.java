@@ -165,26 +165,20 @@ public class WorldTest {
 	@Test
 	public void testIsAntSurronded() {
 		
-		
-		
-//		ArrayList<Cell> adjCells = theMap.surrondingCells(ant1.getCurrentPos());
-//		int surrounded = 0;
-//		
-//		for(Cell c:adjCells){
-//			if(c.containsAnt()){
-//				if(AntColour.otherColour(ant1.getColour()) == c.getAnt().getColour()){
-//					surrounded++;
-//				}
-//			}
-//		}
-//		if (5<=surrounded){
-//			
-//	}
-		
-		
-		
-		
-		fail("Not yet implemented");
+		Ant lAnt1 = new Ant(1, 1, AntColour.BLACK, bs.getStateId(), map[2][3], brain);
+		Ant lAnt2 = new Ant(1, 1, AntColour.RED, bs.getStateId(), map[2][3], brain);
+		Ant lAnt3 = new Ant(1, 1, AntColour.RED, bs.getStateId(), map[2][3], brain);
+		Ant lAnt4 = new Ant(1, 1, AntColour.RED, bs.getStateId(), map[2][3], brain);
+		Ant lAnt5 = new Ant(1, 1, AntColour.RED, bs.getStateId(), map[2][3], brain);
+		Ant lAnt6 = new Ant(1, 1, AntColour.RED, bs.getStateId(), map[2][3], brain);
+
+		w1.getMap().getCell(20, 20).antMoveIn(lAnt1);
+		w1.getMap().getCell(21, 20).antMoveIn(lAnt2);
+		w1.getMap().getCell(21, 19).antMoveIn(lAnt3);
+		w1.getMap().getCell(20, 19).antMoveIn(lAnt4);
+		w1.getMap().getCell(20, 21).antMoveIn(lAnt5);
+		w1.getMap().getCell(19, 20).antMoveIn(lAnt6);
+
 	}
 
 	@Test
