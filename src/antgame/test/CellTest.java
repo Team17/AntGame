@@ -110,7 +110,8 @@ public class CellTest {
 
 	@Test
 	public void testContainsBlackAnt() {
-		fail("Not yet implemented");
+		cell.antMoveIn(new Ant(1, 1, AntColour.RED, 1, null, null));
+		assertTrue(cell.containsRedAnt());
 	}
 
 	@Test
