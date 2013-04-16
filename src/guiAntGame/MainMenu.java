@@ -167,13 +167,17 @@ public class MainMenu extends PApplet {
 
 	public void selectMap() {
 		JFileChooser fc = new JFileChooser();
-		;
 		int returnVal = fc.showOpenDialog(null);
 
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			File file = fc.getSelectedFile();
-			
-			if (MapInterpreter.mapchecker(file.getAbsolutePath())) {
+			boolean mapTest = false;
+			try{
+				mapTest =MapInterpreter.mapchecker(file.getAbsolutePath());
+			}catch(Exception e){
+				
+			}
+			if (mapTest) {
 				selectMap.getCaptionLabel().set(shortText(file.getName(), 30));
 				selectMap.getCaptionLabel().getStyle().setMarginLeft(10);
 				setButtonGreen(selectMap);

@@ -39,7 +39,7 @@ public class SimulatorView extends PApplet {
 		size(800, 700);
 
 		zoomer = new ZoomPan(this);
-		zoomer.allowZoomButton(false);
+		zoomer.setZoomMouseButton(PConstants.RIGHT);
 
 		this.obiwan = w.getObserver();
 		curMap = w.getMap();
