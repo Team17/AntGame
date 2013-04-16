@@ -2,8 +2,6 @@ package antgame.test;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-
 import org.junit.Test;
 
 import antgame.core.AntBrainInterpreterCoryn;
@@ -25,7 +23,13 @@ public class AntBrainInterpreterCorynTest {
 	 */
 	@Test
 	public void testAntBrainInterpreterCoryn() {
-		assertNotNull(AntBrainInterpreterCoryn.getRegExpressions());
+		int regexLength; // = AntBrainInterpreterCoryn.getRegExpressionsLength();
+
+		if (AntBrainInterpreterCoryn.getRegExpressions().size() > 0)
+			regexLength = 1;
+		else 
+			regexLength = 0;
+		assertEquals(1, regexLength);
 	}
 
 	/**
@@ -89,7 +93,7 @@ public class AntBrainInterpreterCorynTest {
 	 */
 	@Test
 	public void testRegChecker() {
-		final String regSense = "sense\\s(here|ahead|leftahead|rightahead)\\s[0-9]{1,4}\\s[0-9]{1,4}\\s(friend|foe|friendwithfood|foewithfood|food|rock|marker\\s[0-5]|foemarker|home|foehome)(|\\s*\\t*;.*)";
+		final String regSense = "sense\\s(here|ahead|leftahead|rightahead)\\s[0-9]{1,4}\\s[0-9]{1,4}\\s(friend|foe|friendwithfood|foewithfood|food|rock|marker\\s\\d|foemarker|home|foehome)(|\\s;.*)";
 		final String regWrong = "mark\\s(0|1|2|7|4|5)\\s[0-9]{1,4}(|\\s;.*)"; //replace 7 with 3 for this to work
 
 		assertTrue(AntBrainInterpreterCoryn.getRegExpressions().contains(regSense));

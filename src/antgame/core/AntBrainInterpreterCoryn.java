@@ -436,7 +436,7 @@ public class AntBrainInterpreterCoryn {
 	/**
 	 * returns the length of the array with the regular expressions
 	 * used in testing to see if the class constructor is adding all the regex to the array
-	 * @return ArrayList<String>
+	 * @return int
 	 */
 	public static ArrayList<String> getRegExpressions() {
 		
