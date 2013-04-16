@@ -475,6 +475,20 @@ public class Cell {
 	}
 	
 	/**
+	 * Set coordinates of a cell
+	 * Used for testing purposes
+	 * @param x int
+	 * @param y int
+	 */
+	public void setPos(int x, int y){
+		//must have values inside possible values on map
+		if(x >= 0 && y >=0) {
+			pos[0] = x;
+			pos[1] = y;
+		}
+	}
+	
+	/**
 	 * Return the x-position of this Cell
 	 * @return	The x-position of this Cell
 	 */
