@@ -49,25 +49,30 @@ public class CellTest {
 
 	@Test
 	public void testAddFood() {
-		fail("Not yet implemented");
+		assertEquals(0, cell.getNumberOfFoodParticles());
+		cell.addFood();
+		assertEquals(1, cell.getNumberOfFoodParticles());
 	}
 
 	@Test
 	public void testAddNumFood() {
-		assertFalse(cell.isContainsFood());
-		//add food
-		cell.addFood();
-		assertTrue(cell.isContainsFood());
+		cell.addNumFood(0);
+		assertEquals(0, cell.getNumberOfFoodParticles());
+		cell.addNumFood(5);
+		assertEquals(5, cell.getNumberOfFoodParticles());
+		cell.addNumFood(-5);
+		assertEquals(5, cell.getNumberOfFoodParticles());
 	}
 
 	@Test
 	public void testRemoveFood() {
 		//add food
-		cell.addFood();
-		assertTrue(cell.isContainsFood());
+		cell.addNumFood(0);
+		cell.addNumFood(2);
+		assertEquals(2, cell.getNumberOfFoodParticles());
 		//remove food
 		cell.removeFood();
-		assertFalse(cell.isContainsFood());
+		assertEquals(1, cell.getNumberOfFoodParticles());
 	}
 
 	@Test
@@ -165,11 +170,6 @@ public class CellTest {
 
 	@Test
 	public void testContainsBlackAntHill() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testMain() {
 		fail("Not yet implemented");
 	}
 

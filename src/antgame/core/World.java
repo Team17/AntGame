@@ -24,6 +24,10 @@ public class World {
 
 	// Observer which stores which cells to update in the SimulatorView
 	private ObserverAntWorld obiwan;
+	
+	//the number of food particles to be added when an ant dies
+	//I couldn't came up with a better name, sorry
+	private static final int threeFood = 3;
 
 	/**
 	 * Constructor
@@ -469,7 +473,7 @@ public class World {
 	 */
 	public void killAnt(Ant ant) {
 		ant.die();
-		ant.getCurrentPos().addNumFood(3);
+		ant.getCurrentPos().addNumFood(threeFood);
 		if (ant.getCurrentPos().containsBlackAntHill()) {
 			stats.decFoodUnitsBlackHill();
 			stats.decFoodUnitsBlackHill();
