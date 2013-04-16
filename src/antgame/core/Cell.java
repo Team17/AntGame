@@ -129,8 +129,11 @@ public class Cell {
 	 * @param	food	The total number of food particles this Cell is to contain
 	 */
 	public void setFood(int food) {
-		numberOfFoodParticles = food;
-		containsFood = true;
+		if(food>=0){
+			numberOfFoodParticles = food;
+			containsFood = true;
+		}
+		
 	}
 	
 	/**
@@ -221,8 +224,11 @@ public class Cell {
 	 * @param n the number of food particles that is being added.
 	 */
 	public void addNumFood(int n){
-		numberOfFoodParticles = numberOfFoodParticles + n;
-		containsFood = true;
+		if(n>=0){
+			numberOfFoodParticles = numberOfFoodParticles + n;
+			containsFood = true;
+		}
+		
 	}
 
 	/**
