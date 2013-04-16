@@ -274,10 +274,12 @@ public class Game {
 	 * Run the Game to completion
 	 */
 	public void run() {
+		AntGame.debug("Running game..." + getId());
 		while (hasNext()) {
 			nextRound();
 		}
 		isFinished();
+		AntGame.debug("Game " + getId() + " complete");
 	}
 	
 	public static void main(String[] args) {

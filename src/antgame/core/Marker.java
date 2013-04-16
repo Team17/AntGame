@@ -11,7 +11,7 @@ import antgame.AntGame;
  * @author Alex
  *
  */
-public class Marker {
+public class Marker implements Cloneable {
 
 	/**
 	 * An integer Id for this particular marker
@@ -43,6 +43,19 @@ public class Marker {
 		return result;
 	}
 
+	@Override
+	public Marker clone() {
+		Marker clone;
+		try {
+			clone = (Marker) super.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			clone = null;
+		}
+		return clone;
+	}
+	
 	/** Two markers are considered equal if their Ids and AntColors match
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */

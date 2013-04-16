@@ -117,6 +117,11 @@ public class AntGameProperties extends Properties {
 	public final String DEFAULT_ENCODING;
 	
 	/**
+	 * The maximum value of the random number that can be used in an AntBrain "flip" function
+	 */
+	public final int FLIP_MAX;
+	
+	/**
 	 * Constructor
 	 * @param	antGame	The AntGame object that is creating this AntGameProperties object
 	 * @throws Exception
@@ -144,6 +149,7 @@ public class AntGameProperties extends Properties {
 		SCORE_FOR_LOSS = Integer.parseInt(this.getAntGameProperty("scoreForLoss"));
 		INITIAL_TOURNAMENT_SCORE = Integer.parseInt(this.getAntGameProperty("initialTournamentScore"));
 		DEFAULT_ENCODING = this.getAntGameProperty("defaultEncoding");
+		FLIP_MAX = Integer.parseInt(this.getAntGameProperty("flipMax"));
 	}
 
 	/**

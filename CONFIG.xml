@@ -20,4 +20,5 @@
 	<entry key="scoreForLoss">0</entry>
 	<entry key="initialTournamentScore">0</entry>
 	<entry key="defaultEncoding">UTF-8</entry>
+	<entry key="flipMax">10000</entry>
 </properties>
