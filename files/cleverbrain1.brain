@@ -1,9 +1,9 @@
-sense here 32 1 home
-sense here 3 2 marker 4
-sense here 8 3 marker 5
-flip 10 5 4
-move 1 5
-flip 2 6 7
+sense here 32 1 home    
+sense here 3 2 marker 4			
+sense here 8 3 marker 5				
+flip 10 5 4    
+move 1 5			
+flip 2 6 7  	
 turn left 1
 turn right 1
 sense ahead 9 10 marker 4

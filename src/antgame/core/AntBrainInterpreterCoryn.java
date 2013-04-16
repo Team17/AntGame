@@ -11,26 +11,26 @@ import java.util.regex.Pattern;
 
 public class AntBrainInterpreterCoryn {
 	//regexStrings are used for checking the ant brain
-	private final static String regSense = "sense\\s(here|ahead|leftahead|rightahead)\\s[0-9]{1,4}\\s[0-9]{1,4}\\s(friend|foe|friendwithfood|foewithfood|food|rock|marker\\s[0-5]|foemarker|home|foehome)(|\\s*\\t*;.*)";
-	private final static String regMark = "mark\\s(0|1|2|3|4|5)\\s[0-9]{1,4}(|\\s*\\t*;.*)";
-	private final static String regUnMark = "unmark\\s(0|1|2|3|4|5)\\s[0-9]{1,4}(|\\s*\\t*;.*)";
-	private final static String regPickUp = "pickup\\s[0-9]{1,4}\\s[0-9]{1,4}(|\\s*\\t*;.*)";
-	private final static String regDrop = "drop\\s[0-9]{1,4}(|\\s*\\t*;.*)";
-	private final static String regTurn = "turn\\s(left|right)\\s[0-9]{1,4}(|\\s*\\t*;.*)";
-	private final static String regMove = "move\\s[0-9]{1,4}\\s[0-9]{1,4}(|\\s*\\t*;.*)";
-	private final static String regFlip = "flip\\s[0-9]{1,4}\\s[0-9]{1,4}\\s[0-9]{1,4}(|\\s*\\t*;.*)";
+	private final static String regSense = "sense\\s(here|ahead|leftahead|rightahead)\\s[0-9]{1,4}\\s[0-9]{1,4}\\s(friend|foe|friendwithfood|foewithfood|food|rock|marker\\s[0-5]|foemarker|home|foehome)(\\s*\\t*|\\s*\\t*;.*)";
+	private final static String regMark = "mark\\s(0|1|2|3|4|5)\\s[0-9]{1,4}(\\s*\\t*|\\s*\\t*;.*)";
+	private final static String regUnMark = "unmark\\s(0|1|2|3|4|5)\\s[0-9]{1,4}(\\s*\\t*|\\s*\\t*;.*)";
+	private final static String regPickUp = "pickup\\s[0-9]{1,4}\\s[0-9]{1,4}(\\s*\\t*|\\s*\\t*;.*)";
+	private final static String regDrop = "drop\\s[0-9]{1,4}(\\s*\\t*|\\s*\\t*;.*)";
+	private final static String regTurn = "turn\\s(left|right)\\s[0-9]{1,4}(\\s*\\t*|\\s*\\t*;.*)";
+	private final static String regMove = "move\\s[0-9]{1,4}\\s[0-9]{1,4}(\\s*\\t*|\\s*\\t*;.*)";
+	private final static String regFlip = "flip\\s[0-9]{1,4}\\s[0-9]{1,4}\\s[0-9]{1,4}(\\s*\\t*|\\s*\\t*;.*)";
 	//the array stores all the string regexpressions
 	private static ArrayList<String> regExpressions = new ArrayList<String>();
 
 	//patterns are used for extracting the relevant information
-	private static Pattern pattSense = Pattern.compile("sense\\s(here|ahead|leftahead|rightahead)\\s([0-9]{1,4})\\s([0-9]{1,4})\\s(friend|foe|friendwithfood|foewithfood|food|rock|marker\\s\\d|foemarker|home|foehome)(|\\s*\\t*;.*)");
-	private static Pattern pattMark = Pattern.compile("mark\\s(0|1|2|3|4|5)\\s([0-9]{1,4})(|\\s*\\t*;.*)");
-	private static Pattern pattUnMark = Pattern.compile("unmark\\s(0|1|2|3|4|5)\\s([0-9]{1,4})(|\\s*\\t*;.*)");
-	private static Pattern pattPickUp = Pattern.compile("pickup\\s([0-9]{1,4})\\s([0-9]{1,4})(|\\s*\\t*;.*)");
-	private static	Pattern pattDrop = Pattern.compile("drop\\s([0-9]{1,4})(|\\s;.*)");
-	private static	Pattern pattTurn = Pattern.compile("turn\\s(left|right)\\s([0-9]{1,4})(|\\s*\\t*;.*)");
-	private static	Pattern pattMove = Pattern.compile("move\\s([0-9]{1,4})\\s([0-9]{1,4})(|\\s*\\t*;.*)");
-	private static	Pattern pattFlip = Pattern.compile("flip\\s([0-9]{1,4})\\s([0-9]{1,4})\\s([0-9]{1,4})(|\\s*\\t*;.*)");
+	private static Pattern pattSense = Pattern.compile("sense\\s(here|ahead|leftahead|rightahead)\\s([0-9]{1,4})\\s([0-9]{1,4})\\s(friend|foe|friendwithfood|foewithfood|food|rock|marker\\s\\d|foemarker|home|foehome)(\\s*\\t*|\\s*\\t*;.*)");
+	private static Pattern pattMark = Pattern.compile("mark\\s(0|1|2|3|4|5)\\s([0-9]{1,4})(\\s*\\t*|\\s*\\t*;.*)");
+	private static Pattern pattUnMark = Pattern.compile("unmark\\s(0|1|2|3|4|5)\\s([0-9]{1,4})(\\s*\\t*|\\s*\\t*;.*)");
+	private static Pattern pattPickUp = Pattern.compile("pickup\\s([0-9]{1,4})\\s([0-9]{1,4})(\\s*\\t*|\\s*\\t*;.*)");
+	private static	Pattern pattDrop = Pattern.compile("drop\\s([0-9]{1,4})(\\s*\\t*|\\s*\\t*;.*)");
+	private static	Pattern pattTurn = Pattern.compile("turn\\s(left|right)\\s([0-9]{1,4})(\\s*\\t*|\\s*\\t*;.*)");
+	private static	Pattern pattMove = Pattern.compile("move\\s([0-9]{1,4})\\s([0-9]{1,4})(\\s*\\t*|\\s*\\t*;.*)");
+	private static	Pattern pattFlip = Pattern.compile("flip\\s([0-9]{1,4})\\s([0-9]{1,4})\\s([0-9]{1,4})(\\s*\\t*|\\s*\\t*;.*)");
 
 	
 	//stores the number of states.
@@ -467,7 +467,7 @@ public class AntBrainInterpreterCoryn {
 		corynTest("emptybrain.brain");
 		corynTest("horseshoe.brain");
 		corynTest("sampleant.brain");
-		corynTest("snakebrain.brain");
+	//	corynTest("dumbTestBrain.brain");
 		
 	}
 }
