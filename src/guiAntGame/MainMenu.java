@@ -202,16 +202,17 @@ public class MainMenu extends PApplet {
 		createMap.lock();
 		mapFile = null;
 		setButtonGrey(selectMap);
-		checkStart();
-		
+		selectMap.getCaptionLabel().setText("Select Map").getStyle()
+		.setMarginLeft(190);
+		checkStart();		
 	}
-	public void setButtonRed(controlP5.Button darthMaul) {
+	private void setButtonRed(controlP5.Button darthMaul) {
 		darthMaul.setColorBackground(color(115, 73, 74))
 				.setColorActive(color(175, 73, 74))
 				.setColorForeground(color(215, 73, 74));
 	}
 
-	public void setButtonGreen(controlP5.Button yoda) {
+	private void setButtonGreen(controlP5.Button yoda) {
 		yoda.setColorBackground(color(80, 113, 60))
 				.setColorActive(color(73, 113, 74))
 				.setColorForeground(color(73, 113, 24));
@@ -223,7 +224,7 @@ public class MainMenu extends PApplet {
 		.setColorForeground(color(0, 150));
 	}
 
-	public String shortText(String toBeShort, int len) {
+	private String shortText(String toBeShort, int len) {
 		if (toBeShort.length() > len) {
 			return toBeShort.substring(0, len);
 		} else {
