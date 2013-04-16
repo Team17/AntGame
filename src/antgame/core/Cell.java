@@ -1,8 +1,6 @@
 package antgame.core;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-
 import antgame.AntGame;
 import antgame.InvalidMarkerIdException;
 

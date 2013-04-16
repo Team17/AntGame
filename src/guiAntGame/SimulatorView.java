@@ -10,6 +10,10 @@ import org.gicentre.utils.move.*;
 import controlP5.*;
 
 public class SimulatorView extends PApplet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Hexagon[][] board;
 	private PImage rock, food, antB, antR, antHR, antHB, clear,
 			scoreboard_round, scoreboard_red, scoreboard_black;
@@ -23,7 +27,6 @@ public class SimulatorView extends PApplet {
 	private ControlP5 cp5;
 	private float frameRateInt = 60;
 	private boolean didthegamefinallyend = false;
-	private String mapF, redBF, blackBF;
 	
 	public void setWorld(World w){
 		this.w = w;

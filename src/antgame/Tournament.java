@@ -62,7 +62,7 @@ public class Tournament extends Observable implements Observer {
 	 * @param	brains	A List of Brains to play in the Tournament
 	 * @param	map		The Map on which the Tournament is to be played
 	 */
-	public Tournament(List<AntBrain> brains, Map map, Observer observer) {
+	public Tournament(List<AntBrain> brains, Map map) {
 		
 		// Brain list underflow check
 		if ( brains.size() < AntGame.CONFIG.MIN_TOURANAMENT_BRAINS ) {
@@ -79,8 +79,8 @@ public class Tournament extends Observable implements Observer {
 			_brains[i] = brains.get(i);
 		}
 		
-		// Go for construction
-		addObserver(observer);
+//		// Go for construction
+//		addObserver(observer);
 		this.brains = _brains;
 		this.map = map;
 		this.gamesPlayed = 0;

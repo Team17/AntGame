@@ -1,13 +1,17 @@
 package guiAntGame;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Observer;
 
 import javax.swing.JFileChooser;
 
 import antgame.core.AntBrain;
 import antgame.core.AntBrainInterpreterCoryn;
+import antgame.core.AntColour;
 import antgame.core.MapInterpreter;
 import controlP5.ControlP5;
 import controlP5.Group;
@@ -19,7 +23,7 @@ public class Tournament extends PApplet{
 	controlP5.Button addBrain , selectBrain, selectMap, startButton;
 	private PFont arialMain, arialB;
 	private File mapFile, toBeAdded;
-	private List<AntBrain> listOfBrains;
+	private ArrayList<File> listOfBrains;
 	private Textarea listBrainsArea;
 
 	public void setup() {
@@ -184,8 +188,24 @@ public class Tournament extends PApplet{
 	public void startButton(){
 		if(mapFile !=null){
 			if(listOfBrains.size()>2 && (MapInterpreter.mapchecker(mapFile.getAbsolutePath()))){
-				new antgame.Tournament(listOfBrains, MapInterpreter.MapGenerator(mapFile.getAbsolutePath()), new Observer());
-			}else{
+				
+				List<AntBrain> a = new ArrayList<AntBrain>();
+				for(int i=0;i<listOfBrains.size();i++){
+					a.add(new AntBrain(listOfBrains.get(i).getAbsolutePath(), AntColour.RED));
+				}
+				antgame.Tournament z = new antgame.Tournament(a, MapInterpreter.MapGenerator(mapFile.getAbsolutePath()));
+				z.runTournament();
+				HashMap<AntBrain, Integer> g = z.getAllScores();
+				
+				for (Entry<AntBrain, Integer> entry : g.entrySet()) {
+			        AntBrain key = entry.getKey();
+			        Integer value = entry.getValue();
+			        System.out.println(key + " : " + value);
+			    }
+				
+				System.out.println("Fin.");
+				
+				}else{
 				setButtonRed(startButton);
 				startButton.setCaptionLabel("ERROR!").lock();
 			}	

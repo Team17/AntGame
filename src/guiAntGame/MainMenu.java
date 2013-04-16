@@ -1,6 +1,9 @@
 package guiAntGame;
 
+import java.awt.Desktop;
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
@@ -282,7 +285,15 @@ public class MainMenu extends PApplet {
 		}
 
 	}
-	
+	public void buttonHelp(){
+
+			try {
+				Desktop.getDesktop().open(new File("\\userGuide\\index.html"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+	}
 	public void buttonTournament(){
 		try {
 			new DisplayFrame(1);
