@@ -79,8 +79,7 @@ public class Tournament extends Observable implements Observer {
 			_brains[i] = brains.get(i);
 		}
 		
-//		// Go for construction
-//		addObserver(observer);
+		// Go for construction
 		this.brains = _brains;
 		this.map = map;
 		this.gamesPlayed = 0;
@@ -116,10 +115,12 @@ public class Tournament extends Observable implements Observer {
 				// Push to our Stack of Worlds a game in which brain_1 and brain_2
 				// play each other on our map
 				_games.add(k, new Game(map,brain_1,brain_2) );
+				_games.get(k).setId(k);
 				k++;
 				// Now push one more game where we swap the colours of brain_1 and
 				// brain_2
 				_games.add(k, new Game(map,brain_2,brain_1) );
+				_games.get(k).setId(k);
 				k++;
 			}
 		}
@@ -157,7 +158,7 @@ public class Tournament extends Observable implements Observer {
 	/**
 	 * Runs the whole Tournament using concurrency where possible
 	 */
-	public void runTournament() {
+	public HashMap<AntBrain,Integer> runTournament() {
 		
 		// We'll do this using threads, let's get the number of
 		// processors available
@@ -204,6 +205,10 @@ public class Tournament extends Observable implements Observer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		System.out.println("Here");
+		
+		return scores;
 		
 	}
 	
@@ -280,6 +285,27 @@ public class Tournament extends Observable implements Observer {
 		}
 		
 		// TODO: This is where a notification call is made to the UI layer
+		
+	}
+	
+	public static void main(String[] args) {
+		
+		int NUMBRAINS = 8;
+		
+		ArrayList<AntBrain> antBrains = new ArrayList<AntBrain>();
+		
+		for (int i = 0; i < NUMBRAINS; i++) {
+			antBrains.add(i,AntBrainGenerator.getRandomAntBrain(AntColour.RED));
+		}
+		
+		Map map = MapCreator.getRandomMap();
+		
+		Tournament t = new Tournament(antBrains,map);
+		
+		HashMap<AntBrain,Integer> scores = t.runTournament();
+		
+		System.out.println("All done");
+		
 		
 	}
 
