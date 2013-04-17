@@ -381,7 +381,4 @@ public class BrainState implements Cloneable {
 	public void print1(){
 		System.out.println("StateId: " + this.stateId +"\nInstructons: " + this.instruction + "\nNextiDState: " + this.nextIdState /*+ "\nNextStateptr: " + this.nextState.stateId */+ "\nAltNextidState: "+ this.altNextIdState /*+"\nAltNextState: "+ this.altNextState.stateId */+  "\nSenseDiection: " + this.senseDirection + "\nSenseCondition: " + this.senseCondition + "\nMarker: " + this.marker  +"\nTrun Dir: " + this.leftRight + "\nRandomInt: "+ this.randomInt +"\n");
 	}
-	public void print1(){
-		System.out.println("StateId: " + this.stateId +"\nInstructons: " + this.instruction + "\nNextiDState: " + this.nextIdState /*+ "\nNextStateptr: " + this.nextState.stateId */+ "\nAltNextidState: "+ this.altNextIdState /*+"\nAltNextState: "+ this.altNextState.stateId */+  "\nSenseDiection: " + this.senseDirection + "\nSenseCondition: " + this.senseCondition + "\nMarker: " + this.marker  +"\nTrun Dir: " + this.leftRight + "\nRandomInt: "+ this.randomInt +"\n");
-	}
 }
