@@ -1,6 +1,12 @@
 package antgame;
+import guiAntGame.MainMenu;
+
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 /**
@@ -122,7 +128,22 @@ public class AntGameProperties extends Properties {
 	 * @throws Exception
 	 */
 	public AntGameProperties() throws Exception {
-		loadFromXML(new FileInputStream(AntGame.CONFIG_FILE));
+		File asFile = null;
+	    try {
+	    	   
+	    	Path tmp_1 = Files.createTempDirectory(null);
+		    asFile = tmp_1.toFile();
+		    asFile.deleteOnExit();
+
+	    	InputStream copy_from = MainMenu.class.getResourceAsStream("/CONFIG.xml");
+		    Path copy_to= Paths.get(tmp_1.toString(),"CONFIG.xml");
+		    Files.copy(copy_from, copy_to);
+	    } catch (Exception e) {
+	    System.err.println(e);
+	    }
+		
+		
+		loadFromXML(new FileInputStream(new File(asFile.getAbsoluteFile()+"/CONFIG.xml")));
 		// ** (Optional) Pull individual properties into named constants for easier access **
 		// This is optional as properties are still accessible using the Properties.getProperty(String key) : String method.
 		NUM_MARKERS = Integer.parseInt(this.getAntGameProperty("numAntMarkers"));
