@@ -186,7 +186,7 @@ ul {
 		<p>Welcome! We're glad you're here, We've been waiting for you.
 			Spend a few minutes going through this guide to learn some
 			AntGameSimulator basics. We will introduce you to a number of useful
-			tutorials, such as how to use the simulator how to make your own ant
+			tutorials, such as how to use the simulator and how to make your own ant
 			brain to battle the legendary ant brains.</p>
 
 		<h3>Basics</h3>
@@ -210,13 +210,13 @@ ul {
 			next section.</p>
 		<p>
 			In the middle section, you can see two hexagons, one for the Red team
-			and one for the Black team. In the middle of each Hexagon there are
+			and one for the Black team. In the middle of each hexagon are
 			buttons to select brains for the team. Once you press the select
 			brain button a file picker will launch, pick any file and see what
 			happens. If you picked a non-ant brain file, the button becomes red,
-			indicating the file does not meet the standart ant brain format. If
+			indicating the file does not meet the standard ant brain format. If
 			it is an acceptable format the button will become green. You can see
-			example of both cases in the screenshot below: <br>
+			examples of both cases in the screenshot below: <br>
 			<img src="img/buttons.jpg" class="screenshots"> Now try
 			selecting a valid ant brain (Hint: You can find one in the brains
 			folder provided with the game).
@@ -225,13 +225,13 @@ ul {
 		<p>
 			In the bottom section, there are two buttons, Select Map and Start.
 			Select Map button works in a similar manner as the select brains
-			buttons, it becomes green with the correct map, red with an invalid
-			file. The start button can be activated only when there is a valid
-			map and two valid ant brains. Only then the button becomes green
+			buttons, it becomes green with the correctly formated map, red with an invalid
+			map. The start button can be activated only when there is a valid
+			map and two valid ant brains. Only then does the button becomes green
 			allowing you to start the simulator. Try inserting two valid brains
 			and a valid map and press start to see the simulation. The screenshot
-			below shows how your main menu should look like if you input all
-			valid inputs. <br>
+			below shows how your main menu should look if you input all
+			valid files. <br>
 			<img src="img/ready.jpg" class="screenshots">
 		</p>
 
@@ -242,18 +242,18 @@ ul {
 			Once you press start, another window will pop up with the simulation.
 			To pan around the map left click and move your mouse. To zoom in use
 			your mouse wheel, alternatively you can use right button of the mouse
-			(Warning, very sensative zooming with the mouse). You can also resize
+			(Warning, very sensitive zooming with the mouse). You can also resize
 			the window to increase your view of the world. <img
 				src="img/simulator.jpg" class="screenshots">
 		</p>
 		<p>
 			There are only two controllers in the simulator view, on the left
-			corner. First we have a Speed slider, which lets the user control the
-			frame rate of the simulator, the maximum speed depends on the
+			corner. Firstly we have a Speed slider, which lets the user control the
+			frame rate of the simulation, the maximum speed depends on the
 			hardware in use. Try dragging it to the right, did you notice how
 			much faster everything started moving? End game button, stops the
-			current simulation and process the rest of the simulation without
-			visialazation. This drastically reduces waiting time for the result
+			current simulation and processes the rest of the simulation without
+			visualisation. This drastically reduces waiting time for the result
 			of the simulation. You can not do anything to the window during this
 			process, please wait for the result. Once the simulation is done
 			processing, you will see a results window as shown below. <img
@@ -263,21 +263,21 @@ ul {
 		<h3>Random Map</h3>
 
 		<p>
-			The random map feature allows the user to create a map on fly without
-			need of creating and loading a map Every random map is generated in a
-			manner which fulfills all the map requirements, such as number of
+			The random map feature allows the user to create a map on the fly without
+			needing to create and load a map. Every random map is generated in a
+			manner which fulfils all the map requirements, such as number of
 			food particles per cell and ant hill size (details are covered in the
 			Making a Map Section). <br> <br> To generate a map simply
 			press the Random Map button, when a successful map is created it will
 			become green. If you change your mind, you can still select a map
-			file. The screenshot below shows how screen may look when a map is
+			file. The screenshot below shows how the screen will look when a map is
 			generated. <img src="img/random.jpg" class="screenshots">
 		</p>
 
 		<h3>Tournaments</h3>
 
 		<p>
-			The tournament mode allows you to pit arbitary number of brains
+			The tournament mode allows you to pit an arbitrary number of brains
 			against each other. You need at least three ant brains in order to
 			create a tournament. <br> <br> To create a tournament,
 			simply press the Tournament button in the main menu. A new window
@@ -287,10 +287,10 @@ ul {
 			is a valid brain, the button will become green. Then you can add the
 			brain to the list of brains in the tournament by pressing the add
 			brain. Remember, you need at least 3 ant brains. <br>
-			<br> Selecting the map works in an exactly same way as it does
+			<br> Selecting the map works in exactly the same way as it does
 			in the main menu. You can pick one yourself or generate a random map.
 			<br>
-			<br> Once at least three ant brains are added to the list, and a
+			<br> Once three ant brains or more are added to the list, and a
 			map is selected/generated the start button will become green and
 			allow you to start the tournament.
 		</p>
@@ -299,13 +299,13 @@ ul {
 			and the second black, and once with the first playing black and the
 			second red. A submission gains 2 points for each game it wins, and 1
 			point for each draw. The submission with the most points wins the
-			tournament. If there is nevertheless no clear winner, the tournament
+			tournament. If there is no clear winner, the tournament
 			is repeated with a certain number of finalist submissions.</p>
 
 		<h3>Ant Brain:</h3>
 		<h4>Ant Brain Rules:</h4>
 		<p>Every ant brain has to follow a specific file format. The
-			concrete format of these files is as follows:</p>
+			concrete format of these files are as follows:</p>
 		<div class="list">
 			<ul>
 				<li>Each line in the file represents one state. The first line
@@ -362,7 +362,7 @@ ul {
 		<h4>
 			The 8 Insturctions
 			</h3>
-			<p>There are total of 8 types of instructions and here is their
+			<p>There are a total of 8 types of instructions and here is their
 				breakdown:</p>
 			<p>
 				<span class="command">Sense sensedir st1 st2 cond </span><br>
@@ -417,11 +417,11 @@ ul {
 					using Windows, you can use the default text editor Notepad to
 					create an ant brain. <br> <br> To save the ant brain just
 					save the text file. The ending format of the file does not matter,
-					but for athentics purposes you can change it to .brain <br>
+					but for asthetic purposes you can change it to .brain <br>
 					<br> In the extra folder provided with the simulator, there is
 					an <span class="highlight">antBrain_language.xml </span> file,
 					which you can import into NotePad++ text editor. This will aid you
-					in creating an ant brain, instead of see just plain text, tokens
+					in creating an ant brain, instead of seeing just plain text, tokens
 					are highlighted according to their category as shown below. <img
 						src="img/tokens.jpg" id="logo">
 				</p>
@@ -432,7 +432,7 @@ ul {
 					<p>Now, we know all the rules of making an ant brain and have
 						all the tools, let's make one. We will make an ant brain which
 						randomly walks around until it finds some food, then randomly
-						walks till it reaches home to drop the food and repeat it the
+						walks until it reaches home to drop the food and repeats the
 						whole process again.</p>
 					<div class="list_c">
 						<div class="list_a">
@@ -450,24 +450,24 @@ ul {
 							Let's walk through the ant brain given on the left: <br> <br>
 
 							First, the ant checks if there is food ahead. If there is food,
-							the ant goes to the state 1, esle to the state 2. At the state 1,
+							the ant goes to the state 1, else it goes to state 2. At state 1,
 							the ant tries to move forward, if it can, it goes to the state 2,
-							else back to the state 0. At the state 2, the ant tries to pick
-							up food, if succesful at it the ant goes to the state 8, else to
-							the state 0. <br> <br> States 3 to 7 are responsbile
+							else it goes back to state 0. At state 2, the ant tries to pick
+							up food, if succesful, the ant goes to state 8, else to
+							state 0. <br> <br> States 3 to 7 are responsbile
 							for randomly turning or moving forward the ant. State 3 flips, if
-							the number generated is 0, the ant goes to the state 4 where it
-							turns to the left and goes to the state 0. Else, the ant goes to
-							the state 5, where it flips again to move to the right. If both
+							the number generated is 0, the ant goes to state 4 where it
+							turns to the left and goes to state 0. Else, the ant goes to
+							state 5, where it flips again to move to the right. If both
 							flips fail, the ant tries to move forward. If it cannot move
-							forward, it goes back to the state 3. <br> <br> States
+							forward, it goes back to state 3. <br> <br> States
 							8 to 15 are responsible for getting the ant back to the anthill
-							to drop the food. First, it checks if ahead of the ant is at
+							to drop the food. First, it checks if ahead of the ant is its
 							home, if it is, the ant moves forward and drops the food. If the
 							ant cannot move forward, it goes back to the state 8. If it does
-							move forward, it drops the food, and goes to the state 0. <br>
-							<br> If ahead was not home, the ant goes to the state 11.
-							State 11 to 15 perform same function as the states 3 to 7, just
+							move forward, it drops the food, and goes to state 0. <br>
+							<br> If ahead was not home, the ant goes to state 11.
+							State 11 to 15 perform the same function as the states 3 to 7, just
 							with different state numbers. <br> <br> In an abstract
 							way, states 0 to 7 are responsible for randonly finding food, and
 							once food is picked up the ant goes to the state 8. States 8 to
@@ -509,7 +509,7 @@ ul {
 						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp.&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp        clear cell (containing nothing interesting)<br>
 						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp        red anthill cell<br>
 						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp- &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp        black anthill cell<br>
-						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp1 to 9&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   clear cell containing the given number of food particle<br>
+						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp1 to 9&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   clear cell containing the given number of food particles<br>
 					
 					
 					</p>
