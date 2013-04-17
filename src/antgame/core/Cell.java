@@ -1,8 +1,6 @@
 package antgame.core;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-
 import antgame.AntGame;
 import antgame.InvalidMarkerIdException;
 
@@ -16,7 +14,7 @@ public class Cell {
 	//pos stores the location of the cell in the map, it is represented by an array of size two so pos[0] = pos[x] and pos[1] = pos[y]
 	private int[] pos  = new int[2];
 	//containsFood is a boolean of whether or not the cell contains food
-	private boolean containsFood;
+//	private boolean containsFood;
 	//numberOfFoodParticles is an int value of the amount of food contained in the cell
 	private int numberOfFoodParticles;
 	//containsRock is a boolean of whether or not the cell contains Rock
@@ -70,7 +68,7 @@ public class Cell {
 
 		}
 		else if(isInteger(content)){
-			containsFood = true;
+		//	containsFood = true;
 			numberOfFoodParticles = Integer.parseInt(content);
 			isClear = true;
 
@@ -88,7 +86,7 @@ public class Cell {
 	public Cell(int x, int y) {
 		pos[0] = x;
 		pos[1] = y;
-		
+		this.isClear = true;
 		_construct();
 		
 	}
@@ -131,8 +129,15 @@ public class Cell {
 	 * @param	food	The total number of food particles this Cell is to contain
 	 */
 	public void setFood(int food) {
-		numberOfFoodParticles = food;
-		containsFood = true;
+		if(food==0){
+			numberOfFoodParticles = food;
+		//	containsFood = false;
+		}
+		else if(food>0){
+			numberOfFoodParticles = food;
+		//	containsFood = true;
+		}
+		
 	}
 	
 	/**
@@ -140,7 +145,7 @@ public class Cell {
 	 */
 	public void clearFood() {
 		numberOfFoodParticles = 0;
-		containsFood = false;
+		//containsFood = false;
 	}
 	
 	/**
@@ -215,7 +220,7 @@ public class Cell {
 	 */
 	public void addFood(){
 		numberOfFoodParticles++;
-		containsFood = true;
+		//containsFood = true;
 	}
 
 	/**
@@ -223,8 +228,11 @@ public class Cell {
 	 * @param n the number of food particles that is being added.
 	 */
 	public void addNumFood(int n){
-		numberOfFoodParticles = numberOfFoodParticles + n;
-		containsFood = true;
+		if(n>=0){
+			numberOfFoodParticles = numberOfFoodParticles + n;
+		//	containsFood = true;
+		}
+		
 	}
 
 	/**
@@ -240,7 +248,7 @@ public class Cell {
 			System.err.print("No Food in Cell");
 		}
 		if(numberOfFoodParticles==0){
-			containsFood = false;
+		//	containsFood = false;
 		}
 	}
 
@@ -385,7 +393,7 @@ public class Cell {
 				return false;
 			}
 		case FOOD:
-			return containsFood;
+			return isContainsFood();
 		case ROCK:
 			return containsRock;
 		case MARKER:
@@ -451,7 +459,7 @@ public class Cell {
 			}
 		}
 
-		if(containsFood){
+		if(isContainsFood()){
 			content  = content + this.numberOfFoodParticles;
 		}
 
@@ -464,6 +472,20 @@ public class Cell {
 	 */
 	public int[] getPos() {
 		return pos;
+	}
+	
+	/**
+	 * Set coordinates of a cell
+	 * Used for testing purposes
+	 * @param x int
+	 * @param y int
+	 */
+	public void setPos(int x, int y){
+		//must have values inside possible values on map
+		if(x >= 0 && y >=0) {
+			pos[0] = x;
+			pos[1] = y;
+		}
 	}
 	
 	/**
@@ -487,7 +509,7 @@ public class Cell {
 	 * @return boolean whether or not the cell contains food
 	 */
 	public boolean isContainsFood() {
-		return containsFood;
+		return this.numberOfFoodParticles>0;
 	}
 
 	/**
