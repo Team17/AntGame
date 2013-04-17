@@ -102,24 +102,9 @@ public class MainMenu extends PApplet {
 
 	   
 	    try {
-	    	
-	    	 
-			    
-//			    Path tmp_1 = Files.createTempDirectory(null);
-//			    File asFile = tmp_1.toFile();
-//			    asFile.deleteOnExit();
-//			    
-//			    InputStream url = MainMenu.class.getResourceAsStream("/userGuide/index.html");
-//			    System.out.println(url);
-//			    
-//			    Path copy_to= Paths.get(tmp_1.toString(),"index.html");	    	
-//			    Files.copy(url, copy_to);
-//			    
-//			    Desktop.getDesktop().open(new File(asFile.getAbsoluteFile()+"/index.html"));
    
 		    tmp_1 = Files.createTempDirectory(null);
 		    Files.createDirectory(Paths.get(tmp_1.toString(),"img"));
-		    System.out.println(tmp_1.toString());
 		    asFile = tmp_1.toFile();
 		    asFile.deleteOnExit();
 		    filesToTemp("index.html");
@@ -140,12 +125,6 @@ public class MainMenu extends PApplet {
 	    } catch (Exception e) {
 	    System.err.println(e);
 	    }
-	    
-	    
-
-	    
-//	    Desktop.getDesktop().browse(temp.getAbsolutePath());
-
 	}
 
 	public void draw() {
@@ -156,10 +135,7 @@ public class MainMenu extends PApplet {
 	private void filesToTemp(String name){
 	    try {
 	    	InputStream copy_from = MainMenu.class.getResourceAsStream("/userGuide/" +name);
-	    	System.out.println(copy_from);
-	    	System.out.println(tmp_1.toString());
 		    Path copy_to= Paths.get(tmp_1.toString(),name);
-		    System.out.println(copy_to);
 		    Files.copy(copy_from, copy_to);
 	    } catch (Exception e) {
 	    System.err.println(e);
@@ -312,7 +288,7 @@ public class MainMenu extends PApplet {
 								.getAbsolutePath(),blackBrain
 								.getAbsolutePath()));
 				} catch (Exception e) {
-
+					selectMap.getCaptionLabel().set(e.getMessage());
 				}
 			}
 		}else if(mapMap != null && redBrain != null && blackBrain!=null){
