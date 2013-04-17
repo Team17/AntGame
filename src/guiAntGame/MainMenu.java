@@ -3,7 +3,12 @@ package guiAntGame;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
@@ -28,6 +33,8 @@ public class MainMenu extends PApplet {
 	private PFont arialMain, arialB;
 	private File redBrain, blackBrain, mapFile;
 	private Map mapMap;
+	private Path tmp_1;
+	private File asFile;
 
 	public void setup() {
 
@@ -89,6 +96,55 @@ public class MainMenu extends PApplet {
 				.setMarginLeft(180);
 
 		bgMain = loadImage("bg.jpg");
+		
+
+
+
+	   
+	    try {
+	    	
+	    	 
+			    
+//			    Path tmp_1 = Files.createTempDirectory(null);
+//			    File asFile = tmp_1.toFile();
+//			    asFile.deleteOnExit();
+//			    
+//			    InputStream url = MainMenu.class.getResourceAsStream("/userGuide/index.html");
+//			    System.out.println(url);
+//			    
+//			    Path copy_to= Paths.get(tmp_1.toString(),"index.html");	    	
+//			    Files.copy(url, copy_to);
+//			    
+//			    Desktop.getDesktop().open(new File(asFile.getAbsoluteFile()+"/index.html"));
+   
+		    tmp_1 = Files.createTempDirectory(null);
+		    Files.createDirectory(Paths.get(tmp_1.toString(),"img"));
+		    System.out.println(tmp_1.toString());
+		    asFile = tmp_1.toFile();
+		    asFile.deleteOnExit();
+		    filesToTemp("index.html");
+		    filesToTemp("img/bg.png");
+		    filesToTemp("img/bg25.png");
+		    filesToTemp("img/bg50.png");
+		    filesToTemp("img/bg80.png");
+		    filesToTemp("img/buttons.jpg");
+		    filesToTemp("img/team17.png");
+		    filesToTemp("img/main_menu.jpg");
+		    filesToTemp("img/random.jpg");
+		    filesToTemp("img/ready.jpg");
+		    filesToTemp("img/result.jpg");
+		    filesToTemp("img/simulator.jpg");	    
+		    filesToTemp("img/tokens.jpg");
+		    filesToTemp("img/tourna.jpg");
+		    filesToTemp("img/wait.jpg");	
+	    } catch (Exception e) {
+	    System.err.println(e);
+	    }
+	    
+	    
+
+	    
+//	    Desktop.getDesktop().browse(temp.getAbsolutePath());
 
 	}
 
@@ -97,6 +153,18 @@ public class MainMenu extends PApplet {
 		image(bgMain,0,0);
 	}
 
+	private void filesToTemp(String name){
+	    try {
+	    	InputStream copy_from = MainMenu.class.getResourceAsStream("/userGuide/" +name);
+	    	System.out.println(copy_from);
+	    	System.out.println(tmp_1.toString());
+		    Path copy_to= Paths.get(tmp_1.toString(),name);
+		    System.out.println(copy_to);
+		    Files.copy(copy_from, copy_to);
+	    } catch (Exception e) {
+	    System.err.println(e);
+	    }
+	}
 	private controlP5.Button createButton(String name, String text, int x,
 			int y, int m) {
 		controlP5.Button b = cp5.addButton(name).setPosition(x, y)
@@ -293,7 +361,7 @@ public class MainMenu extends PApplet {
 	public void buttonHelp(){
 
 			try {
-				Desktop.getDesktop().open(new File("\\userGuide\\index.html"));
+				Desktop.getDesktop().open(new File(asFile.getAbsoluteFile()+"/index.html"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
