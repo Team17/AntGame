@@ -5,16 +5,18 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import antgame.AntGame;
+import antgame.FileManager;
 import antgame.Game;
 import antgame.core.AntBrain;
 import antgame.core.AntColour;
-import antgame.core.Map;
 import antgame.core.MapCreator;
 
 public class Generation implements Observer {
@@ -35,9 +37,9 @@ public class Generation implements Observer {
 	private HashMap<AntBrain, Integer> scores;
 	
 	/**
-	 * Pointer to the best performing AntBrain
+	 * Pointer to the best performing AntBrains
 	 */
-	private AntBrain elite;
+	private AntBrain[] elite;
 	
 	/**
 	 * The total number of games we need to run
@@ -48,6 +50,31 @@ public class Generation implements Observer {
 	 * The total number of games we have run
 	 */
 	private int completedGames;
+	
+	/**
+	 * Array of pointers to Ant Brains used in selecting breeding pairs
+	 */
+	private AntBrain[] breedingMap;
+	
+	/**
+	 * Random number generator
+	 */
+	private Random random;
+	
+	/**
+	 * Probability that crossover will occur
+	 */
+	public static final double P_CROSSOVER = 0.9;
+	
+	/**
+	 * Probability that mutation will occur
+	 */
+	public static final double P_MUTATION = 0.01;
+	
+	/**
+	 * The number of elite brains to keep
+	 */
+	public static final int ELITE_BRAINS = 5;
 	
 	/**
 	 * Constructor
@@ -65,11 +92,60 @@ public class Generation implements Observer {
 		}
 		this.completedGames = 0;
 		this.totalGames = 0;
+		this.random = new Random();
 	}
 	
+	/**
+	 * Run a complete fitness assessment and breeding procedure to return
+	 * the next Generation from this one.
+	 * @return	The next Generation
+	 */
 	public Generation getNextGeneration() {
-		// TODO: Score up current gen, breed and return next gen
-		return null;
+		
+		// The size of the next generation will equal the size of this one
+		AntBrain[] nextChromosomes = new AntBrain[chromosomes.length];
+		
+		// Score this generation
+		scoreGeneration();
+		
+		// Create the elite brains and the breeding map
+		generateElite();
+		generateBreedingMap();
+		
+		// Keep track of how many chromosomes we've added
+		int added = 0;
+		
+		// The elite chromosomes get a free pass
+		while (added < elite.length) {
+			nextChromosomes[added] = elite[added];
+			added++;
+		}
+		
+		// Create the remaining chromosomes
+		while (added < nextChromosomes.length) {
+			
+			// Grab a breeding pair from the current population of chromosomes
+			BreedingPair bp = getBreedingPair();
+			// Perform crossover
+			bp.crossover();
+			// Perform mutation
+			bp.mutate();
+			
+			// Add the first child to the new population
+			nextChromosomes[added] = bp.getChromosome1();
+			added++;
+			
+			// Add the second child to the new population
+			nextChromosomes[added] = bp.getChromosome2();
+			
+		}
+		
+		// Create the new generation
+		Generation g = new Generation(nextChromosomes);
+		g.n = this.n + 1;
+		
+		// Return the new generation
+		return g;
 	}
 	
 	/**
@@ -150,6 +226,50 @@ public class Generation implements Observer {
 	}
 	
 	/**
+	 * Generate the list of elite brains
+	 */
+	public void generateElite() {
+		
+		// We might have fewer than 5 chromosomes
+		int length = (ELITE_BRAINS > chromosomes.length) ? chromosomes.length : ELITE_BRAINS;
+		
+		// Initialise list of elite brains
+		elite = new AntBrain[length];
+		
+		// Initialise list with any old brains
+		for (int i = 0; i < elite.length; i++) {
+			elite[i] = chromosomes[i];
+		}
+		
+		// Loop through the brains
+		for (AntBrain ab : chromosomes) {
+			
+			// Loop through the current elite list.
+			// If we find a brain that scores lower than this one,
+			// replace it with this one.
+			boolean addToList = false;
+			int toReplace = -1;
+			for (int i = 0; i < elite.length; i++) {
+				int lowestScoreSeen = Integer.MAX_VALUE;
+				if (scores.get(elite[i]) < scores.get(ab)) {
+					addToList = true;
+					if (scores.get(elite[i]) < lowestScoreSeen) {
+						lowestScoreSeen = scores.get(elite[i]);
+						toReplace = i;
+					}
+					
+				}
+			}
+			if (addToList) {
+				elite[toReplace] = ab;
+			}
+			
+			
+		}
+		
+	}
+	
+	/**
 	 * Play two AntBrains off against each other on a random Contest Map and return the winner
 	 * @param	brain1	The first competing AntBrain
 	 * @param	brain2	The second competing AntBrain
@@ -197,6 +317,34 @@ public class Generation implements Observer {
 	}
 	
 	/**
+	 * Saves this generation to a series of AntBrain files
+	 */
+	public void saveGeneration() {
+		
+		String folderName = "Generation-" + n + "-" + System.nanoTime();
+		FileManager.createFolder(folderName);
+		for (int i = 0; i < chromosomes.length; i++) {
+			FileManager.saveBrain(chromosomes[i], folderName + "\\" + scores.get(chromosomes[i]) + "-" + i + System.nanoTime());
+		}
+		
+	}
+	
+	/**
+	 * Determine if a chromosome is part of the elite set for this generation
+	 * @param	antBrain	The AntBrain whose eliteness we are testing
+	 * @return				True if this AntBrain is elite, false otherwise
+	 */
+	public boolean isElite(AntBrain antBrain) {
+		boolean isElite = false;
+		int i = 0;
+		while (!isElite) {
+			isElite = (elite[i].equals(antBrain));
+			i++;
+		}
+		return isElite;
+	}
+	
+	/**
 	 * Print the current scores to the console
 	 */
 	public void printScores() {
@@ -213,9 +361,88 @@ public class Generation implements Observer {
 		
 	}
 	
+	/**
+	 * Generate the breeding map (post run)
+	 * The breeding map is an array of pointers to the chromosomes.
+	 * The more pointers there are to one chromosomes, the higher the probability
+	 * that it will be selected to breed.
+	 */
+	public void generateBreedingMap() {
+		
+		// Initialise an ArrayList
+		ArrayList<AntBrain> _breedMap = new ArrayList<AntBrain>();
+		// Iterate over chromosomes
+		for (int i = 0; i < chromosomes.length; i++) {
+			// The number of times the chromosome will be added depends on it's rank
+			// Number of times added = (total number of chromosomes) - rank
+			for (int j = 0; j < (chromosomes.length - i); j++) {
+				_breedMap.add(chromosomes[i]);
+			}
+		}
+		// Set the breeding map
+		breedingMap = new AntBrain[_breedMap.size()];
+		breedingMap = _breedMap.toArray(breedingMap);
+		
+	}
+	
+	/**
+	 * Select and return a BreedingPair
+	 * The probability of a chromosome being selected is proportional to its fitness
+	 * @return	A breeding pair
+	 */
+	public BreedingPair getBreedingPair() {
+		AntBrain c1 = breedingMap[ random.nextInt(breedingMap.length) ];
+		AntBrain c2 = breedingMap[ random.nextInt(breedingMap.length) ];
+		return new BreedingPair(c1,c2);
+	}
+	
+	/**
+	 * Re-ordered the chromosomes array so they appear in descending order of score
+	 */
+	public void rankChromosomes() {
+		
+		// Create an ordered, inverse mapping of score values to a List of AntBrains
+		// that have that score
+		TreeMap<Integer,ArrayList<AntBrain>> inverted = new TreeMap<Integer,ArrayList<AntBrain>>();
+		for (AntBrain ab : chromosomes) {
+			int score = scores.get(ab);
+			// Initialise the ArrayList<AntBrain>s as and when
+			if (inverted.get(score) == null) {
+				inverted.put(score, new ArrayList<AntBrain>());
+			}
+			// Add this AntBrain to the List of AntBrains with this score
+			inverted.get(score).add(ab);
+		}
+		
+		// We'll be pulling AntBrains out in ascending score order so
+		// we'll be inverting this array at the end
+		AntBrain[] reversed = new AntBrain[chromosomes.length];
+
+		// Pull out an Iterator
+		Iterator<Integer> it = inverted.keySet().iterator();
+		int i = 0;
+		while (it.hasNext()) {
+			ArrayList<AntBrain> brainsWithScore = inverted.get(it.next());
+			for (AntBrain ab : brainsWithScore) {
+				reversed[i] = ab;
+				i++;
+			}
+		}
+		
+		// Reverse the array
+		AntBrain[] ordered = new AntBrain[chromosomes.length];
+		for (i = 0; i < ordered.length; i++) {
+			ordered[i] = reversed[ (chromosomes.length - i) ];
+		}
+		
+		// Set the chromosomes as the ordered array
+		chromosomes = ordered;
+		
+	}
+	
 	public static void main(String[] args) {
 		
-		int POPSIZE = 6;
+		int POPSIZE = 4;
 		
 		AntBrain[] antBrains = new AntBrain[POPSIZE];
 		long startTime = System.nanoTime();
@@ -227,10 +454,10 @@ public class Generation implements Observer {
 		
 		Generation g = new Generation(antBrains);
 		
-		startTime = System.nanoTime();
-		g.scoreGeneration();
-
-		System.out.println("All done!");
+		while (true) {
+			Generation _g = g.getNextGeneration();
+			_g.saveGeneration();
+		}
 		
 		
 		

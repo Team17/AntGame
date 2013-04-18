@@ -1,39 +1,533 @@
 <!DOCTYPE html>
-	<head>
-		<meta charset="utf-8">
-		<title>AntGameSimulator - Team 17 | Tutorial</title>
+<head>
+<meta charset="utf-8">
+<title>AntGameSimulator - Team 17 | Tutorial</title>
 
-		<meta name="author" content="Doniyor Ulmasov" />
-		<meta name="copyright" content="Doniyor Ulmasov" />
-		<meta name="description" content="This is a getting Started Guide for the Ant Game built by Team 17." />
-		
-		
-		
+<meta name="author" content="Doniyor Ulmasov" />
+<meta name="copyright" content="Doniyor Ulmasov" />
+<meta name="description"
+	content="This is a Getting Started Guide for the Ant Game built by Team 17." />
+
+<STYLE type="text/css">
+body {
+	background: #9e9e9e;
+	background-image: url(img/bg.png);
+}
+
+#all {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	min-width: 600px;
+	max-width: 800px;
+}
+
+h1 {
+	font-size: 36px;
+	background-image: url(img/bg80.png);
+	color: #eee;
+	font-family: Arial;
+	min-width: 600px;
+	max-width: 800px;
+	margin-right: 0px;
+	margin-left: 0px;
+	padding: 10px;
+	margin-bottom: 10px;
+	margin-top: 20px;
+}
+
+h3 {
+	font-size: 16px;
+	background-image: url(img/bg50.png);
+	color: #eee;
+	font-family: Arial;
+	min-width: 600px;
+	max-width: 780px;
+	margin-right: 0px;
+	margin-left: 20px;
+	padding: 10px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+h4 {
+	font-size: 14px;
+	background-image: url(img/bg50.png);
+	color: #eee;
+	font-family: Arial;
+	min-width: 600px;
+	max-width: 780px;
+	margin-right: 0px;
+	margin-left: 30px;
+	padding: 10px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+p {
+	font-size: 14px;
+	background-image: url(img/bg25.png);
+	color: #eee;
+	font-family: Arial;
+	min-width: 560px;
+	max-width: 760px;
+	margin-right: 0px;
+	margin-left: 40px;
+	padding: 10px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	text-indent: 30px;
+}
+
+#logo {
+	display: block;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.screenshots {
+	width: 500px;
+	display: block;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.highlight {
+	color: #00a8ff;
+	font-size: 15px;
+	font-weight: bold
+}
+
+.command {
+	color: #cbd8ff;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.list {
+	font-size: 14px;
+	background-image: url(img/bg25.png);
+	color: #eee;
+	font-family: Arial;
+	min-width: 560px;
+	max-width: 760px;
+	margin-right: 0px;
+	margin-left: 40px;
+	padding: 10px;
+	margin-bottom: 10px;
+	margin-top: 0px;
+}
+
+.list_a {
+	font-size: 14px;
+	background-image: url(img/bg25.png);
+	color: #eee;
+	font-family: Times New Roman;
+	width: 160px;
+	margin-right: 10px;
+	margin-left: 10px;
+	padding: 10px;
+	margin-bottom: 10px;
+	margin-top: 0px;
+}
+
+.list_c {
+	font-size: 14px;
+	background-image: url(img/bg25.png);
+	color: #eee;
+	font-family: Arial;
+	min-width: 560px;
+	max-width: 760px;
+	margin-right: 0px;
+	margin-left: 40px;
+	padding-top: 10px;
+	padding-right: 10px;
+	margin-bottom: 10px;
+	margin-top: 0px;
+	height: 550px;
+}
+
+#list_b {
+	font-size: 14px;
+	background-image: url(img/bg25.png);
+	color: #eee;
+	font-family: Arial;
+	min-width: 450px;
+	max-width: 650px;
+	margin-right: 185px;
+	margin-left: 10px;
+	padding: 10px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	position: relative;
+	bottom: 335px;
+	left: 185px;
+}
+
+ul {
+	list-style-type: square;
+}
+</STYLE>
+
 </head>
 
 <body>
-<h1> AntGameSimulator: Getting Started</h1>
-<h2> Team 17</h2>
+	<div id="all">
+		<h1>AntGameSimulator: Getting Started Guide</h1>
 
-<h3>Introduction</h3>
-<p>
-Welcome! We're glad you're here, We've been waiting for you. 
-Spend a few minutes going through this guide to
- learn some AntGameSimulator basics. We will introduce you 
- to a number of useful tutorials to make it easier to battle the ants. 
-</p>
 
-<h3>Basics</h3>
-<p>
- The simulator comes with several files, to lauch the simulator open the<strong> antgame.jar </strong> file. 
- In the<strong> brains</strong> and <strong>world</strong> directories you will find some examples of the
- brains and world files. 
-</p>
-<p>
- Let's get started, first launch the simulator. You should have a window open as shown below.
-</p>
-<img src="main_menu.jpg">
 
+
+		<h3>Introduction</h3>
+		<p>Welcome! We're glad you're here, We've been waiting for you.
+			Spend a few minutes going through this guide to learn some
+			AntGameSimulator basics. We will introduce you to a number of useful
+			tutorials, such as how to use the simulator and how to make your own ant
+			brain to battle the legendary ant brains.</p>
+
+		<h3>Basics</h3>
+		<p>
+			The simulator comes with several files, in the<span class="highlight">
+				brains</span> and <span class="highlight">world</span> directories you will
+			find some examples of the brains and world files. In the extra folder
+			you will find two files to aid you in creation of ant brains and
+			maps, which are covered in later sections. To lauch the simulator
+			open the<span class="highlight"> antgame.jar </span> file.
+		</p>
+		<p>
+			Let's get started, first launch the simulator. You should have a
+			window open as shown below. <br>
+			<img src="img/main_menu.jpg" class="screenshots">
+		</p>
+
+
+		<p>Here we have our main menu, on top there are three buttons,
+			Help, Tournament and Random Map. Functions of each is covered in the
+			next section.</p>
+		<p>
+			In the middle section, you can see two hexagons, one for the Red team
+			and one for the Black team. In the middle of each hexagon are
+			buttons to select brains for the team. Once you press the select
+			brain button a file picker will launch, pick any file and see what
+			happens. If you picked a non-ant brain file, the button becomes red,
+			indicating the file does not meet the standard ant brain format. If
+			it is an acceptable format the button will become green. You can see
+			examples of both cases in the screenshot below: <br>
+			<img src="img/buttons.jpg" class="screenshots"> Now try
+			selecting a valid ant brain (Hint: You can find one in the brains
+			folder provided with the game).
+		</p>
+
+		<p>
+			In the bottom section, there are two buttons, Select Map and Start.
+			Select Map button works in a similar manner as the select brains
+			buttons, it becomes green with the correctly formated map, red with an invalid
+			map. The start button can be activated only when there is a valid
+			map and two valid ant brains. Only then does the button becomes green
+			allowing you to start the simulator. Try inserting two valid brains
+			and a valid map and press start to see the simulation. The screenshot
+			below shows how your main menu should look if you input all
+			valid files. <br>
+			<img src="img/ready.jpg" class="screenshots">
+		</p>
+
+		<h3>The Simulation</h3>
+
+		<p>
+
+			Once you press start, another window will pop up with the simulation.
+			To pan around the map left click and move your mouse. To zoom in use
+			your mouse wheel, alternatively you can use right button of the mouse
+			(Warning, very sensitive zooming with the mouse). You can also resize
+			the window to increase your view of the world. <img
+				src="img/simulator.jpg" class="screenshots">
+				
+			<br> The green hexagons represent food cells, black hexagons with lines inside are black ants.
+			Red ants are the dark red hexagons with lines inside. The ant hills are pale version of ant 
+			heaxgons. Rocks are represented as a beveled hexagon.
+		</p>
+		<p>
+			There are only two controllers in the simulator view, on the left
+			corner. Firstly we have a Speed slider, which lets the user control the
+			frame rate of the simulation, the maximum speed depends on the
+			hardware in use. Try dragging it to the right, did you notice how
+			much faster everything started moving? End game button, stops the
+			current simulation and processes the rest of the simulation without
+			visualisation. This drastically reduces waiting time for the result
+			of the simulation. You can not do anything to the window during this
+			process, please wait for the result. Once the simulation is done
+			processing, you will see a results window as shown below. <img
+				src="img/result.jpg" class="screenshots">
+		</p>
+
+		<h3>Random Map</h3>
+
+		<p>
+			The random map feature allows the user to create a map on the fly without
+			needing to create and load a map. Every random map is generated in a
+			manner which fulfils all the map requirements, such as number of
+			food particles per cell and ant hill size (details are covered in the
+			Making a Map Section). <br> <br> To generate a map simply
+			press the Random Map button, when a successful map is created it will
+			become green. If you change your mind, you can still select a map
+			file. The screenshot below shows how the screen will look when a map is
+			generated. <img src="img/random.jpg" class="screenshots">
+		</p>
+
+		<h3>Tournaments</h3>
+
+		<p>
+			The tournament mode allows you to pit an arbitrary number of brains
+			against each other. You need at least three ant brains in order to
+			create a tournament. <br> <br> To create a tournament,
+			simply press the Tournament button in the main menu. A new window
+			will pop up as shown below. <img src="img/tourna.jpg"
+				class="screenshots"> The Tournament menu works in similar
+			fashion as the main menu. To add a brain, first select a brain, if it
+			is a valid brain, the button will become green. Then you can add the
+			brain to the list of brains in the tournament by pressing the add
+			brain. Remember, you need at least 3 ant brains. <br>
+			<br> Selecting the map works in exactly the same way as it does
+			in the main menu. You can pick one yourself or generate a random map.
+			<br>
+			<br> Once three ant brains or more are added to the list, and a
+			map is selected/generated the start button will become green and
+			allow you to start the tournament.
+		</p>
+		<p>During the tournament, each pair of submissions is pitted
+			against each other twice, once with the first submission playing red
+			and the second black, and once with the first playing black and the
+			second red. A submission gains 2 points for each game it wins, and 1
+			point for each draw. The submission with the most points wins the
+			tournament. If there is no clear winner, the tournament
+			is repeated with a certain number of finalist submissions.</p>
+
+		<h3>Ant Brain:</h3>
+		<h4>Ant Brain Rules:</h4>
+		<p>Every ant brain has to follow a specific file format. The
+			concrete format of these files are as follows:</p>
+		<div class="list">
+			<ul>
+				<li>Each line in the file represents one state. The first line
+					is state 0, the second line state 1, and so on.</li>
+				<li>The file may contain no more than 10000 lines. (It may
+					contain fewer.)</li>
+				<li>Each line consists of a sequence of whitespace-separated
+					tokens, followed (optionally) by a comment beginning with a
+					semicolon and extending to the end of the line.</li>
+				<li>Tokens are either keywords or integers. Keywords are
+					case-insensitive.</li>
+			</ul>
+			The possible tokens for instructions are:
+			<ul>
+				<li>Sense</li>
+				<li>Mark</li>
+				<li>Unmark</li>
+				<li>PickUp</li>
+				<li>Drop</li>
+				<li>Turn</li>
+				<li>Move</li>
+				<li>Flip</li>
+			</ul>
+
+			The tokens for sensing directions are:
+			<ul>
+				<li>Here</li>
+				<li>Ahead</li>
+				<li>LeftAhead</li>
+				<li>RightAhead</li>
+			</ul>
+
+			The tokens for conditions are:
+			<ul>
+				<li>Friend</li>
+				<li>Foe</li>
+				<li>FriendWithFood</li>
+				<li>FoeWithFood</li>
+				<li>Food</li>
+				<li>Rock</li>
+				<li>Marker</li>
+				<li>FoeMarker</li>
+				<li>Home</li>
+				<li>FoeHome</li>
+			</ul>
+			The tokens for arguments to turn are:
+			<ul>
+				<li>Left</li>
+				<li>Right</li>
+			</ul>
+
+		</div>
+
+		<h4>
+			The 8 Insturctions
+			</h3>
+			<p>There are a total of 8 types of instructions and here is their
+				breakdown:</p>
+			<p>
+				<span class="command">Sense sensedir st1 st2 cond </span><br>
+				Go to state st1 if condition cond in direction sensedir is true,
+				else go to state st2. As previously stated, you can sense 4
+				directions, here, ahead, left ahead and right ahead. For a full list
+				of conditions, refer to the previous section.
+			</p>
+
+			<p>
+				<span class="command">Mark x st </span><br> Set mark x in the
+				current cell, and go to the state st. Every team has 6 markers.
+				Therefore x can be 0,1,2,3,4,5.
+			</p>
+
+			<p>
+				<span class="command">Unmark x st</span><br> Clear mark x in
+				the current cell, and go to the state st.
+			</p>
+
+			<p>
+				<span class="command">PickUp st1 st2 </span><br> Pick up food
+				from the current cell and go to the state st1, if there is no food
+				in the current cell go to the state st2.
+			</p>
+
+			<p>
+				<span class="command">Drop st </span><br> Drop food and go to
+				the state st.
+			</p>
+			<p>
+				<span class="command">Turn lr st </span><br> Turn to the
+				direction lr and go to the state st. lr can be right or left.
+			</p>
+			<p>
+				<span class="command">Move st1 st2</span><br> Move forward and
+				go to the state st1, if the cell ahead is blocked go to the state
+				st2.
+			</p>
+			<p>
+				<span class="command">Flip p st1 st2 </span><br> Flip is used
+				to make ant movement more random. A random number is generated
+				between 0 to p-1, if the number generated is 0 the ant goes to the
+				state st1, else to st2.
+			</p>
+
+			<h4>
+				Creating and Saving an Ant Brain
+				</h3>
+				<p>
+					An ant brain can be created using any text editing tool. If you are
+					using Windows, you can use the default text editor Notepad to
+					create an ant brain. <br> <br> To save the ant brain just
+					save the text file. The ending format of the file does not matter,
+					but for asthetic purposes you can change it to .brain <br>
+					<br> In the extra folder provided with the simulator, there is
+					an <span class="highlight">antBrain_language.xml </span> file,
+					which you can import into NotePad++ text editor. This will aid you
+					in creating an ant brain, instead of seeing just plain text, tokens
+					are highlighted according to their category as shown below. <img
+						src="img/tokens.jpg" id="logo">
+				</p>
+
+				<h4>
+					Creating a Simple Ant Brain
+					</h3>
+					<p>Now, we know all the rules of making an ant brain and have
+						all the tools, let's make one. We will make an ant brain which
+						randomly walks around until it finds some food, then randomly
+						walks until it reaches home to drop the food and repeats the
+						whole process again.</p>
+					<div class="list_c">
+						<div class="list_a">
+							0 &nbsp&nbspSense Ahead 1 3 Food<br> 1 &nbsp&nbspMove 2 0<br>
+							2 &nbsp&nbspPickUp 8 0<br>
+							<br> 3 &nbsp&nbspFlip 3 4 5<br> 4 &nbsp&nbspTurn Left 0<br>
+							5 &nbsp&nbspFlip 2 6 7<br> 6 &nbsp&nbspTurn Right 0<br>
+							7 &nbsp&nbspMove 0 3<br>
+							<br> 8 &nbsp&nbspSense Ahead 9 11 Home<br> 9
+							&nbsp&nbspMove 10 8<br> 10 &nbspDrop 0<br> 11 &nbspFlip
+							3 12 13<br> 12 &nbspTurn Left 8<br> 13 &nbspFlip 2 14
+							15<br> 14 &nbspTurn Right 8<br> 15 &nbspMove 8 11<br>
+						</div>
+						<div id="list_b">
+							Let's walk through the ant brain given on the left: <br> <br>
+
+							First, the ant checks if there is food ahead. If there is food,
+							the ant goes to the state 1, else it goes to state 2. At state 1,
+							the ant tries to move forward, if it can, it goes to the state 2,
+							else it goes back to state 0. At state 2, the ant tries to pick
+							up food, if succesful, the ant goes to state 8, else to
+							state 0. <br> <br> States 3 to 7 are responsbile
+							for randomly turning or moving forward the ant. State 3 flips, if
+							the number generated is 0, the ant goes to state 4 where it
+							turns to the left and goes to state 0. Else, the ant goes to
+							state 5, where it flips again to move to the right. If both
+							flips fail, the ant tries to move forward. If it cannot move
+							forward, it goes back to state 3. <br> <br> States
+							8 to 15 are responsible for getting the ant back to the anthill
+							to drop the food. First, it checks if ahead of the ant is its
+							home, if it is, the ant moves forward and drops the food. If the
+							ant cannot move forward, it goes back to the state 8. If it does
+							move forward, it drops the food, and goes to state 0. <br>
+							<br> If ahead was not home, the ant goes to state 11.
+							State 11 to 15 perform the same function as the states 3 to 7, just
+							with different state numbers. <br> <br> In an abstract
+							way, states 0 to 7 are responsible for randonly finding food, and
+							once food is picked up the ant goes to the state 8. States 8 to
+							15, randomly try to find the anthill to drop the food and go back
+							to the state 0. <br> <br> Can you write a better
+							antbrain?
+
+
+						</div>
+					</div>
+
+
+
+					<h3>Creating a Map:</h3>
+
+					<p>
+						Just like the Ant Brain files, the map file has it's own syntax and rules. Systax of the
+						map file as follows:
+					</p>
+					
+					<div class="list">
+						<ul>
+							<li>The first line contains a single integer representing the size of the world in the x dimension.</li>
+							<li>The second line contains a single integer representing the size of the world in the y dimension.</li>
+							<li>The rest of the file consists of y lines, each containing x one-character cell specifiers, 
+							separated by spaces (even lines also contain a leading space before the first cell specifier).
+							The top-left cell specifier corresponds to position (0,0).</li>
+							<li>The dimensions of the world are always 150 by 150 cells.</li>
+							<li>The cells on the perimeter are always rocky.</li>
+							<li>Every world contains exactly the same elements, of particular shapes: 2 anthills, 14 rocks, and 11 blobs of food. The anthills, in particular, are hexagons with sides of length 7. Also, a food blob is always a 5-by-5 rectangle, with each cell containing 5 food particles.</li>
+						</ul>
+						
+					</div>
+					
+					<p>
+						The possible cell specifiers are:<br><br>
+
+						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp#&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp        rocky cell<br>
+						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp.&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp        clear cell (containing nothing interesting)<br>
+						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp        red anthill cell<br>
+						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp- &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp        black anthill cell<br>
+						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp1 to 9&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   clear cell containing the given number of food particles<br>
+					
+					
+					</p>
+					
+					<p>
+						Hint: In the extra folder there is an XML file for the NotePad++
+						Hint2: Just generate a random map.
+					</p>
+					
+					<p>
+						<img src="img/team17.png" id="logo">
+					</p>
+					<h3>Thank you for reading me! - Team17 User Guide</h3>
+	</div>
 </body>
 </html>
 

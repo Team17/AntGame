@@ -2,6 +2,11 @@ package antgame;
 
 public class PropertiesFileNotFoundException extends AntGameException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public PropertiesFileNotFoundException() {
 		super();
 		// TODO Auto-generated constructor stub

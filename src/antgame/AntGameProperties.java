@@ -1,6 +1,12 @@
 package antgame;
+import guiAntGame.MainMenu;
+
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 /**
@@ -15,6 +21,8 @@ public class AntGameProperties extends Properties {
 	 * serialisation which I don't know anything about.  Keeps Eclipse happy, though.
 	 */
 	private static final long serialVersionUID = 6760091941922810995L;
+
+	private static final int FLIP_MAX = 100;
 
 	/**
 	 * The number of different types of Markers an Ant can place in a Cell
@@ -122,7 +130,22 @@ public class AntGameProperties extends Properties {
 	 * @throws Exception
 	 */
 	public AntGameProperties() throws Exception {
-		loadFromXML(new FileInputStream(AntGame.CONFIG_FILE));
+		File asFile = null;
+	    try {
+	    	   
+	    	Path tmp_1 = Files.createTempDirectory(null);
+		    asFile = tmp_1.toFile();
+		    asFile.deleteOnExit();
+
+	    	InputStream copy_from = MainMenu.class.getResourceAsStream("/CONFIG.xml");
+		    Path copy_to= Paths.get(tmp_1.toString(),"CONFIG.xml");
+		    Files.copy(copy_from, copy_to);
+	    } catch (Exception e) {
+	    System.err.println(e);
+	    }
+		
+		
+		loadFromXML(new FileInputStream(new File(asFile.getAbsoluteFile()+"/CONFIG.xml")));
 		// ** (Optional) Pull individual properties into named constants for easier access **
 		// This is optional as properties are still accessible using the Properties.getProperty(String key) : String method.
 		NUM_MARKERS = Integer.parseInt(this.getAntGameProperty("numAntMarkers"));
@@ -161,6 +184,10 @@ public class AntGameProperties extends Properties {
 			throw new NoSuchPropertyException();
 		}
 		return _prop;
+	}
+
+	public static int getFlipMax() {
+		return FLIP_MAX;
 	}
 	
 }

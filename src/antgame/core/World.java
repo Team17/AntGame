@@ -3,8 +3,6 @@ package antgame.core;
 import guiAntGame.ObserverAntWorld;
 
 import java.util.ArrayList;
-
-import antgame.AntGame;
 import antgame.services.RandomNumber;
 
 public class World {
@@ -550,18 +548,4 @@ public class World {
 		}
 		return null;
 	}
-
-	public static void main(String[] args) {
-		String workingDir = System.getProperty("user.dir");
-
-		World w1 = new World("C:/workingworld.world"/*
-													 * workingDir+
-													 * "\\files\\workingworld.world"
-													 * *
-													 */, workingDir
-				+ "\\files\\cleverbrain1.brain", workingDir
-				+ "\\files\\cleverbrain2.brain");
-
-	}
-
 }

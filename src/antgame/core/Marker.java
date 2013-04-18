@@ -4,14 +4,13 @@
 package antgame.core;
 
 import antgame.InvalidMarkerIdException;
-import antgame.AntGame;
 
 /**
  * Class representing a chemical marker
  * @author Alex
  *
  */
-public class Marker {
+public class Marker implements Cloneable {
 
 	/**
 	 * An integer Id for this particular marker
@@ -43,6 +42,19 @@ public class Marker {
 		return result;
 	}
 
+	@Override
+	public Marker clone() {
+		Marker clone;
+		try {
+			clone = (Marker) super.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			clone = null;
+		}
+		return clone;
+	}
+	
 	/** Two markers are considered equal if their Ids and AntColors match
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -111,9 +123,4 @@ public class Marker {
 		this.color = colour;
 	}
 	
-	public static void main(String[] args) throws InvalidMarkerIdException{
-		
-			Marker m1 = new Marker(1,AntColour.RED);
-		
-	}
 }

@@ -1,6 +1,5 @@
 package antgame;
 
-import antgame.braintrain.AntBrainGenerator;
 import antgame.core.AntBrain;
 import antgame.core.AntColour;
 import antgame.core.Map;
@@ -38,11 +37,6 @@ public class Game {
 	 */
 	private int round;
 
-	/**
-	 * The time taken to execute the game in seconds
-	 */
-	private double runTime;
-	
 	/**
 	 * Constructor
 	 * 
@@ -274,10 +268,12 @@ public class Game {
 	 * Run the Game to completion
 	 */
 	public void run() {
+		AntGame.debug("Running game..." + getId());
 		while (hasNext()) {
 			nextRound();
 		}
 		isFinished();
+		AntGame.debug("Game " + getId() + " complete");
 	}
 	
 	public static void main(String[] args) {

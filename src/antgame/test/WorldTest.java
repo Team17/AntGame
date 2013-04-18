@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import guiAntGame.ObserverAntWorld;
 
-import java.util.ArrayList;
+
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -35,7 +35,6 @@ public class WorldTest {
 	private static BrainState bs = new BrainState();
 	private WorldStats stats = w1.getStats();
 	private ObserverAntWorld obs = w1.getObserver();
-	private AntColour colour;
 	private static Cell[][] map = new Cell[10][10];
 
 	private static AntBrain brain = new AntBrain(workingDir + "\\files\\TestBrainGood.brain",AntColour.RED);
@@ -204,7 +203,7 @@ public class WorldTest {
 		}
 		
 		
-		assertEquals(colour.RED, w1.whoWon());
+		assertEquals(AntColour.RED, w1.whoWon());
 		
 		//Equal number of food and ants alive
 		for (int i =0; i<=3; i++){
@@ -214,7 +213,7 @@ public class WorldTest {
 		
 		//Equal number of food
 		stats.decBlackAlive();
-		assertEquals(colour.RED, w1.whoWon());
+		assertEquals(AntColour.RED, w1.whoWon());
 		
 		
 		

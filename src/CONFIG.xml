@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="numAntMarkers">6</entry>
+	<entry key="contestMapDimension">150</entry>
+	<entry key="contestMapRocks">14</entry>
+	<entry key="contestMapFoodBlobs">11</entry>
+	<entry key="contestMapAnthillSideLength">7</entry>
+	<entry key="contestMapFoodBlobSideLength">5</entry>
+	<entry key="contestMapFoodPerBlobCell">5</entry>
+	<entry key="maxAntBrainLines">10000</entry>
+	<entry key="gameRounds">300000</entry>
+	<entry key="restingRounds">14</entry>
+	<entry key="defaultAntDirection">0</entry>
+	<entry key="userPrefsDir">AntGame</entry>
+	<entry key="minTournamentBrains">3</entry>
+	<entry key="maxTournamentBrains">20</entry>
+	<entry key="scoreForWin">2</entry>
+	<entry key="scoreForDraw">1</entry>
+	<entry key="scoreForLoss">0</entry>
+	<entry key="initialTournamentScore">0</entry>
+	<entry key="defaultEncoding">UTF-8</entry>
+</properties>

@@ -10,7 +10,7 @@ import antgame.InvalidMarkerIdException;
  * @author Alex
  *
  */
-public class BrainState {
+public class BrainState implements Cloneable {
 
 	private Instruction instruction;
 
@@ -91,6 +91,19 @@ public class BrainState {
 		this.senseCondition = null;
 		this.senseDirection = null;
 		this.stateId = -1;
+	}
+	
+	@Override
+	public BrainState clone() {
+		BrainState clone;
+		try {
+			clone = (BrainState) super.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			clone = null;
+		}
+		return clone;
 	}
 	
 	/**

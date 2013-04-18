@@ -1,7 +1,10 @@
 
 package antgame.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -9,7 +12,6 @@ import antgame.InvalidMarkerIdException;
 import antgame.core.Ant;
 import antgame.core.AntBrain;
 import antgame.core.AntColour;
-import antgame.core.BrainState;
 import antgame.core.Cell;
 import antgame.core.Marker;
 import antgame.core.SenseCondition;

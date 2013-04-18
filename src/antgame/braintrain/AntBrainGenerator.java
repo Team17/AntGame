@@ -1,17 +1,11 @@
 package antgame.braintrain;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Random;
 
-import antgame.InvalidMarkerIdException;
 import antgame.core.AntBrain;
 import antgame.core.AntColour;
 import antgame.core.BrainState;
 import antgame.core.Instruction;
 import antgame.core.LeftRight;
-import antgame.core.Marker;
 import antgame.core.SenseCondition;
 import antgame.core.SenseDirection;
 
@@ -104,6 +98,60 @@ public class AntBrainGenerator {
 		return array[r.nextInt(array.length-1)];
 	}
 	
+	public static BrainState getRandomBrainState(AntColour colour) {
+		
+		// Create a new BrainState with i as the stateId
+		BrainState brainState = new BrainState();
+		
+		// Set the Instruction
+		Instruction instruction = getRandom(Instruction.class);
+		brainState.setInstruction(instruction);
+		
+		// Determine the additional Tokens needed
+		TokenType[] tokenTypes = getTokens(instruction);
+		
+		// Loop through the additional tokens that we require
+		for (int j = 0; j < tokenTypes.length; j++) {
+			switch (tokenTypes[j]) {
+				case NEXTSTATE:
+					brainState.setNextIdState(r.nextInt(STATE_MAX));
+					break;
+				case ALTNEXTSTATE:
+					brainState.setAltNextIdState(r.nextInt(STATE_MAX));
+					break;
+				case SENSEDIRECTION:
+					brainState.setSenseDirection(getRandom(SenseDirection.class));
+					break;
+				case SENSECONDITION:
+					SenseCondition sc = getRandom(SenseCondition.class);
+					brainState.setSenseCondition(sc);
+					if (sc.equals(SenseCondition.MARKER)) {
+						brainState.setMarker(r.nextInt(MARKER_MAX), colour);
+					}
+					break;
+				case LEFTRIGHT:
+					brainState.setLeftRight(getRandom(LeftRight.class));
+					break;
+				case RANDINT:
+					brainState.setRandomInt(r.nextInt(FLIP_MAX));
+					break;
+				case MARKER:
+					brainState.setMarker(r.nextInt(MARKER_MAX), colour);
+					break;
+			}
+		}
+		
+		return brainState;
+		
+	}
+	
+	public void saveGeneration() {
+		String folderName = "Generation-" + System.nanoTime();
+		
+		
+		
+	}
+	
 	/**
 	 * Returns a random AntBrain of the specified colour
 	 * @param	colour	The colour of the random AntBrain to return
@@ -118,51 +166,25 @@ public class AntBrainGenerator {
 		for (int i = 0; i < STATE_MAX; i++) {
 			
 			// Create a new BrainState with i as the stateId
-			BrainState brainState = new BrainState();
-			brainStates[i] = brainState;
+			BrainState brainState = getRandomBrainState(colour);
 			brainState.setStateId(i);
-			
-			// Set the Instruction
-			Instruction instruction = getRandom(Instruction.class);
-			brainState.setInstruction(instruction);
-			
-			// Determine the additional Tokens needed
-			TokenType[] tokenTypes = getTokens(instruction);
-			
-			// Loop through the additional tokens that we require
-			for (int j = 0; j < tokenTypes.length; j++) {
-				switch (tokenTypes[j]) {
-					case NEXTSTATE:
-						brainState.setNextIdState(r.nextInt(STATE_MAX));
-						break;
-					case ALTNEXTSTATE:
-						brainState.setAltNextIdState(r.nextInt(STATE_MAX));
-						break;
-					case SENSEDIRECTION:
-						brainState.setSenseDirection(getRandom(SenseDirection.class));
-						break;
-					case SENSECONDITION:
-						SenseCondition sc = getRandom(SenseCondition.class);
-						brainState.setSenseCondition(sc);
-						if (sc.equals(SenseCondition.MARKER)) {
-							brainState.setMarker(r.nextInt(MARKER_MAX), colour);
-						}
-						break;
-					case LEFTRIGHT:
-						brainState.setLeftRight(getRandom(LeftRight.class));
-						break;
-					case RANDINT:
-						brainState.setRandomInt(r.nextInt(FLIP_MAX));
-						break;
-					case MARKER:
-						brainState.setMarker(r.nextInt(MARKER_MAX), colour);
-						break;
-				}
-			}
-			
+			brainStates[i] = brainState;
+
 		}
-			
-		// Loop through again, updating pointers between BrainState objects
+		
+		// Update the pointers
+		brainStates = cleanStates(brainStates);
+		
+		// Return the AntBrain
+		return new AntBrain(brainStates,colour);
+	}
+	
+	/**
+	 * Updates BrainState pointers so they correspond with their built-in integer pointers
+	 * @param	brainStates	The clean BrainStates
+	 */
+	public static BrainState[] cleanStates(BrainState[] brainStates) {
+		// Loop through, updating pointers between BrainState objects
 		// based on the now-established Ids
 		for (BrainState bs: brainStates) {
 			// Every BrainState has a next state, add the pointer
@@ -172,11 +194,8 @@ public class AntBrainGenerator {
 				bs.setAltNextState( brainStates[ bs.getAltNextIdState() ] );
 			}
 		}
-		
-		// Return the AntBrain
-		return new AntBrain(brainStates,colour);
+		return brainStates;
 	}
-	
 	
 	public static void main (String[] args) {
 		AntBrain randomBrain = getRandomAntBrain(AntColour.BLACK);

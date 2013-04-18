@@ -14,10 +14,6 @@ import antgame.core.Map;
 public class MapTest {
 	
 	
-	//the width of the map
-	private int xSize;
-	//the height of the map
-	private int ySize;
 	//cells making up map
 	private static Cell[][] cell;
 	//map instance

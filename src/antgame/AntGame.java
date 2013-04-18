@@ -1,11 +1,6 @@
 package antgame;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.InvalidPropertiesFormatException;
-import java.util.Properties;
 
 /**
  * Main class for the Ant Game which follows the Singleton design pattern.
@@ -80,9 +75,6 @@ public class AntGame {
 		return instance;
 	}
 	
-	private void wipeUserSettings() {
-		
-	}
 	
 	/**
 	 * Determine whether the current user has played the game before.
@@ -100,14 +92,7 @@ public class AntGame {
 		}
 	}
 	
-	/**
-	 * Creates a User Preferences directory and a user preferences file.
-	 */
-	private static void setUpUser() {
-		CONFIG.USER_PREFS_DIR.mkdirs();
-		// TODO: Generate user preferences file
-	}
-	
+
 	/**
 	 * Prints a string to the console if running in debug mode
 	 * @param	s	The string to print to the console

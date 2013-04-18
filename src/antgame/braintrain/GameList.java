@@ -1,5 +1,6 @@
 package antgame.braintrain;
 
+import antgame.AntGame;
 import antgame.Game;
 
 import java.util.Observable;
@@ -40,13 +41,13 @@ public class GameList extends Observable implements Runnable {
 	 * Method invoked upon Thread.start()
 	 */
 	public void run() {
-		System.out.println("-> GameList " + id + " starting");
+		AntGame.debug("-> GameList " + id + " starting");
 		for (Game game : games) {
 			game.run();
 			setChanged();
 			notifyObservers(game);
 		}
-		System.out.println("-> GameList " + id + " finished");
+		AntGame.debug("-> GameList " + id + " finished");
 	}
 	
 }

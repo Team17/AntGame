@@ -3,6 +3,11 @@ package antgame;
 
 public class NoSuchPropertyException extends AntGameException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public NoSuchPropertyException() {
 		super();
 		// TODO Auto-generated constructor stub
