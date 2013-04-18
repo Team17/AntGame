@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import guiAntGame.ObserverAntWorld;
 
-
+import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -35,6 +35,7 @@ public class WorldTest {
 	private static BrainState bs = new BrainState();
 	private WorldStats stats = w1.getStats();
 	private ObserverAntWorld obs = w1.getObserver();
+	private AntColour colour;
 	private static Cell[][] map = new Cell[10][10];
 
 	private static AntBrain brain = new AntBrain(workingDir + "\\files\\TestBrainGood.brain",AntColour.RED);
@@ -64,6 +65,9 @@ public class WorldTest {
 
 	@Before
 	public void setUp() throws Exception {
+		
+	
+		
 	}
 
 	@After
@@ -72,12 +76,34 @@ public class WorldTest {
 
 	@Test
 	public void testWorld() {
-		fail("Not yet implemented");
+		assertNotNull(w1.getMap());
+		assertNotNull(w1.getBlackBrain());
+		assertNotNull(w1.getRedBrain());
+		
+		
 	}
 
 	@Test
 	public void testStep() {
-		fail("Not yet implemented");
+		
+		System.out.println("TEST 1");
+		AntBrain brain2 = new AntBrain(workingDir + "\\files\\dumbTestBrain.brain",AntColour.RED);
+		BrainState bs2 = new BrainState();
+		
+		World w2 = new World(workingDir+"\\files\\testWorld.world",workingDir+"\\files\\dumbTestBrain.brain",workingDir+"\\files\\cleverbrain2.brain");
+		System.out.println("TEST 2");
+		//Ant testAnt = new Ant(1, 1, AntColour.RED, bs2.getStateId(), map[1][1], brain2);
+		//w2.getMap().getCell(1, 1).antMoveIn(testAnt);
+		w2.getMap().printmap();
+		for (int i = 0; i<=10; i++){
+			w2.getMap().printmap();
+			System.out.println("iter: " + i);
+			//System.out.println(testAnt.isHasFood());
+			w2.step();
+			
+		}
+		
+		
 	}
 
 	@Test
@@ -156,7 +182,7 @@ public class WorldTest {
 		
 		assertFalse("Ant still alive", ant4.isAlive());
 		assertTrue("Food correctly added to cell", tempCell.getNumberOfFoodParticles() == numFood + 3);
-		assertTrue("cell correctly dealth with dead ant", !tempCell.containsAnt()&&tempCell.isClear());
+		assertTrue("cell correctly deals with dead ant", !tempCell.containsAnt()&&tempCell.isClear());
 		
 		
 	}
@@ -164,20 +190,33 @@ public class WorldTest {
 	@Test
 	public void testIsAntSurronded() {
 		
-		Ant lAnt1 = new Ant(1, 1, AntColour.BLACK, bs.getStateId(), map[2][3], brain);
-		Ant lAnt2 = new Ant(1, 1, AntColour.RED, bs.getStateId(), map[2][3], brain);
-		Ant lAnt3 = new Ant(1, 1, AntColour.RED, bs.getStateId(), map[2][3], brain);
-		Ant lAnt4 = new Ant(1, 1, AntColour.RED, bs.getStateId(), map[2][3], brain);
-		Ant lAnt5 = new Ant(1, 1, AntColour.RED, bs.getStateId(), map[2][3], brain);
-		Ant lAnt6 = new Ant(1, 1, AntColour.RED, bs.getStateId(), map[2][3], brain);
+		Ant lAnt1 = new Ant(1, 1, AntColour.BLACK, bs.getStateId(),w1.getMap().getCell(20, 20), brain);
+		Ant lAnt2 = new Ant(1, 1, AntColour.RED, bs.getStateId(), w1.getMap().getCell(21, 20), brain);
+		Ant lAnt3 = new Ant(1, 1, AntColour.RED, bs.getStateId(), w1.getMap().getCell(21, 19), brain);
+		Ant lAnt4 = new Ant(1, 1, AntColour.RED, bs.getStateId(), w1.getMap().getCell(20, 19), brain);
+		Ant lAnt5 = new Ant(1, 1, AntColour.RED, bs.getStateId(), w1.getMap().getCell(20, 21), brain);
+		Ant lAnt6 = new Ant(1, 1, AntColour.RED, bs.getStateId(), w1.getMap().getCell(19, 20), brain);
 
+		//surrounded by 5 ants of enemy colour
 		w1.getMap().getCell(20, 20).antMoveIn(lAnt1);
 		w1.getMap().getCell(21, 20).antMoveIn(lAnt2);
-		w1.getMap().getCell(21, 19).antMoveIn(lAnt3);
-		w1.getMap().getCell(20, 19).antMoveIn(lAnt4);
-		w1.getMap().getCell(20, 21).antMoveIn(lAnt5);
-		w1.getMap().getCell(19, 20).antMoveIn(lAnt6);
+		w1.getMap().getCell(19, 20).antMoveIn(lAnt3);
+		w1.getMap().getCell(20, 21).antMoveIn(lAnt4);
+		w1.getMap().getCell(20, 19).antMoveIn(lAnt5);
+		
+		w1.getMap().getCell(19, 21).antMoveIn(lAnt6);
+		
+		assertTrue("Ant successfully marked as surrounded", w1.isAntSurronded(lAnt1));
 
+		//surrounded by 6 ant, 2 of which are the same colour (same team)
+		Ant lAnt7 = new Ant(1, 1, AntColour.BLACK, bs.getStateId(), w1.getMap().getCell(19, 20), brain);
+		Ant lAnt8 = new Ant(1, 1, AntColour.BLACK, bs.getStateId(), w1.getMap().getCell(19, 20), brain);
+		w1.getMap().getCell(19, 21).antMoveOut();
+		w1.getMap().getCell(19, 21).antMoveIn(lAnt7);
+		w1.getMap().getCell(19, 19).antMoveIn(lAnt8);
+		
+		assertFalse("Ant not surrounded, only 2 enemy ants surrounding", w1.isAntSurronded(lAnt1));
+		
 	}
 
 	@Test
@@ -203,7 +242,7 @@ public class WorldTest {
 		}
 		
 		
-		assertEquals(AntColour.RED, w1.whoWon());
+		assertEquals(colour.RED, w1.whoWon());
 		
 		//Equal number of food and ants alive
 		for (int i =0; i<=3; i++){
@@ -211,9 +250,9 @@ public class WorldTest {
 			}		
 		assertEquals(null, w1.whoWon());
 		
-		//Equal number of food
+		//Equal number of food, more red ants alive
 		stats.decBlackAlive();
-		assertEquals(AntColour.RED, w1.whoWon());
+		assertEquals(colour.RED, w1.whoWon());
 		
 		
 		
