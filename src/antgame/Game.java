@@ -1,6 +1,5 @@
 package antgame;
 
-import antgame.braintrain.AntBrainGenerator;
 import antgame.core.AntBrain;
 import antgame.core.AntColour;
 import antgame.core.Map;
@@ -38,11 +37,6 @@ public class Game {
 	 */
 	private int round;
 
-	/**
-	 * The time taken to execute the game in seconds
-	 */
-	private double runTime;
-	
 	/**
 	 * Constructor
 	 * 

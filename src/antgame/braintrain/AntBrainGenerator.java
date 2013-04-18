@@ -1,17 +1,11 @@
 package antgame.braintrain;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Random;
 
-import antgame.InvalidMarkerIdException;
 import antgame.core.AntBrain;
 import antgame.core.AntColour;
 import antgame.core.BrainState;
 import antgame.core.Instruction;
 import antgame.core.LeftRight;
-import antgame.core.Marker;
 import antgame.core.SenseCondition;
 import antgame.core.SenseDirection;
 

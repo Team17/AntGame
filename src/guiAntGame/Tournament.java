@@ -3,26 +3,28 @@ package guiAntGame;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.Observer;
 
 import javax.swing.JFileChooser;
 
+import processing.core.PApplet;
+import processing.core.PFont;
+import processing.core.PImage;
 import antgame.core.AntBrain;
 import antgame.core.AntBrainInterpreterCoryn;
 import antgame.core.AntColour;
 import antgame.core.Map;
 import antgame.core.MapCreator;
 import antgame.core.MapInterpreter;
-import antgame.core.World;
 import controlP5.ControlP5;
-import controlP5.Group;
 import controlP5.Textarea;
-import processing.core.*;
 
 public class Tournament extends PApplet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ControlP5 cp5;
 	private PImage bgMain;
 	controlP5.Button addBrain, selectBrain, selectMap, startButton, createMap;
@@ -87,6 +89,7 @@ public class Tournament extends PApplet {
 		image(bgMain, 0, 0);
 	}
 
+	@SuppressWarnings("deprecation")
 	private controlP5.Button createButton(String name, String text, int x,
 			int y, int m) {
 		controlP5.Button b = cp5.addButton(name).setPosition(x, y)
@@ -239,7 +242,7 @@ public class Tournament extends PApplet {
 						MapInterpreter.MapGenerator(mapFile.getAbsolutePath()));
 				z.runTournament();
 				HashMap<AntBrain, Integer> g = z.getAllScores();
-
+				
 				for (Entry<AntBrain, Integer> entry : g.entrySet()) {
 					AntBrain key = entry.getKey();
 					Integer value = entry.getValue();

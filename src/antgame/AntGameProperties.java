@@ -22,6 +22,8 @@ public class AntGameProperties extends Properties {
 	 */
 	private static final long serialVersionUID = 6760091941922810995L;
 
+	private static final int FLIP_MAX = 100;
+
 	/**
 	 * The number of different types of Markers an Ant can place in a Cell
 	 */
@@ -182,6 +184,10 @@ public class AntGameProperties extends Properties {
 			throw new NoSuchPropertyException();
 		}
 		return _prop;
+	}
+
+	public static int getFlipMax() {
+		return FLIP_MAX;
 	}
 	
 }

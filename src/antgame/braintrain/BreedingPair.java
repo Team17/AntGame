@@ -3,6 +3,7 @@ package antgame.braintrain;
 import java.util.Random;
 
 import antgame.AntGame;
+import antgame.AntGameProperties;
 import antgame.braintrain.AntBrainGenerator.TokenType;
 import antgame.core.AntBrain;
 import antgame.core.AntColour;
@@ -22,11 +23,6 @@ public class BreedingPair {
 	 * The second chromosome
 	 */
 	private AntBrain chromosome2;
-	
-	/**
-	 * Probability that crossover will occur
-	 */
-	private static final double P_CROSSOVER = Generation.P_CROSSOVER;
 	
 	/**
 	 * Probability that mutation will occur
@@ -179,7 +175,7 @@ public class BreedingPair {
 								bs.setLeftRight(AntBrainGenerator.getRandom(LeftRight.class));
 								break;
 							case RANDINT:
-								bs.setRandomInt(random.nextInt(AntGame.CONFIG.FLIP_MAX));
+								bs.setRandomInt(random.nextInt(AntGameProperties.getFlipMax()));
 								break;
 							case MARKER:
 								bs.setMarker(random.nextInt(AntGame.CONFIG.NUM_MARKERS), AntColour.RED);

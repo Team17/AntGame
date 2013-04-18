@@ -17,7 +17,6 @@ import antgame.FileManager;
 import antgame.Game;
 import antgame.core.AntBrain;
 import antgame.core.AntColour;
-import antgame.core.Map;
 import antgame.core.MapCreator;
 
 public class Generation implements Observer {

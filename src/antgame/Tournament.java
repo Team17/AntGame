@@ -15,7 +15,7 @@ import antgame.core.AntBrain;
 import antgame.core.AntColour;
 import antgame.core.Map;
 import antgame.core.MapCreator;
-import antgame.core.World;
+
 
 /**
  * Class representing a Tournament.  A Tournament a is a collection of games (Worlds) to be played
@@ -290,7 +290,7 @@ public class Tournament extends Observable implements Observer {
 	
 	public static void main(String[] args) {
 		
-		int NUMBRAINS = 8;
+		int NUMBRAINS = 3;
 		
 		ArrayList<AntBrain> antBrains = new ArrayList<AntBrain>();
 		
@@ -303,6 +303,8 @@ public class Tournament extends Observable implements Observer {
 		Tournament t = new Tournament(antBrains,map);
 		
 		HashMap<AntBrain,Integer> scores = t.runTournament();
+		
+		System.out.println(scores.get(antBrains.get(0)));
 		
 		System.out.println("All done");
 		

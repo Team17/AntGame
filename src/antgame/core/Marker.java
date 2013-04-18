@@ -4,7 +4,6 @@
 package antgame.core;
 
 import antgame.InvalidMarkerIdException;
-import antgame.AntGame;
 
 /**
  * Class representing a chemical marker
@@ -124,9 +123,4 @@ public class Marker implements Cloneable {
 		this.color = colour;
 	}
 	
-	public static void main(String[] args) throws InvalidMarkerIdException{
-		
-			Marker m1 = new Marker(1,AntColour.RED);
-		
-	}
 }

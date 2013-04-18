@@ -1,13 +1,23 @@
 package guiAntGame;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
 import antgame.core.World;
 
-
+/**
+ * A class used to put the JApplets inside a JFrame
+ * @author Doniyor
+ */
 public class DisplayFrame extends javax.swing.JFrame {
-    public DisplayFrame(World w){
+    
+    /** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Instantiates a new display frame with the SimulatorView PApplet inside it.
+	 *
+	 * @param w the world to simulate inside the simulator view.
+	 */
+	public DisplayFrame(World w){
         this.setSize(803, 745); //The window Dimensions
         this.setMinimumSize(getSize());
         
@@ -24,6 +34,9 @@ public class DisplayFrame extends javax.swing.JFrame {
         this.setVisible(true);
     }
     
+    /**
+     * Instantiates a new display frame with the MainMenu PApplet inside it.
+     */
     public DisplayFrame(){
         this.setSize(600, 530); //The window Dimensions
 
@@ -39,6 +52,10 @@ public class DisplayFrame extends javax.swing.JFrame {
         this.setVisible(true);
     }
     
+    /**
+     * Instantiates a new display frame with the Tournament PApplet inside it.
+     * @param null
+     */
     public DisplayFrame(int i){
         this.setSize(405, 530); //The window Dimensions
 
