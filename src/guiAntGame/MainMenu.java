@@ -1,6 +1,7 @@
 package guiAntGame;
 
 import java.awt.Desktop;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,6 +14,7 @@ import javax.swing.JFileChooser;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
+
 import antgame.core.AntBrain;
 import antgame.core.AntBrainInterpreterCoryn;
 import antgame.core.AntColour;
@@ -20,6 +22,7 @@ import antgame.core.Map;
 import antgame.core.MapCreator;
 import antgame.core.MapInterpreter;
 import antgame.core.World;
+
 import controlP5.ControlP5;
 import controlP5.Group;
 
@@ -145,9 +148,19 @@ public class MainMenu extends PApplet {
 	// Load the main background image
 	bgMain = loadImage("bg.jpg");
 
+
+
 	// Creates all the temporary files;
 	createTempDir();
     }
+    
+    public void keyPressed() {
+    	  if (key == CODED) {
+    		    if (keyCode == KeyEvent.VK_F1) {
+    		      buttonHelp();
+    		    } 
+    		  }
+    	}
 
     /* 
      * Responsible for visializing the whole class
