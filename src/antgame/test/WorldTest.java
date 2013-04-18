@@ -20,7 +20,7 @@ import antgame.core.Cell;
 import antgame.core.Map;
 import antgame.core.World;
 import antgame.core.WorldStats;
-
+//
 public class WorldTest {
 
 	
